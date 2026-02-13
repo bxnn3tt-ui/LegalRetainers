@@ -30,8 +30,7 @@ export function Header() {
             fontWeight: 700,
             letterSpacing: '-0.03em'
           }}>
-            <span className="text-black text-[25px] leading-none">LegalRetainers</span>
-            <span className="text-primary text-[25px] leading-none">.com</span>
+            <span className="inline-block text-black text-[25px] leading-none origin-left scale-110">LegalRetainers</span>
           </Link>
           </div>
           
