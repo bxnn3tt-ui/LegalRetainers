@@ -4,6 +4,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { HelmetProvider } from 'react-helmet-async';
+import { Helmet } from "react-helmet-async";
 import { ScrollToTop } from "./components/ScrollToTop";
 import Index from "./pages/Index";
 import CasesPage from "./pages/CasesPage";
@@ -26,6 +27,21 @@ import DesignSystemPage from "./pages/DesignSystemPage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
+const siteComingSoon = true;
+
+const ComingSoonPage = () => (
+  <>
+    <Helmet>
+      <title>Coming soon | LegalRetainers</title>
+      <meta name="robots" content="noindex, nofollow" />
+    </Helmet>
+    <main className="min-h-screen bg-white text-black">
+      <div className="mx-auto flex min-h-screen w-full max-w-4xl items-center justify-center px-6 text-center">
+        <h1 className="text-4xl font-bold tracking-tight sm:text-5xl">Coming soon.</h1>
+      </div>
+    </main>
+  </>
+);
 
 const App = () => (
   <HelmetProvider>
@@ -33,33 +49,37 @@ const App = () => (
       <TooltipProvider>
       <Toaster />
       <Sonner />
-      <BrowserRouter>
-        <ScrollToTop />
-        <Routes>
-          <Route path="/" element={<Index />} />
-          <Route path="/cases" element={<CasesPage />} />
-          <Route path="/cases/:slug" element={<CaseDetailPage />} />
-          <Route path="/request-clients" element={<RequestCasesForm />} />
-          <Route path="/about" element={<AboutPage />} />
-          {/* Redirect /updates to /insights (combined view) */}
-          <Route path="/updates" element={<Navigate to="/insights" replace />} />
-          <Route path="/updates/:id" element={<UpdateDetailPage />} />
-          <Route path="/contact" element={<ContactPage />} />
-          <Route path="/privacy" element={<PrivacyPage />} />
-          <Route path="/terms" element={<TermsPage />} />
-          <Route path="/accessibility" element={<AccessibilityPage />} />
-          <Route path="/cookies" element={<CookiesPage />} />
-          <Route path="/editorial" element={<EditorialPage />} />
-          <Route path="/contact-success" element={<ContactSuccessPage />} />
-          <Route path="/order-success" element={<OrderSuccessPage />} />
-          <Route path="/newsletter-success" element={<NewsletterSuccessPage />} />
-          <Route path="/insights" element={<BlogPage />} />
-          <Route path="/insights/:slug" element={<BlogPostPage />} />
-          <Route path="/design-system" element={<DesignSystemPage />} />
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </BrowserRouter>
+      {siteComingSoon ? (
+        <ComingSoonPage />
+      ) : (
+        <BrowserRouter>
+          <ScrollToTop />
+          <Routes>
+            <Route path="/" element={<Index />} />
+            <Route path="/cases" element={<CasesPage />} />
+            <Route path="/cases/:slug" element={<CaseDetailPage />} />
+            <Route path="/request-clients" element={<RequestCasesForm />} />
+            <Route path="/about" element={<AboutPage />} />
+            {/* Redirect /updates to /insights (combined view) */}
+            <Route path="/updates" element={<Navigate to="/insights" replace />} />
+            <Route path="/updates/:id" element={<UpdateDetailPage />} />
+            <Route path="/contact" element={<ContactPage />} />
+            <Route path="/privacy" element={<PrivacyPage />} />
+            <Route path="/terms" element={<TermsPage />} />
+            <Route path="/accessibility" element={<AccessibilityPage />} />
+            <Route path="/cookies" element={<CookiesPage />} />
+            <Route path="/editorial" element={<EditorialPage />} />
+            <Route path="/contact-success" element={<ContactSuccessPage />} />
+            <Route path="/order-success" element={<OrderSuccessPage />} />
+            <Route path="/newsletter-success" element={<NewsletterSuccessPage />} />
+            <Route path="/insights" element={<BlogPage />} />
+            <Route path="/insights/:slug" element={<BlogPostPage />} />
+            <Route path="/design-system" element={<DesignSystemPage />} />
+            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </BrowserRouter>
+      )}
     </TooltipProvider>
   </QueryClientProvider>
   </HelmetProvider>
