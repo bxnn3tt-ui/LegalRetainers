@@ -52,13 +52,13 @@ const NewsletterSuccessPage = () => {
               <div className="bg-muted/50 p-6 rounded-none mb-8">
                 <h3 className="lr-heading-s mb-4">Your subscription details</h3>
                 <dl className="lr-summary-list">
-                  <div className="flex justify-between py-2 border-b">
+                  <div className="flex flex-col gap-1 py-2 border-b sm:flex-row sm:items-start sm:justify-between">
                     <dt className="lr-body font-medium">Name</dt>
-                    <dd className="lr-body">{subscriptionData.name}</dd>
+                    <dd className="lr-body break-words sm:text-right">{subscriptionData.name}</dd>
                   </div>
-                  <div className="flex justify-between py-2 border-b">
+                  <div className="flex flex-col gap-1 py-2 border-b sm:flex-row sm:items-start sm:justify-between">
                     <dt className="lr-body font-medium">Email</dt>
-                    <dd className="lr-body">{subscriptionData.email}</dd>
+                    <dd className="lr-body break-all sm:text-right">{subscriptionData.email}</dd>
                   </div>
                 </dl>
               </div>
@@ -70,7 +70,7 @@ const NewsletterSuccessPage = () => {
               </p>
             </div>
 
-            <div className="flex gap-4">
+            <div className="flex flex-col gap-4 sm:flex-row">
               <Link to="/updates">
                 <Button variant="default" className="lr-focus">
                   View latest updates

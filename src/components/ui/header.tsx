@@ -34,7 +34,7 @@ export function Header() {
           </Link>
           </div>
           
-          <nav className="hidden md:flex items-center gap-6">
+          <nav className="hidden lg:flex items-center gap-6">
             <Link to="/cases" className="lr-link lr-focus">Find a case</Link>
             <Link to="/request-clients" className="lr-link lr-focus">Request clients</Link>
             <Link to="/insights" className="lr-link lr-focus">Insights</Link>
@@ -51,7 +51,7 @@ export function Header() {
             
             <Sheet open={isMobileMenuOpen} onOpenChange={setIsMobileMenuOpen}>
               <SheetTrigger asChild>
-                <Button variant="ghost" size="sm" className="md:hidden lr-focus p-2 min-h-[44px] min-w-[44px]" aria-label="Open menu">
+                <Button variant="ghost" size="sm" className="lg:hidden lr-focus p-2 min-h-[44px] min-w-[44px]" aria-label="Open menu">
                   <Menu className="h-7 w-7" />
                 </Button>
               </SheetTrigger>

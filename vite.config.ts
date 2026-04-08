@@ -6,10 +6,11 @@ import { componentTagger } from "lovable-tagger";
 // https://vitejs.dev/config/
 export default defineConfig(({ command, mode }) => {
   const isDev = command === 'serve';
+  const host = process.env.HOST || (isDev ? "127.0.0.1" : "0.0.0.0");
   
   return {
     server: {
-      host: "0.0.0.0",
+      host,
       port: 5000,
       allowedHosts: true,
       proxy: {

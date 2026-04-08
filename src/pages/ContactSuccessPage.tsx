@@ -53,23 +53,23 @@ const ContactSuccessPage = () => {
               <div className="bg-muted/50 p-6 rounded-none mb-8">
                 <h3 className="lr-heading-s mb-4">Your submission details</h3>
                 <dl className="lr-summary-list">
-                  <div className="flex justify-between py-2 border-b">
+                  <div className="flex flex-col gap-1 py-2 border-b sm:flex-row sm:items-start sm:justify-between">
                     <dt className="lr-body font-medium">Name</dt>
-                    <dd className="lr-body">{submissionData.firstName} {submissionData.lastName}</dd>
+                    <dd className="lr-body break-words sm:text-right">{submissionData.firstName} {submissionData.lastName}</dd>
                   </div>
-                  <div className="flex justify-between py-2 border-b">
+                  <div className="flex flex-col gap-1 py-2 border-b sm:flex-row sm:items-start sm:justify-between">
                     <dt className="lr-body font-medium">Email</dt>
-                    <dd className="lr-body">{submissionData.email}</dd>
+                    <dd className="lr-body break-all sm:text-right">{submissionData.email}</dd>
                   </div>
                   {submissionData.phone && (
-                    <div className="flex justify-between py-2 border-b">
+                    <div className="flex flex-col gap-1 py-2 border-b sm:flex-row sm:items-start sm:justify-between">
                       <dt className="lr-body font-medium">Phone</dt>
-                      <dd className="lr-body">{submissionData.phone}</dd>
+                      <dd className="lr-body break-words sm:text-right">{submissionData.phone}</dd>
                     </div>
                   )}
-                  <div className="flex justify-between py-2 border-b">
+                  <div className="flex flex-col gap-1 py-2 border-b sm:flex-row sm:items-start sm:justify-between">
                     <dt className="lr-body font-medium">Inquiry type</dt>
-                    <dd className="lr-body">{submissionData.inquiryType}</dd>
+                    <dd className="lr-body break-words sm:text-right">{submissionData.inquiryType}</dd>
                   </div>
                 </dl>
               </div>
@@ -82,7 +82,7 @@ const ContactSuccessPage = () => {
               </p>
             </div>
 
-            <div className="flex gap-4">
+            <div className="flex flex-col gap-4 sm:flex-row">
               <Link to="/">
                 <Button variant="default" className="lr-focus">
                   Return to homepage

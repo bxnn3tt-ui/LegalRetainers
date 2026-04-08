@@ -758,13 +758,6 @@ const RequestCasesForm = () => {
             {selectedCase ? `Back to ${selectedCase.title}` : 'Back to home'}
           </Link>
           <h1 className="lr-heading-xl">Request Signed Cases</h1>
-          {selectedCase && (
-            <div className="mb-4">
-              <Badge variant="secondary" className="bg-[#FFD900] text-primary border border-black rounded-none font-bold text-xs tracking-wider">
-                {selectedCase.title}
-              </Badge>
-            </div>
-          )}
           <p className="lr-body-l text-muted-foreground max-w-xl">
             Tell us about your firm and we'll match you with pre-qualified clients ready for representation.
           </p>

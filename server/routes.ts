@@ -7,6 +7,7 @@ import { Resend } from "resend";
 const RATE_LIMIT = 5;
 const RATE_LIMIT_ORDER = 3;
 const RATE_WINDOW = 60 * 60 * 1000;
+const memoryRateLimits = new Map<string, { requestCount: number; windowStart: number; lastRequest: number }>();
 
 function getClientIP(req: Request): string {
   return (req.headers['x-forwarded-for'] as string)?.split(',')[0].trim() || 
@@ -18,6 +19,32 @@ function getClientIP(req: Request): string {
 async function checkRateLimit(clientIP: string, functionName: string, limit: number = RATE_LIMIT): Promise<boolean> {
   const now = Date.now();
   const windowStart = new Date(now - RATE_WINDOW);
+  const key = `${clientIP}:${functionName}`;
+
+  if (!db) {
+    const existing = memoryRateLimits.get(key);
+
+    if (!existing || existing.windowStart < now - RATE_WINDOW) {
+      memoryRateLimits.set(key, {
+        requestCount: 1,
+        windowStart: now,
+        lastRequest: now,
+      });
+      return false;
+    }
+
+    if (existing.requestCount >= limit) {
+      return true;
+    }
+
+    memoryRateLimits.set(key, {
+      ...existing,
+      requestCount: existing.requestCount + 1,
+      lastRequest: now,
+    });
+
+    return false;
+  }
 
   const existing = await db
     .select()

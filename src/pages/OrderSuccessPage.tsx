@@ -53,28 +53,28 @@ const OrderSuccessPage = () => {
               <div className="bg-muted/50 p-6 rounded-none mb-8">
                 <h3 className="lr-heading-s mb-4">Your order summary</h3>
                 <dl className="lr-summary-list">
-                  <div className="flex justify-between py-2 border-b">
+                  <div className="flex flex-col gap-1 py-2 border-b sm:flex-row sm:items-start sm:justify-between">
                     <dt className="lr-body font-medium">Law firm</dt>
-                    <dd className="lr-body">{orderData.firmName}</dd>
+                    <dd className="lr-body break-words sm:text-right">{orderData.firmName}</dd>
                   </div>
-                  <div className="flex justify-between py-2 border-b">
+                  <div className="flex flex-col gap-1 py-2 border-b sm:flex-row sm:items-start sm:justify-between">
                     <dt className="lr-body font-medium">Attorney</dt>
-                    <dd className="lr-body">{orderData.attorneyName}</dd>
+                    <dd className="lr-body break-words sm:text-right">{orderData.attorneyName}</dd>
                   </div>
-                  <div className="flex justify-between py-2 border-b">
+                  <div className="flex flex-col gap-1 py-2 border-b sm:flex-row sm:items-start sm:justify-between">
                     <dt className="lr-body font-medium">Email</dt>
-                    <dd className="lr-body">{orderData.email}</dd>
+                    <dd className="lr-body break-all sm:text-right">{orderData.email}</dd>
                   </div>
                   {orderData.phone && (
-                    <div className="flex justify-between py-2 border-b">
+                    <div className="flex flex-col gap-1 py-2 border-b sm:flex-row sm:items-start sm:justify-between">
                       <dt className="lr-body font-medium">Phone</dt>
-                      <dd className="lr-body">{orderData.phone}</dd>
+                      <dd className="lr-body break-words sm:text-right">{orderData.phone}</dd>
                     </div>
                   )}
                   {orderData.selectedCases && (
-                  <div className="flex justify-between py-2 border-b">
+                  <div className="flex flex-col gap-1 py-2 border-b sm:flex-row sm:items-start sm:justify-between">
                     <dt className="lr-body font-medium">Cases requested</dt>
-                    <dd className="lr-body">{orderData.selectedCases} case(s)</dd>
+                    <dd className="lr-body break-words sm:text-right">{orderData.selectedCases} case(s)</dd>
                   </div>
                   )}
                 </dl>
@@ -91,7 +91,7 @@ const OrderSuccessPage = () => {
               </ul>
             </div>
 
-            <div className="flex gap-4">
+            <div className="flex flex-col gap-4 sm:flex-row">
               <Link to="/">
                 <Button variant="default" className="lr-focus">
                   Return to homepage

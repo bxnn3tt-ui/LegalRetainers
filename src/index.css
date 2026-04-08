@@ -736,8 +736,9 @@
 
   .lr-article table,
   .blog-article-content table {
-    @apply w-full mb-8 text-sm md:text-base;
+    @apply block w-full overflow-x-auto mb-8 text-sm md:text-base;
     max-width: 100%;
+    -webkit-overflow-scrolling: touch;
   }
 
   .lr-article th,

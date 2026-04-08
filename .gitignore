@@ -11,6 +11,8 @@ node_modules
 dist
 dist-ssr
 *.local
+.env
+node_modules.broken-setup
 
 # Editor directories and files
 .vscode/*

@@ -22,11 +22,21 @@ A marketplace platform where plaintiff law firms acquire pre-signed legal cases 
 # Install dependencies
 npm install
 
+# Optional: create a local env file
+cp .env.example .env
+
 # Start development server
 npm run dev
 ```
 
 The app runs on `http://localhost:5000` by default.
+
+### Local Environment Variables
+
+For basic local development, environment variables are optional.
+
+- `DATABASE_URL`: Optional for local browsing. If omitted, the app falls back to an in-memory rate limiter instead of Postgres.
+- `RESEND_API_KEY`: Optional for local browsing. Contact and order forms will render, but email submission endpoints will return a configuration error until this is set.
 
 ### Build for Production
 

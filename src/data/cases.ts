@@ -59,7 +59,14 @@ export const practiceAreas: PracticeArea[] = [
   },
 ];
 
-export const cases: CaseType[] = [
+const launchCaseSlugs = new Set([
+  "motor-vehicle-accidents",
+  "ssdi-ssi-claims",
+  "premises-slip-fall",
+  "dog-bites-animal-attacks",
+]);
+
+const allCases: CaseType[] = [
   {
     slug: "motor-vehicle-accidents",
     title: "Motor Vehicle Accidents (Auto & Motorcycle)",
@@ -635,5 +642,7 @@ export const cases: CaseType[] = [
       "Several states banned forced arbitration for sexual harassment claims; #MeToo movement continues driving policy changes; EEOC harassment guidance updated 2024",
   },
 ];
+
+export const cases: CaseType[] = allCases.filter((caseItem) => launchCaseSlugs.has(caseItem.slug));
 
 export const updates: LegalUpdate[] = [];
