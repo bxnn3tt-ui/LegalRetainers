@@ -2,6 +2,18 @@ import { pgTable, text, serial, integer, timestamp, uuid } from "drizzle-orm/pg-
 import { createInsertSchema } from "drizzle-zod";
 import { z } from "zod";
 
+const optionalEmailSchema = z.preprocess(
+  (value) => {
+    if (typeof value !== "string") {
+      return value;
+    }
+
+    const trimmedValue = value.trim();
+    return trimmedValue === "" ? undefined : trimmedValue;
+  },
+  z.string().email().max(255).optional(),
+);
+
 export const rateLimits = pgTable("rate_limits", {
   id: uuid("id").primaryKey().defaultRandom(),
   ipAddress: text("ip_address").notNull(),
@@ -16,13 +28,13 @@ export const insertRateLimitSchema = createInsertSchema(rateLimits);
 
 export const newsletterSchema = z.object({
   name: z.string().min(1).max(100),
-  email: z.string().email().max(255),
+  email: optionalEmailSchema,
 });
 
 export const contactSchema = z.object({
   firstName: z.string().min(1).max(50),
   lastName: z.string().min(1).max(50),
-  email: z.string().email().max(255),
+  email: optionalEmailSchema,
   phone: z.string().optional(),
   inquiryType: z.string().min(1),
   message: z.string().min(1).max(2000),
@@ -31,7 +43,7 @@ export const contactSchema = z.object({
 export const lawFirmLeadSchema = z.object({
   firmName: z.string().min(1).max(100),
   contactName: z.string().min(1).max(100),
-  email: z.string().email().max(255),
+  email: optionalEmailSchema,
   phone: z.string().min(10).max(20),
   practiceAreas: z.array(z.string()).min(1),
   caseVolume: z.string().min(1),
@@ -41,7 +53,7 @@ export const lawFirmLeadSchema = z.object({
 export const claimOrderSchema = z.object({
   firmName: z.string().min(1).max(200),
   attorneyName: z.string().min(1).max(100),
-  email: z.string().email().max(255),
+  email: optionalEmailSchema,
   phone: z.string().min(1),
   practiceAreas: z.array(z.string()),
   selectedCases: z.array(z.object({

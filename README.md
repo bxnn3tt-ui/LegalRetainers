@@ -1,90 +1,153 @@
-# LegalRetainers.com
+# LegalRetainers
 
-A marketplace platform where plaintiff law firms acquire pre-signed legal cases across multiple practice areas.
+LegalRetainers is a marketing site and intake platform for signed legal case acquisition. Law firms can browse supported case types, request signed clients, submit contact inquiries, and send partnership/demo requests. Form submissions are routed into Twenty CRM as `opportunities`.
 
-## Tech Stack
+## Stack
 
-- **Frontend:** React 18, TypeScript, Vite
-- **Styling:** Tailwind CSS, shadcn/ui components
-- **Routing:** React Router v6
-- **Data Fetching:** TanStack Query (React Query)
+- React 18
+- TypeScript
+- Vite
+- Express
+- Tailwind CSS
+- Radix UI / shadcn primitives
+- Zod
+- Drizzle ORM
 
-## Getting Started
+## How It Works
 
-### Prerequisites
+- The frontend is a Vite React app under [src](/Users/work/Downloads/LegalRetainers-main/src).
+- The backend is a small Express server under [server](/Users/work/Downloads/LegalRetainers-main/server).
+- Shared validation schemas live in [shared/schema.ts](/Users/work/Downloads/LegalRetainers-main/shared/schema.ts).
+- Static business content like case definitions and blog content lives in [src/data](/Users/work/Downloads/LegalRetainers-main/src/data).
+- Form submissions are handled in [server/routes.ts](/Users/work/Downloads/LegalRetainers-main/server/routes.ts) and pushed to Twenty via [server/twenty.ts](/Users/work/Downloads/LegalRetainers-main/server/twenty.ts).
 
-- Node.js 18+ 
-- npm or yarn
+## Requirements
 
-### Installation
+- Node.js `22.9+`
+- npm
+
+## Local Development
+
+1. Install dependencies:
 
 ```bash
-# Install dependencies
 npm install
+```
 
-# Optional: create a local env file
+2. Create a local env file:
+
+```bash
 cp .env.example .env
+```
 
-# Start development server
+3. Start the app:
+
+```bash
 npm run dev
 ```
 
-The app runs on `http://localhost:5000` by default.
+4. Open:
 
-### Local Environment Variables
+```text
+http://127.0.0.1:5000
+```
 
-For basic local development, environment variables are optional.
+The frontend runs on `127.0.0.1:5000` and the backend runs on `127.0.0.1:3001`.
 
-- `DATABASE_URL`: Optional for local browsing. If omitted, the app falls back to an in-memory rate limiter instead of Postgres.
-- `RESEND_API_KEY`: Optional for local browsing. Contact and order forms will render, but email submission endpoints will return a configuration error until this is set.
+## Environment Variables
 
-### Build for Production
+### Core
+
+- `DATABASE_URL`
+  Optional for local development. If omitted, rate limiting falls back to in-memory storage.
+
+### Twenty CRM
+
+- `TWENTY_API_KEY`
+  Required if you want form submissions to sync into Twenty.
+
+- `TWENTY_BASE_URL`
+  Optional. Defaults to `https://api.twenty.com`.
+  For self-hosted Twenty, set this to your CRM base URL or internal service URL.
+
+- `TWENTY_ALLOW_INSECURE_TLS`
+  Optional. Use `true` only in local development when your self-hosted Twenty instance uses an internal or self-signed certificate.
+
+- `TWENTY_OBJECT_NAME`
+  Optional. Defaults to `opportunities`.
+
+- `TWENTY_OPPORTUNITY_NAME_FIELD`
+  Optional. Defaults to `name`.
+
+- `TWENTY_OPPORTUNITY_DESCRIPTION_FIELD`
+  Optional. Leave blank unless your Twenty workspace actually has a description-like opportunity field.
+
+- `TWENTY_OPPORTUNITY_*_FIELD`
+  Optional field mappings for workspace-specific opportunity fields such as source, contact name, company name, phone, email, or stage.
+
+## Forms
+
+These routes create Twenty opportunities:
+
+- `POST /api/send-newsletter`
+- `POST /api/send-contact`
+- `POST /api/send-law-firm-lead`
+- `POST /api/send-claim-order`
+
+Email is optional for the current submission flow.
+
+## Build
 
 ```bash
 npm run build
 ```
 
-Output is generated in the `dist/` directory.
+Production assets are written to [dist](/Users/work/Downloads/LegalRetainers-main/dist).
+
+## Production Server
+
+Start the backend directly with:
+
+```bash
+npm run start
+```
+
+The app can also be containerized with the existing [Dockerfile](/Users/work/Downloads/LegalRetainers-main/Dockerfile).
 
 ## Project Structure
 
-```
+```text
 src/
-├── components/       # Reusable UI components
-│   ├── blog/         # Blog-related components
-│   └── ui/           # Core UI components (header, footer, buttons, etc.)
-├── pages/            # Route page components
-├── data/             # Static data (cases, blog posts)
-├── utils/            # Utility functions and helpers
-└── assets/           # Images and static assets
+  assets/           Static images
+  components/       Reusable UI and feature components
+  data/             Case and blog content
+  pages/            Route-level pages
+  utils/            SEO/schema/helpers
 
-public/
-├── images/           # Public images
-└── ...               # Other static files
+server/
+  db.ts             Database connection and local fallback handling
+  index.ts          Express server entrypoint
+  routes.ts         Form API routes
+  twenty.ts         Twenty CRM integration
+
+shared/
+  schema.ts         Shared Zod and Drizzle schemas
 ```
-
-## Key Pages
-
-| Route | Description |
-|-------|-------------|
-| `/` | Homepage with hero and featured case categories |
-| `/cases` | Case marketplace with filtering |
-| `/cases/:slug` | Individual case detail page |
-| `/request-clients` | Case request form |
-| `/insights` | Blog and industry updates |
-| `/about` | About the company |
-| `/contact` | Contact information and form |
 
 ## Design System
 
-The project uses a custom design system with `lr-` prefixed CSS utility classes:
+The project uses a custom LegalRetainers design system centered around:
 
-- **Typography:** `lr-heading-xl`, `lr-heading-l`, `lr-body`, etc.
-- **Components:** `lr-card`, `lr-badge-*`, `lr-button-*`
-- **Layout:** `lr-container`, `lr-section`
+- `lr-` typography and utility classes in [src/index.css](/Users/work/Downloads/LegalRetainers-main/src/index.css)
+- brand colors for blue, yellow, green, red, and black
+- square corners, bold borders, and brutalist-inspired interaction styling
 
-Reference documentation available at `/design-system` in development.
+Core UI primitives live in [src/components/ui](/Users/work/Downloads/LegalRetainers-main/src/components/ui).
+
+## Notes
+
+- If you paste real API credentials into chat or logs, rotate them afterward.
 
 ## License
 
-Proprietary - All rights reserved.
+Proprietary. All rights reserved.

@@ -85,12 +85,12 @@ const RequestCasesForm = () => {
     if (isCaseOrder) {
       // Case order validation (existing logic)
       if (step === 1) {
-        if (!caseOrderData.firmName || !caseOrderData.attorneyName || !caseOrderData.email || !caseOrderData.phone) {
+        if (!caseOrderData.firmName || !caseOrderData.attorneyName || !caseOrderData.phone) {
           setFormError('Please fill in all required fields.');
           return;
         }
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!emailRegex.test(caseOrderData.email)) {
+        if (caseOrderData.email && !emailRegex.test(caseOrderData.email)) {
           setFormError('Please enter a valid email address.');
           return;
         }
@@ -120,12 +120,12 @@ const RequestCasesForm = () => {
     } else {
       // Partnership inquiry validation
       if (step === 1) {
-        if (!partnershipData.firmName || !partnershipData.contactName || !partnershipData.email || !partnershipData.phone) {
+        if (!partnershipData.firmName || !partnershipData.contactName || !partnershipData.phone) {
           setFormError('Please fill in all required fields.');
           return;
         }
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!emailRegex.test(partnershipData.email)) {
+        if (partnershipData.email && !emailRegex.test(partnershipData.email)) {
           setFormError('Please enter a valid email address.');
           return;
         }
@@ -186,7 +186,7 @@ const RequestCasesForm = () => {
         const payload = {
           firmName: caseOrderData.firmName,
           attorneyName: caseOrderData.attorneyName,
-          email: caseOrderData.email,
+          email: caseOrderData.email || undefined,
           phone: caseOrderData.phone,
           practiceAreas: caseOrderData.practiceAreas,
           selectedCases: validCases,
@@ -223,7 +223,7 @@ const RequestCasesForm = () => {
           orderReference,
           firmName: caseOrderData.firmName,
           attorneyName: caseOrderData.attorneyName,
-          email: caseOrderData.email,
+          email: caseOrderData.email || undefined,
           phone: caseOrderData.phone,
           selectedCases: validCases.reduce((sum, s) => sum + s.quantity, 0),
           geographicPreferences: caseOrderData.geographicPreferences
@@ -236,7 +236,7 @@ const RequestCasesForm = () => {
       const partnershipPayload = {
         firmName: partnershipData.firmName,
         contactName: partnershipData.contactName,
-        email: partnershipData.email,
+        email: partnershipData.email || undefined,
         phone: partnershipData.phone,
         practiceAreas: partnershipData.practiceAreas,
         caseVolume: partnershipData.monthlyVolume || 'unsure',
@@ -272,7 +272,7 @@ const RequestCasesForm = () => {
         orderReference,
         firmName: partnershipData.firmName,
         attorneyName: partnershipData.contactName,
-        email: partnershipData.email,
+        email: partnershipData.email || undefined,
         phone: partnershipData.phone
       };
 
@@ -444,14 +444,13 @@ const RequestCasesForm = () => {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
                     <Label htmlFor="email" className="lr-body font-bold">
-                      Email Address *
+                      Email Address
                     </Label>
                     <Input 
                       id="email" 
                       type="email" 
                       value={partnershipData.email} 
                       onChange={e => setPartnershipData({...partnershipData, email: e.target.value})} 
-                      required 
                       className="lr-focus border-2 border-black" 
                     />
                   </div>
@@ -804,9 +803,9 @@ const RequestCasesForm = () => {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
                   <Label htmlFor="email" className="lr-body font-bold">
-                    Email Address *
+                    Email Address
                   </Label>
-                  <Input id="email" type="email" value={caseOrderData.email} onChange={e => setCaseOrderData({...caseOrderData, email: e.target.value})} required className="lr-focus border-2 border-black" />
+                  <Input id="email" type="email" value={caseOrderData.email} onChange={e => setCaseOrderData({...caseOrderData, email: e.target.value})} className="lr-focus border-2 border-black" />
                 </div>
                 <div>
                   <Label htmlFor="phone" className="lr-body font-bold">

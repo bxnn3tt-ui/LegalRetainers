@@ -2,7 +2,7 @@ import type { Express, Request, Response } from "express";
 import { db } from "./db";
 import { rateLimits, newsletterSchema, contactSchema, lawFirmLeadSchema, claimOrderSchema } from "../shared/schema";
 import { eq, and, gte } from "drizzle-orm";
-import { Resend } from "resend";
+import { createTwentyOpportunity } from "./twenty";
 
 const RATE_LIMIT = 5;
 const RATE_LIMIT_ORDER = 3;
@@ -81,23 +81,14 @@ async function checkRateLimit(clientIP: string, functionName: string, limit: num
   return false;
 }
 
-function escapeHtml(unsafe: string): string {
-  return unsafe
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;")
-    .replace(/'/g, "&#039;");
-}
-
-function sanitizeInput(input: string): string {
-  return input.trim().replace(/[<>]/g, '');
+function formatDetailLines(details: Array<[string, string | undefined]>): string {
+  return details
+    .filter(([, value]) => value && value.trim().length > 0)
+    .map(([label, value]) => `${label}: ${value}`)
+    .join("\n");
 }
 
 export function registerRoutes(app: Express): void {
-  const resendApiKey = process.env.RESEND_API_KEY;
-  const resend = resendApiKey ? new Resend(resendApiKey) : null;
-
   app.post("/api/send-newsletter", async (req: Request, res: Response) => {
     const clientIP = getClientIP(req);
     const isLimited = await checkRateLimit(clientIP, 'send-newsletter');
@@ -112,44 +103,23 @@ export function registerRoutes(app: Express): void {
 
     const { name, email } = parsed.data;
 
-    if (!resend) {
-      console.error("RESEND_API_KEY not configured");
-      return res.status(500).json({ error: "Email service not configured" });
-    }
-
     try {
-      await resend.emails.send({
-        from: "LegalRetainers <noreply@legalretainers.com>",
-        to: ["dylan@legalretainers.com"],
-        subject: "New Newsletter Subscription",
-        html: `
-          <h2>New Newsletter Subscription</h2>
-          <p><strong>Name:</strong> ${escapeHtml(name)}</p>
-          <p><strong>Email:</strong> ${escapeHtml(email)}</p>
-          <p><strong>Submitted:</strong> ${new Date().toISOString()}</p>
-        `,
-      });
-
-      await resend.emails.send({
-        from: "LegalRetainers <noreply@legalretainers.com>",
-        to: [email],
-        subject: "Thank you for subscribing to LegalRetainers",
-        html: `
-          <h2>Welcome to LegalRetainers, ${escapeHtml(name)}!</h2>
-          <p>Thank you for subscribing to our newsletter. You'll receive updates about:</p>
-          <ul>
-            <li>New legal case opportunities</li>
-            <li>Industry news and insights</li>
-            <li>Practice area updates</li>
-            <li>Special offers for law firms</li>
-          </ul>
-          <p>Best regards,<br>The LegalRetainers Team</p>
-        `,
+      await createTwentyOpportunity({
+        source: "newsletter",
+        title: `Newsletter signup - ${name}`,
+        description: formatDetailLines([
+          ["Submission type", "Newsletter signup"],
+          ["Name", name],
+          ["Email", email],
+          ["Submitted", new Date().toISOString()],
+        ]),
+        contactName: name,
+        email,
       });
 
       res.json({ success: true, message: "Newsletter subscription successful" });
     } catch (error) {
-      console.error("Email error:", error);
+      console.error("Twenty sync error:", error);
       res.status(500).json({ error: "Failed to process newsletter subscription" });
     }
   });
@@ -168,44 +138,27 @@ export function registerRoutes(app: Express): void {
 
     const { firstName, lastName, email, phone, inquiryType, message } = parsed.data;
 
-    if (!resend) {
-      console.error("RESEND_API_KEY not configured");
-      return res.status(500).json({ error: "Email service not configured" });
-    }
-
     try {
-      await resend.emails.send({
-        from: "LegalRetainers <noreply@legalretainers.com>",
-        to: ["dylan@legalretainers.com"],
-        subject: `New Contact Form Submission - ${inquiryType}`,
-        html: `
-          <h2>New Contact Form Submission</h2>
-          <p><strong>Name:</strong> ${escapeHtml(firstName)} ${escapeHtml(lastName)}</p>
-          <p><strong>Email:</strong> ${escapeHtml(email)}</p>
-          <p><strong>Phone:</strong> ${phone ? escapeHtml(phone) : 'Not provided'}</p>
-          <p><strong>Inquiry Type:</strong> ${escapeHtml(inquiryType)}</p>
-          <p><strong>Message:</strong></p>
-          <p>${escapeHtml(message).replace(/\n/g, '<br>')}</p>
-          <p><strong>Submitted:</strong> ${new Date().toISOString()}</p>
-        `,
-      });
-
-      await resend.emails.send({
-        from: "LegalRetainers <noreply@legalretainers.com>",
-        to: [email],
-        subject: "We received your message - LegalRetainers",
-        html: `
-          <h2>Thank you for contacting LegalRetainers, ${escapeHtml(firstName)}!</h2>
-          <p>We have received your inquiry regarding: <strong>${escapeHtml(inquiryType.replace(/-/g, ' '))}</strong></p>
-          <p>Our team will review your message and respond within 24-48 business hours.</p>
-          <p>If your matter is urgent, please call us directly at (305) 900-5954.</p>
-          <p>Best regards,<br>The LegalRetainers Team</p>
-        `,
+      await createTwentyOpportunity({
+        source: "contact-form",
+        title: `Contact inquiry - ${firstName} ${lastName}`,
+        description: formatDetailLines([
+          ["Submission type", "Contact inquiry"],
+          ["Name", `${firstName} ${lastName}`],
+          ["Email", email],
+          ["Phone", phone],
+          ["Inquiry type", inquiryType],
+          ["Message", message],
+          ["Submitted", new Date().toISOString()],
+        ]),
+        contactName: `${firstName} ${lastName}`,
+        email,
+        phone,
       });
 
       res.json({ success: true, message: "Contact form submitted successfully" });
     } catch (error) {
-      console.error("Email error:", error);
+      console.error("Twenty sync error:", error);
       res.status(500).json({ error: "Failed to process contact form" });
     }
   });
@@ -218,62 +171,30 @@ export function registerRoutes(app: Express): void {
 
     const data = parsed.data;
 
-    if (!resend) {
-      console.error("RESEND_API_KEY not configured");
-      return res.status(500).json({ error: "Email service not configured" });
-    }
-
     try {
-      await resend.emails.send({
-        from: "LegalRetainers <noreply@legalretainers.com>",
-        to: ["dylan@legalretainers.com"],
-        subject: `New Law Firm Demo Request: ${data.firmName}`,
-        html: `
-          <h1>New Law Firm Demo Request</h1>
-          <h2>Firm Information</h2>
-          <p><strong>Firm Name:</strong> ${escapeHtml(data.firmName)}</p>
-          <p><strong>Contact Name:</strong> ${escapeHtml(data.contactName)}</p>
-          <p><strong>Email:</strong> ${escapeHtml(data.email)}</p>
-          <p><strong>Phone:</strong> ${escapeHtml(data.phone)}</p>
-          
-          <h2>Practice Details</h2>
-          <p><strong>Practice Areas:</strong> ${data.practiceAreas.join(", ")}</p>
-          <p><strong>Monthly Case Volume:</strong> ${escapeHtml(data.caseVolume)}</p>
-          ${data.challenge ? `<p><strong>Main Challenge:</strong> ${escapeHtml(data.challenge)}</p>` : ""}
-          
-          <p style="margin-top: 20px; padding: 10px; background-color: #f0f0f0;">
-            Please follow up within 24 hours to schedule their demo.
-          </p>
-        `,
-      });
-
-      await resend.emails.send({
-        from: "LegalRetainers <noreply@legalretainers.com>",
-        to: [data.email],
-        subject: "Thanks for Your Interest in LegalRetainers",
-        html: `
-          <h1>Thank you, ${escapeHtml(data.contactName)}!</h1>
-          <p>We've received your demo request for ${escapeHtml(data.firmName)}.</p>
-          <p>Our team will reach out within 24 hours to schedule a personalized demo and discuss how we can help streamline your retainer process.</p>
-          
-          <h2>What to Expect</h2>
-          <ul>
-            <li>See how our platform increases signed retainers</li>
-            <li>Learn about our simple pricing (no setup fees)</li>
-            <li>Get answers to your specific questions about ${data.practiceAreas.join(" and ")}</li>
-          </ul>
-          
-          <p style="margin-top: 20px;">
-            In the meantime, if you have any questions, feel free to reply to this email.
-          </p>
-          
-          <p>Best regards,<br>The LegalRetainers Team</p>
-        `,
+      await createTwentyOpportunity({
+        source: "law-firm-demo",
+        title: `Law firm inquiry - ${data.firmName}`,
+        description: formatDetailLines([
+          ["Submission type", "Law firm inquiry"],
+          ["Firm name", data.firmName],
+          ["Contact name", data.contactName],
+          ["Email", data.email],
+          ["Phone", data.phone],
+          ["Practice areas", data.practiceAreas.join(", ")],
+          ["Monthly case volume", data.caseVolume],
+          ["Main challenge", data.challenge],
+          ["Submitted", new Date().toISOString()],
+        ]),
+        contactName: data.contactName,
+        companyName: data.firmName,
+        email: data.email,
+        phone: data.phone,
       });
 
       res.json({ success: true, message: "Demo request received" });
     } catch (error) {
-      console.error("Email error:", error);
+      console.error("Twenty sync error:", error);
       res.status(500).json({ error: "Failed to process demo request" });
     }
   });
@@ -296,87 +217,42 @@ export function registerRoutes(app: Express): void {
       return res.status(400).json({ error: "Service agreement must be accepted" });
     }
 
-    if (!resend) {
-      console.error("RESEND_API_KEY not configured");
-      return res.status(500).json({ error: "Email service not configured" });
-    }
-
     const orderId = `CPO-${Date.now().toString().slice(-6)}`;
 
-    const casesHtml = formData.selectedCases.map(selection => 
-      `<li><strong>Case Type:</strong> ${escapeHtml(selection.caseType)} <strong>Quantity:</strong> ${selection.quantity}</li>`
-    ).join('');
-
     try {
-      await resend.emails.send({
-        from: "LegalRetainers <noreply@legalretainers.com>",
-        to: ["dylan@legalretainers.com"],
-        subject: `New Exclusive Lead Order - ${formData.firmName}`,
-        html: `
-          <h2>New Exclusive Lead Order</h2>
-          <p><strong>Order ID:</strong> ${escapeHtml(orderId)}</p>
-          
-          <h3>Firm Information</h3>
-          <p><strong>Law Firm:</strong> ${escapeHtml(formData.firmName)}</p>
-          <p><strong>Attorney:</strong> ${escapeHtml(formData.attorneyName)}</p>
-          <p><strong>Email:</strong> ${escapeHtml(formData.email)}</p>
-          <p><strong>Phone:</strong> ${escapeHtml(formData.phone)}</p>
-          <p><strong>Practice Areas:</strong> ${formData.practiceAreas.map(area => escapeHtml(area)).join(', ')}</p>
-          
-          <h3>Lead Selection</h3>
-          <ul>${casesHtml}</ul>
-          
-          ${formData.geographicPreferences.length > 0 ? 
-            `<p><strong>Geographic Preferences:</strong> ${formData.geographicPreferences.map(pref => escapeHtml(pref)).join(', ')}</p>` : ''}
-          
-          ${formData.requirements ? 
-            `<p><strong>Special Requirements:</strong><br>${escapeHtml(formData.requirements).replace(/\n/g, '<br>')}</p>` : ''}
-          
-          <h3>Firm Qualifications</h3>
-          <p><strong>Years in Practice:</strong> ${escapeHtml(formData.yearsInPractice)}</p>
-          <p><strong>Referral Source:</strong> ${escapeHtml(formData.referralSource)}</p>
-          
-          <p><strong>Service Agreement Accepted:</strong> ${formData.serviceAgreement ? 'Yes' : 'No'}</p>
-          <p><strong>Submitted:</strong> ${new Date().toISOString()}</p>
-          
-          <p><strong>Action Required:</strong> Begin prospect screening and schedule live warm transfers within 24-48 hours.</p>
-        `,
-      });
-
-      await resend.emails.send({
-        from: "LegalRetainers <noreply@legalretainers.com>",
-        to: [formData.email],
-        subject: `Exclusive Lead Order Confirmed - ${orderId}`,
-        html: `
-          <h2>Exclusive Lead Order Confirmed</h2>
-          <p>Dear ${escapeHtml(formData.attorneyName)},</p>
-          <p>Thank you for ordering exclusive legal leads. We have received your firm's information and will begin screening prospects for live transfer to your intake team.</p>
-          
-          <div style="background-color: #f4f4f4; padding: 15px; margin: 20px 0;">
-            <p><strong>Order ID:</strong> ${escapeHtml(orderId)}</p>
-            <p><strong>Law Firm:</strong> ${escapeHtml(formData.firmName)}</p>
-            <p><strong>Lead Packages Requested:</strong> ${formData.selectedCases.length}</p>
-          </div>
-          
-          <h3>What happens next?</h3>
-          <ul>
-            <li>Qualified prospects will be transferred live within 24-48 hours</li>
-            <li>Each lead is exclusive — no competing firms will receive the same prospect</li>
-            <li>Your intake team will receive warm transfers during business hours</li>
-            <li>Order confirmation and tracking details will be sent to your email</li>
-          </ul>
-          
-          <p><strong>Important:</strong> Leads are pre-qualified but conversion depends on your intake team's engagement. We recommend prompt follow-up and professional handling of all transfers.</p>
-          
-          <p>For any questions about your order, please reference Order ID <strong>${escapeHtml(orderId)}</strong> and contact us at (305) 900-5954.</p>
-          
-          <p>Best regards,<br>The LegalRetainers Team</p>
-        `,
+      await createTwentyOpportunity({
+        source: "claim-order",
+        title: `Claim order - ${formData.firmName} (${orderId})`,
+        description: formatDetailLines([
+          ["Submission type", "Claim order"],
+          ["Order ID", orderId],
+          ["Law firm", formData.firmName],
+          ["Attorney", formData.attorneyName],
+          ["Email", formData.email],
+          ["Phone", formData.phone],
+          ["Practice areas", formData.practiceAreas.join(", ")],
+          [
+            "Selected cases",
+            formData.selectedCases
+              .map((selection) => `${selection.caseType} x${selection.quantity}`)
+              .join(", "),
+          ],
+          ["Geographic preferences", formData.geographicPreferences.join(", ")],
+          ["Special requirements", formData.requirements],
+          ["Years in practice", formData.yearsInPractice],
+          ["Referral source", formData.referralSource],
+          ["Service agreement accepted", formData.serviceAgreement ? "Yes" : "No"],
+          ["Submitted", new Date().toISOString()],
+        ]),
+        contactName: formData.attorneyName,
+        companyName: formData.firmName,
+        email: formData.email,
+        phone: formData.phone,
       });
 
       res.json({ success: true, message: "Case purchase order submitted successfully", orderId });
     } catch (error) {
-      console.error("Email error:", error);
+      console.error("Twenty sync error:", error);
       res.status(500).json({ error: "Failed to process case purchase order" });
     }
   });

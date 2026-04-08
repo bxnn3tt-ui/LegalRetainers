@@ -26,7 +26,11 @@ const Index = () => {
   const navigate = useNavigate();
   const handleNewsletterSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (email && name) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (email && !emailRegex.test(email)) {
+      return;
+    }
+    if (name) {
       try {
         const response = await fetch("/api/send-newsletter", {
           method: "POST",
@@ -100,8 +104,8 @@ const Index = () => {
       <Header />
 
       <main>
-        {/* Hero Section - sized so "Find Your Practice Area" H2 is above fold on desktop */}
-        <section className="bg-primary text-primary-foreground py-8 md:py-12 lg:min-h-[calc(100dvh-110px)] xl:min-h-[calc(100dvh-135px)] 2xl:min-h-[calc(100dvh-165px)] 3xl:min-h-[calc(100dvh-200px)]">
+        {/* Hero Section - desktop height stays consistent so the approved wide-screen composition holds across laptop and desktop sizes */}
+        <section className="bg-primary text-primary-foreground py-8 md:py-12 lg:py-10 lg:min-h-[610px] xl:min-h-[610px] 2xl:min-h-[640px] 3xl:min-h-[680px]">
           <div className="lr-width-container lg:h-full">
             <div className="grid lg:grid-cols-2 gap-8 2xl:gap-12 3xl:gap-16 items-center">
               <div className="space-y-4 md:space-y-8">

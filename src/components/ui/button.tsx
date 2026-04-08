@@ -5,14 +5,14 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium transition-all focus-visible:outline-none focus-visible:bg-[#FFD900] focus-visible:text-[#0b0c0c] focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-0 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
+  "inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium transition-all focus-visible:outline-none focus-visible:bg-[hsl(var(--warning))] focus-visible:text-[hsl(var(--warning-foreground))] focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-0 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
   {
     variants: {
       variant: {
         default: "bg-primary text-primary-foreground hover:bg-primary/90 rounded-none lr-focus",
         lr: "bg-accent text-accent-foreground hover:bg-accent/90 rounded-none lr-focus",
-        brutalist: "bg-[#FFD900] text-primary border-2 border-black font-black uppercase tracking-wider hover:-translate-y-1 hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] rounded-none lr-focus",
-        "brutalist-green": "bg-[#00703C] text-white border-2 border-black font-black uppercase tracking-wider hover:-translate-y-1 hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] rounded-none lr-focus",
+        brutalist: "bg-[hsl(var(--warning))] text-[hsl(var(--warning-foreground))] border-2 border-black font-black uppercase tracking-wider hover:-translate-y-1 hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] rounded-none lr-focus",
+        "brutalist-green": "bg-accent text-accent-foreground border-2 border-black font-black uppercase tracking-wider hover:-translate-y-1 hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] rounded-none lr-focus",
         "brutalist-outline": "bg-white text-black border-2 border-black font-black uppercase tracking-wider hover:-translate-y-1 hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] rounded-none lr-focus",
         destructive: "bg-destructive text-destructive-foreground hover:bg-destructive/90 rounded-none lr-focus",
         outline: "border-2 border-foreground bg-background hover:bg-accent hover:text-accent-foreground rounded-none lr-focus",
@@ -23,8 +23,8 @@ const buttonVariants = cva(
       },
       size: {
         default: "h-10 px-4 py-2",
-        sm: "h-9 rounded-md px-3",
-        lg: "h-11 rounded-md px-8",
+        sm: "h-9 rounded-none px-3",
+        lg: "h-11 rounded-none px-8",
         icon: "h-10 w-10",
       },
     },

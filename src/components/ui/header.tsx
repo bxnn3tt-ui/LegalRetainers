@@ -25,7 +25,7 @@ export function Header() {
       <div className="lr-width-container">
         <div className="flex items-center justify-between py-4">
           <div className="flex items-center gap-4">
-            <Link to="/" className="inline-flex shrink-0 items-center whitespace-nowrap px-3 py-2 md:px-2 md:py-1 transition-colors lr-focus touch-manipulation border-2 border-black bg-[#FFD900]" style={{
+            <Link to="/" className="inline-flex shrink-0 items-center whitespace-nowrap px-3 py-2 md:px-2 md:py-1 transition-colors lr-focus touch-manipulation border-2 border-black bg-[hsl(var(--warning))] text-[hsl(var(--warning-foreground))]" style={{
             fontFamily: "'Space Grotesk', sans-serif",
             fontWeight: 700,
             letterSpacing: '-0.03em'

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Phone, Mail, MapPin, Clock } from "lucide-react";
 import { Header } from "@/components/ui/header";
 import { Footer } from "@/components/ui/footer";
@@ -17,6 +17,7 @@ import { AlertTriangle } from "lucide-react";
 const ContactPage = () => {
   const navigate = useNavigate();
   const [formError, setFormError] = useState("");
+  const [inquiryType, setInquiryType] = useState("");
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -165,17 +166,17 @@ const ContactPage = () => {
                     lastName: formData.get('lastName') as string,
                     email: formData.get('email') as string,
                     phone: formData.get('phone') as string,
-                    inquiryType: formData.get('inquiryType') as string,
+                    inquiryType,
                     message: formData.get('message') as string
                   };
 
                   // Client-side validation
-                  if (!contactData.firstName || !contactData.lastName || !contactData.email || !contactData.inquiryType || !contactData.message) {
+                  if (!contactData.firstName || !contactData.lastName || !contactData.inquiryType || !contactData.message) {
                     setFormError('Please fill in all required fields.');
                     return;
                   }
                   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-                  if (!emailRegex.test(contactData.email)) {
+                  if (contactData.email && !emailRegex.test(contactData.email)) {
                     setFormError('Please enter a valid email address.');
                     return;
                   }
@@ -224,9 +225,9 @@ const ContactPage = () => {
 
                     <div>
                       <Label htmlFor="email" className="lr-body font-bold">
-                        Email Address *
+                        Email Address
                       </Label>
-                      <Input id="email" name="email" type="email" required className="lr-focus border-2 border-black" />
+                      <Input id="email" name="email" type="email" className="lr-focus border-2 border-black" />
                     </div>
 
                     <div>
@@ -240,7 +241,7 @@ const ContactPage = () => {
                       <Label htmlFor="inquiry-type" className="lr-body font-bold">
                         Inquiry Type *
                       </Label>
-                      <Select name="inquiryType" required>
+                      <Select name="inquiryType" value={inquiryType} onValueChange={setInquiryType} required>
                         <SelectTrigger className="lr-focus border-2 border-black">
                           <SelectValue placeholder="Select inquiry type" />
                         </SelectTrigger>
@@ -275,7 +276,11 @@ const ContactPage = () => {
                     </Button>
 
                     <p className="text-xs text-center text-muted-foreground pt-2">
-                      By submitting, you agree to our privacy policy
+                      By submitting, you agree to our{" "}
+                      <Link to="/privacy" className="lr-link">
+                        privacy policy
+                      </Link>
+                      .
                     </p>
                   </form>
                 </CardContent>

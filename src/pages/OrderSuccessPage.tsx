@@ -61,10 +61,12 @@ const OrderSuccessPage = () => {
                     <dt className="lr-body font-medium">Attorney</dt>
                     <dd className="lr-body break-words sm:text-right">{orderData.attorneyName}</dd>
                   </div>
-                  <div className="flex flex-col gap-1 py-2 border-b sm:flex-row sm:items-start sm:justify-between">
-                    <dt className="lr-body font-medium">Email</dt>
-                    <dd className="lr-body break-all sm:text-right">{orderData.email}</dd>
-                  </div>
+                  {orderData.email && (
+                    <div className="flex flex-col gap-1 py-2 border-b sm:flex-row sm:items-start sm:justify-between">
+                      <dt className="lr-body font-medium">Email</dt>
+                      <dd className="lr-body break-all sm:text-right">{orderData.email}</dd>
+                    </div>
+                  )}
                   {orderData.phone && (
                     <div className="flex flex-col gap-1 py-2 border-b sm:flex-row sm:items-start sm:justify-between">
                       <dt className="lr-body font-medium">Phone</dt>

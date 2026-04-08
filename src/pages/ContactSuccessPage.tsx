@@ -57,10 +57,12 @@ const ContactSuccessPage = () => {
                     <dt className="lr-body font-medium">Name</dt>
                     <dd className="lr-body break-words sm:text-right">{submissionData.firstName} {submissionData.lastName}</dd>
                   </div>
-                  <div className="flex flex-col gap-1 py-2 border-b sm:flex-row sm:items-start sm:justify-between">
-                    <dt className="lr-body font-medium">Email</dt>
-                    <dd className="lr-body break-all sm:text-right">{submissionData.email}</dd>
-                  </div>
+                  {submissionData.email && (
+                    <div className="flex flex-col gap-1 py-2 border-b sm:flex-row sm:items-start sm:justify-between">
+                      <dt className="lr-body font-medium">Email</dt>
+                      <dd className="lr-body break-all sm:text-right">{submissionData.email}</dd>
+                    </div>
+                  )}
                   {submissionData.phone && (
                     <div className="flex flex-col gap-1 py-2 border-b sm:flex-row sm:items-start sm:justify-between">
                       <dt className="lr-body font-medium">Phone</dt>

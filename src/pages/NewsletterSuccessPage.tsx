@@ -45,7 +45,7 @@ const NewsletterSuccessPage = () => {
           <div className="max-w-2xl mx-auto">
             <h2 className="lr-heading-m">What's next</h2>
             <p className="lr-body mb-6">
-              Keep an eye on your inbox for case updates, deadlines, and news worth knowing.
+              We saved your information and our team can follow up with relevant updates and opportunities.
             </p>
 
             {subscriptionData && (
@@ -56,17 +56,19 @@ const NewsletterSuccessPage = () => {
                     <dt className="lr-body font-medium">Name</dt>
                     <dd className="lr-body break-words sm:text-right">{subscriptionData.name}</dd>
                   </div>
-                  <div className="flex flex-col gap-1 py-2 border-b sm:flex-row sm:items-start sm:justify-between">
-                    <dt className="lr-body font-medium">Email</dt>
-                    <dd className="lr-body break-all sm:text-right">{subscriptionData.email}</dd>
-                  </div>
+                  {subscriptionData.email && (
+                    <div className="flex flex-col gap-1 py-2 border-b sm:flex-row sm:items-start sm:justify-between">
+                      <dt className="lr-body font-medium">Email</dt>
+                      <dd className="lr-body break-all sm:text-right">{subscriptionData.email}</dd>
+                    </div>
+                  )}
                 </dl>
               </div>
             )}
 
             <div className="border-l-4 p-4 mb-8" style={{ backgroundColor: '#85994b20', borderColor: '#00703c' }}>
               <p className="lr-body-s">
-                <strong>Privacy first:</strong> You can unsubscribe at any time using the link in any newsletter email. We respect your privacy and will never share your information.
+                <strong>Privacy first:</strong> We respect your privacy and keep your information limited to internal follow-up and CRM tracking.
               </p>
             </div>
 

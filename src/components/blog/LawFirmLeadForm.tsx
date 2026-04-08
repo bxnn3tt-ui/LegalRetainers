@@ -19,9 +19,9 @@ const lawFirmLeadSchema = z.object({
   contactName: z.string().trim().min(2, {
     message: "Your name is required"
   }).max(100),
-  email: z.string().trim().email({
-    message: "Valid email address is required"
-  }).max(255),
+  email: z.string().trim().max(255).refine(value => !value || /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value), {
+    message: "Please enter a valid email address"
+  }).optional(),
   phone: z.string().trim().min(10, {
     message: "Valid phone number is required"
   }).max(20),
@@ -115,9 +115,9 @@ export const LawFirmLeadForm = () => {
           <FormField control={form.control} name="email" render={({
           field
         }) => <FormItem>
-                <FormLabel>Email Address *</FormLabel>
+                <FormLabel>Email Address</FormLabel>
                 <FormControl>
-                  <Input {...field} type="email" placeholder="john@smithlegal.com" className="rounded-none border-2" aria-required="true" />
+                  <Input {...field} type="email" placeholder="john@smithlegal.com" className="rounded-none border-2" />
                 </FormControl>
                 <FormMessage />
               </FormItem>} />
