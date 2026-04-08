@@ -64,7 +64,7 @@ export function CaseCard({
         </script>
       </Helmet>
       <Link to={`/cases/${caseItem.slug}`} className="block h-full group">
-        <Card className="h-full border-2 border-black bg-white cursor-pointer transition-all duration-200 hover:-translate-y-1 hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
+        <Card className="h-full cursor-pointer shadow-none transition-all duration-200 hover:-translate-y-1 hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] active:translate-y-0 active:shadow-none">
         <CardHeader className="pb-4">
           <div className="flex justify-between items-start gap-2 mb-2">
             <CardTitle className="text-lg font-bold leading-tight text-black group-hover:text-primary transition-colors">
