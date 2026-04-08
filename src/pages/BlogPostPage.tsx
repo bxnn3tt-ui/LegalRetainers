@@ -17,8 +17,20 @@ import { KeyTakeaways } from '@/components/blog/KeyTakeaways';
 import { blogPosts } from '@/data/blog';
 import { generateBlogSchemas } from '@/utils/blogSchema';
 
+const retiredPostRedirects: Record<string, string> = {
+  "why-more-leads-means-fewer-signed-cases": "/insights/why-most-law-firm-leads-dont-turn-into-signed-cases",
+  "qualified-leads-vs-clients-ready-to-sign": "/insights/why-most-law-firm-leads-dont-turn-into-signed-cases",
+  "how-law-firms-can-make-intake-more-predictable": "/insights/where-law-firm-marketing-budgets-get-wasted",
+};
+
 const BlogPostPage = () => {
   const { slug } = useParams<{ slug: string }>();
+  const redirectTarget = slug ? retiredPostRedirects[slug] : undefined;
+
+  if (redirectTarget) {
+    return <Navigate to={redirectTarget} replace />;
+  }
+
   const post = blogPosts.find(p => p.slug === slug && p.status === 'published');
 
   if (!post) {
