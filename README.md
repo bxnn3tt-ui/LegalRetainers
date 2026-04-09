@@ -15,11 +15,11 @@ LegalRetainers is a marketing site and intake platform for signed legal case acq
 
 ## How It Works
 
-- The frontend is a Vite React app under [src](/Users/work/Downloads/LegalRetainers-main/src).
-- The backend is a small Express server under [server](/Users/work/Downloads/LegalRetainers-main/server).
-- Shared validation schemas live in [shared/schema.ts](/Users/work/Downloads/LegalRetainers-main/shared/schema.ts).
-- Static business content like case definitions and blog content lives in [src/data](/Users/work/Downloads/LegalRetainers-main/src/data).
-- Form submissions are handled in [server/routes.ts](/Users/work/Downloads/LegalRetainers-main/server/routes.ts) and pushed to Twenty via [server/twenty.ts](/Users/work/Downloads/LegalRetainers-main/server/twenty.ts).
+- The frontend is a Vite React app under [`src`](./src).
+- The backend is a small Express server under [`server`](./server).
+- Shared validation schemas live in [`shared/schema.ts`](./shared/schema.ts).
+- Static business content like case definitions and blog content lives in [`src/data`](./src/data).
+- Form submissions are handled in [`server/routes.ts`](./server/routes.ts) and pushed to Twenty via [`server/twenty.ts`](./server/twenty.ts).
 
 ## Requirements
 
@@ -40,13 +40,19 @@ npm install
 cp .env.example .env
 ```
 
-3. Start the app:
+3. In `.env`, disable coming-soon mode so the full local site is visible:
+
+```bash
+VITE_SITE_COMING_SOON=false
+```
+
+4. Start the app:
 
 ```bash
 npm run dev
 ```
 
-4. Open:
+5. Open:
 
 ```text
 http://127.0.0.1:5000
@@ -61,10 +67,15 @@ The frontend runs on `127.0.0.1:5000` and the backend runs on `127.0.0.1:3001`.
 - `DATABASE_URL`
   Optional for local development. If omitted, rate limiting falls back to in-memory storage.
 
+- `VITE_SITE_COMING_SOON`
+  Optional. Set to `false` to render the full app and routes.
+  If not set to `false`, the app renders a "Coming soon" page.
+
 ### Twenty CRM
 
 - `TWENTY_API_KEY`
-  Required if you want form submissions to sync into Twenty.
+  Required for current form submission endpoints (`/api/send-newsletter`, `/api/send-contact`, `/api/send-law-firm-lead`, `/api/send-claim-order`).
+  If missing, those endpoints return server errors.
 
 - `TWENTY_BASE_URL`
   Optional. Defaults to `https://api.twenty.com`.
@@ -82,8 +93,26 @@ The frontend runs on `127.0.0.1:5000` and the backend runs on `127.0.0.1:3001`.
 - `TWENTY_OPPORTUNITY_DESCRIPTION_FIELD`
   Optional. Leave blank unless your Twenty workspace actually has a description-like opportunity field.
 
-- `TWENTY_OPPORTUNITY_*_FIELD`
-  Optional field mappings for workspace-specific opportunity fields such as source, contact name, company name, phone, email, or stage.
+- `TWENTY_OPPORTUNITY_SOURCE_FIELD`
+  Optional. Field mapping for submission source.
+
+- `TWENTY_OPPORTUNITY_CONTACT_NAME_FIELD`
+  Optional. Field mapping for contact name.
+
+- `TWENTY_OPPORTUNITY_COMPANY_NAME_FIELD`
+  Optional. Field mapping for company/firm name.
+
+- `TWENTY_OPPORTUNITY_EMAIL_FIELD`
+  Optional. Field mapping for contact email.
+
+- `TWENTY_OPPORTUNITY_PHONE_FIELD`
+  Optional. Field mapping for contact phone.
+
+- `TWENTY_OPPORTUNITY_STAGE_FIELD`
+  Optional. Field mapping for stage field.
+
+- `TWENTY_OPPORTUNITY_STAGE_VALUE`
+  Optional. Stage value sent only when `TWENTY_OPPORTUNITY_STAGE_FIELD` is set.
 
 ## Forms
 
@@ -102,7 +131,7 @@ Email is optional for the current submission flow.
 npm run build
 ```
 
-Production assets are written to [dist](/Users/work/Downloads/LegalRetainers-main/dist).
+Production assets are written to [`dist`](./dist).
 
 ## Production Server
 
@@ -112,7 +141,9 @@ Start the backend directly with:
 npm run start
 ```
 
-The app can also be containerized with the existing [Dockerfile](/Users/work/Downloads/LegalRetainers-main/Dockerfile).
+Run `npm run build` before `npm run start` when serving the full production app.
+
+The app can also be containerized with the existing [`Dockerfile`](./Dockerfile).
 
 ## Project Structure
 
@@ -138,11 +169,11 @@ shared/
 
 The project uses a custom LegalRetainers design system centered around:
 
-- `lr-` typography and utility classes in [src/index.css](/Users/work/Downloads/LegalRetainers-main/src/index.css)
+- `lr-` typography and utility classes in [`src/index.css`](./src/index.css)
 - brand colors for blue, yellow, green, red, and black
 - square corners, bold borders, and brutalist-inspired interaction styling
 
-Core UI primitives live in [src/components/ui](/Users/work/Downloads/LegalRetainers-main/src/components/ui).
+Core UI primitives live in [`src/components/ui`](./src/components/ui).
 
 ## Notes
 
