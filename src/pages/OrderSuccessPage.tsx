@@ -20,6 +20,7 @@ const OrderSuccessPage = () => {
       <SEOHead 
         title="Order Confirmed | LegalRetainers"
         description="Your case order has been submitted successfully."
+        canonical="https://legalretainers.com/order-success"
         noIndex={true}
       />
       <StructuredData type="webPage" data={{

@@ -14,13 +14,14 @@ const NotFound = () => {
       <SEOHead 
         title="Page Not Found | LegalRetainers"
         description="The page you are looking for could not be found."
+        canonical="https://legalretainers.com/404"
         noIndex={true}
       />
       <StructuredData type="webPage" data={{
         "@context": "https://schema.org",
         "@type": "WebPage",
         "name": "Page Not Found",
-        "url": typeof window !== 'undefined' ? window.location.href : "https://legalretainers.com"
+        "url": "https://legalretainers.com/404"
       }} />
       <Header />
       <main className="py-16">

@@ -1,5 +1,4 @@
 import { useParams, Navigate, Link } from 'react-router-dom';
-import { Helmet } from 'react-helmet-async';
 import { Calendar, Clock, RefreshCw } from 'lucide-react';
 import { Breadcrumbs } from '@/components/Breadcrumbs';
 import { Header } from '@/components/ui/header';
@@ -16,16 +15,12 @@ import { ArticleCTA } from '@/components/blog/ArticleCTA';
 import { KeyTakeaways } from '@/components/blog/KeyTakeaways';
 import { blogPosts } from '@/data/blog';
 import { generateBlogSchemas } from '@/utils/blogSchema';
-
-const retiredPostRedirects: Record<string, string> = {
-  "why-more-leads-means-fewer-signed-cases": "/insights/why-most-law-firm-leads-dont-turn-into-signed-cases",
-  "qualified-leads-vs-clients-ready-to-sign": "/insights/why-most-law-firm-leads-dont-turn-into-signed-cases",
-  "how-law-firms-can-make-intake-more-predictable": "/insights/where-law-firm-marketing-budgets-get-wasted",
-};
+import { retiredInsightSlugRedirects } from '@/utils/redirects';
+import { Helmet } from '@/lib/helmet';
 
 const BlogPostPage = () => {
   const { slug } = useParams<{ slug: string }>();
-  const redirectTarget = slug ? retiredPostRedirects[slug] : undefined;
+  const redirectTarget = slug ? retiredInsightSlugRedirects[slug] : undefined;
 
   if (redirectTarget) {
     return <Navigate to={redirectTarget} replace />;
@@ -141,7 +136,7 @@ const BlogPostPage = () => {
 
                 {/* Featured Image */}
                 <div className="pt-6">
-                  <div className="relative overflow-hidden border-2 border-black h-[300px] md:h-[400px]">
+                  <div className="relative h-[300px] w-[90%] overflow-hidden border-2 border-black md:h-[400px] mx-auto">
                     <img
                       src={post.featuredImage.url}
                       alt={post.featuredImage.alt}

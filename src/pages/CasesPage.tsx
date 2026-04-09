@@ -93,7 +93,7 @@ const CasesPage = () => {
           <Breadcrumbs items={breadcrumbItems} variant="light" />
           <h1 className="lr-heading-xl mb-4 text-white">Pre-Signed Cases</h1>
           <p className="lr-body-l text-white/90 max-w-3xl">
-            Start with the case type your firm wants most. Review signed opportunities by practice area, then decide which matters are worth your team's time.
+            Browse pre-signed cases by practice area and evaluate the opportunities that best align with your firm’s focus, capacity, and intake standards.
           </p>
         </div>
       </section>

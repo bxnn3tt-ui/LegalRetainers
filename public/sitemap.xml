@@ -33,7 +33,7 @@
   </url>
   <url>
     <loc>https://legalretainers.com/editorial</loc>
-    <lastmod>2026-04-09</lastmod>
+    <lastmod>2026-02-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -51,13 +51,13 @@
   </url>
   <url>
     <loc>https://legalretainers.com/cookies</loc>
-    <lastmod>2026-04-09</lastmod>
+    <lastmod>2026-02-13</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
     <loc>https://legalretainers.com/accessibility</loc>
-    <lastmod>2026-04-09</lastmod>
+    <lastmod>2026-02-13</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
@@ -120,5 +120,11 @@
       <image:loc>https://legalretainers.com/images/blog/lose-cases-during-intake.png</image:loc>
       <image:title>Illustration of lawyer chasing after a client running away from law office</image:title>
     </image:image>
+  </url>
+  <url>
+    <loc>https://legalretainers.com/insights/author/dylan-bennett</loc>
+    <lastmod>2026-04-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
   </url>
 </urlset>

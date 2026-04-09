@@ -1,4 +1,3 @@
-import { Helmet } from 'react-helmet-async';
 import {
   organizationSchema,
   professionalServiceSchema,
@@ -26,6 +25,7 @@ import {
   generateQASchema,
   generateGlossarySchema
 } from '@/utils/siteSchema';
+import { Helmet } from '@/lib/helmet';
 
 interface StructuredDataProps {
   type: 'organization' | 'legalService' | 'faqPage' | 'localBusiness' | 'breadcrumbList' | 'service' | 'article' | 'webPage' | 'professionalService' | 'product' | 'itemList' | 'website' | 'howTo' | 'siteNavigation' | 'homepage' | 'contactPage' | 'aboutPage' | 'collectionPage' | 'action' | 'review' | 'event' | 'specialAnnouncement' | 'knowledgeGraph' | 'llmOptimizedPage' | 'qaPage' | 'glossary' | 'blog';

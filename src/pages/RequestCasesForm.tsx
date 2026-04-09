@@ -309,7 +309,7 @@ const RequestCasesForm = () => {
   };
 
   // Success page redirect check
-  if (window.location.pathname === '/order-success') {
+  if (typeof window !== 'undefined' && window.location.pathname === '/order-success') {
     return <div className="min-h-screen bg-background">
         <SEOHead title="Request Submitted | LegalRetainers" description="Your inquiry has been submitted successfully." noIndex={true} />
         <Header />

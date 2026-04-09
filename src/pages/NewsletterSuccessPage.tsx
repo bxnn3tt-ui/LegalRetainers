@@ -20,6 +20,7 @@ const NewsletterSuccessPage = () => {
       <SEOHead 
         title="Newsletter Subscription Confirmed | LegalRetainers"
         description="You've successfully subscribed to our newsletter."
+        canonical="https://legalretainers.com/newsletter-success"
         noIndex={true}
       />
       <StructuredData type="webPage" data={{
