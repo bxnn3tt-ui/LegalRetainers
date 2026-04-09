@@ -15,6 +15,7 @@ export interface SitemapUrl {
 export const generateSitemapUrls = (): SitemapUrl[] => {
   const baseUrl = 'https://legalretainers.com';
   const currentDate = new Date().toISOString().split('T')[0];
+  const defaultLiveCaseLastmod = '2026-04-09';
   
   const staticUrls: SitemapUrl[] = [
     {
@@ -84,7 +85,7 @@ export const generateSitemapUrls = (): SitemapUrl[] => {
     loc: `${baseUrl}/cases/${caseItem.slug}`,
     changefreq: 'weekly' as const,
     priority: caseItem.priority === 'high' ? 0.9 : caseItem.priority === 'medium' ? 0.8 : 0.7,
-    lastmod: caseItem.recentUpdate ? currentDate : undefined,
+    lastmod: defaultLiveCaseLastmod,
   }));
 
   // Note: updates array is currently empty, so no update URLs are generated

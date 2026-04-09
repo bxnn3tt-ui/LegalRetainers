@@ -5,6 +5,9 @@ Allow: /
 User-agent: ChatGPT-User
 Allow: /
 
+User-agent: OAI-SearchBot
+Allow: /
+
 User-agent: CCBot
 Allow: /
 
@@ -35,6 +38,7 @@ Allow: /assets/
 Allow: /*.css$
 Allow: /*.js$
 Allow: /llm.txt
+Allow: /llms.txt
 
 # Sitemap
 Sitemap: https://legalretainers.com/sitemap.xml

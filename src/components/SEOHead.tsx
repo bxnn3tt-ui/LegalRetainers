@@ -47,7 +47,7 @@ export const SEOHead = ({
   const imageAlt = ogImageAlt || title;
   const robotsContent = noIndex
     ? "noindex, nofollow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"
-    : "max-snippet:-1, max-image-preview:large, max-video-preview:-1";
+    : "index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1";
   
   return (
     <Helmet>
@@ -91,7 +91,6 @@ export const SEOHead = ({
       <meta name="twitter:description" content={description} />
       <meta name="twitter:image" content={absoluteOgImage} />
       <meta name="twitter:image:alt" content={imageAlt} />
-      <meta name="twitter:site" content="@legalretainers" />
       {authorTwitter && <meta name="twitter:creator" content={authorTwitter} />}
       
       {/* Additional SEO meta tags */}
@@ -107,20 +106,9 @@ export const SEOHead = ({
       <meta name="citation_title" content={title} />
       <meta name="citation_journal_title" content="LegalRetainers" />
       
-      {/* Geographic targeting */}
-      <meta name="geo.region" content="US-AZ" />
-      <meta name="geo.placename" content="Phoenix" />
-      <meta name="geo.position" content="33.4792;-112.0305" />
-      
       {/* Language alternatives */}
       <link rel="alternate" hrefLang="en-US" href={currentUrl} />
       <link rel="alternate" hrefLang="x-default" href={SITE_URL} />
-      
-      {/* Revisit frequency */}
-      <meta name="revisit-after" content="7 days" />
-      
-      {/* Content rating */}
-      <meta name="rating" content="general" />
       
       {/* Mobile optimization */}
       <meta name="mobile-web-app-capable" content="yes" />

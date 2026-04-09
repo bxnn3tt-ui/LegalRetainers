@@ -18,7 +18,7 @@ export const organizationSchema = {
     "width": 1200,
     "height": 630
   },
-  "description": "LegalRetainers delivers pre-qualified, signed cases to plaintiff law firms nationwide. Skip intake and start working immediately with clients who have already signed representation agreements.",
+  "description": "LegalRetainers helps plaintiff law firms review signed case opportunities with supporting intake details and a faster path to evaluation.",
   "foundingDate": "2020",
   "contactPoint": [
     {
@@ -56,9 +56,8 @@ export const organizationSchema = {
   },
   "serviceType": [
     "Signed Case Delivery",
-    "Pre-Qualified Legal Case Acquisition",
-    "Law Firm Case Fulfillment",
-    "Retainer Agreement Services"
+    "Legal Case Acquisition",
+    "Law Firm Intake Support"
   ],
   "knowsAbout": [
     "Motor Vehicle Accident Cases",
@@ -67,15 +66,9 @@ export const organizationSchema = {
     "Dog Bite and Animal Attack Cases",
     "Legal Lead Generation",
     "Case Acquisition for Law Firms",
-    "Pre-Signed Retainer Agreements",
     "Law Firm Intake Optimization"
   ],
   "slogan": "Signed Cases on Demand",
-  "sameAs": [
-    "https://linkedin.com/company/legalretainers",
-    "https://x.com/legalretainers",
-    "https://facebook.com/legalretainers"
-  ]
 };
 
 export const professionalServiceSchema = {
@@ -83,7 +76,7 @@ export const professionalServiceSchema = {
   "@type": "ProfessionalService",
   "@id": `${BASE_URL}/#service`,
   "name": "LegalRetainers Case Acquisition Service",
-  "description": "Delivers pre-signed retainer agreements to plaintiff law firms. Each case includes a client who has already executed a representation agreement, complete intake documentation, and HIPAA authorizations. Cases are delivered within 24-48 hours.",
+  "description": "Signed case opportunity service for plaintiff law firms. LegalRetainers helps firms review matters with supporting intake details and available documentation.",
   "provider": {
     "@type": "Organization",
     "@id": `${BASE_URL}/#organization`
@@ -102,7 +95,7 @@ export const professionalServiceSchema = {
         "itemOffered": {
           "@type": "Service",
           "name": "Motor Vehicle Accident Cases",
-          "description": "Auto and motorcycle accident cases delivered with signed representation agreements"
+          "description": "Auto and motorcycle accident matters with clear-liability positioning and supporting intake details"
         }
       },
       {
@@ -126,7 +119,7 @@ export const professionalServiceSchema = {
         "itemOffered": {
           "@type": "Service",
           "name": "Dog Bite and Animal Attack Cases",
-          "description": "Animal attack injury cases delivered with signed representation agreements"
+          "description": "Animal attack injury matters with severe injuries and supporting intake details"
         }
       }
     ]
@@ -134,8 +127,7 @@ export const professionalServiceSchema = {
   "availableChannel": {
     "@type": "ServiceChannel",
     "serviceUrl": `${BASE_URL}/cases`,
-    "servicePhone": "+1-305-900-5954",
-    "serviceSmsNumber": "+1-305-900-5954"
+    "servicePhone": "+1-305-900-5954"
   },
   "termsOfService": `${BASE_URL}/terms`,
   "audience": {
@@ -153,7 +145,7 @@ export const localBusinessSchema = {
   "@type": "LegalService",
   "@id": `${BASE_URL}/#localbusiness`,
   "name": "LegalRetainers",
-  "description": "Signed case delivery service for plaintiff law firms. Pre-qualified clients with signed representation agreements delivered in 24-48 hours.",
+  "description": "LegalRetainers helps plaintiff law firms review signed case opportunities with supporting intake details and available documentation.",
   "url": BASE_URL,
   "telephone": "+1-305-900-5954",
   "email": "help@legalretainers.com",
@@ -482,7 +474,7 @@ export const generateAboutPageSchema = () => ({
   "@type": "AboutPage",
   "@id": `${BASE_URL}/about`,
   "name": "About LegalRetainers",
-  "description": "Learn how LegalRetainers delivers pre-signed retainer agreements to plaintiff law firms nationwide",
+  "description": "Learn how LegalRetainers helps plaintiff law firms review signed case opportunities with supporting intake details and a faster path to evaluation",
   "url": `${BASE_URL}/about`,
   "mainEntity": {
     "@type": "Organization",
