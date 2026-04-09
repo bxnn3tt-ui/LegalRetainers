@@ -25,12 +25,12 @@ export function Header() {
       <div className="lr-width-container">
         <div className="flex items-center justify-between py-4 lg:h-[82px] lg:py-0">
           <div className="flex items-center gap-4">
-            <Link to="/" className="inline-flex shrink-0 items-center whitespace-nowrap px-3 py-2 md:px-2 md:py-1 transition-colors lr-focus touch-manipulation border-2 border-black bg-[hsl(var(--warning))] text-[hsl(var(--warning-foreground))]" style={{
+            <Link to="/" className="inline-flex shrink-0 items-center whitespace-nowrap px-3 py-2 md:px-3 md:py-1.5 lg:px-4 lg:py-2 transition-colors lr-focus touch-manipulation border-2 border-black bg-[hsl(var(--warning))] text-[hsl(var(--warning-foreground))]" style={{
             fontFamily: "'Space Grotesk', sans-serif",
             fontWeight: 700,
             letterSpacing: '-0.03em'
           }}>
-            <span className="inline-block text-black text-[26px] leading-none md:text-[25px]">LegalRetainers</span>
+            <span className="inline-block text-black text-[22px] leading-none sm:text-[24px] md:text-[26px] lg:text-[28px]">LegalRetainers</span>
           </Link>
           </div>
           

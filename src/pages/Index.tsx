@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { Shield, Clock, Users, CheckCircle2, Heart, Briefcase } from "lucide-react";
 import { SEOHead } from "@/components/SEOHead";
 import { StructuredData } from "@/components/StructuredData";
@@ -15,12 +15,7 @@ const Index = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
-  const [selectedCase, setSelectedCase] = useState<string>("");
   const navigate = useNavigate();
-
-  const handleCaseSelect = (caseSlug: string) => {
-    setSelectedCase(caseSlug);
-  };
 
   const handleStartClaim = () => {
     navigate("/request-clients");
@@ -60,7 +55,7 @@ const Index = () => {
                       Grow Your Firm With Cases on Demand
                     </h1>
                     <p className="mb-6 max-w-2xl text-lg text-white/90 sm:lr-body-l xl:max-w-[34rem]">
-                    Choose the case types your firm wants to review. We help you start with signed opportunities, cleaner intake context, and a simpler handoff to your team.
+                      Choose the case types your firm wants to review. We deliver signed opportunities with clearer intake and simpler handoff.
                     </p>
                   </div>
 
@@ -68,7 +63,7 @@ const Index = () => {
                     <h3 className="mb-4 text-2xl font-bold text-white sm:text-3xl lg:text-[24px] lg:leading-[30px] xl:text-[28px] xl:leading-[34px]">
                       Start With Practice Fit
                     </h3>
-                    <MassTortDropdown onSelect={handleCaseSelect} />
+                    <MassTortDropdown />
                   </div>
 
                   <div className="flex flex-col gap-4 sm:flex-row">
@@ -81,30 +76,32 @@ const Index = () => {
                   </div>
                 </div>
 
-                <div className="relative overflow-hidden rounded-lg lg:justify-self-end">
+                <div className="relative rounded-lg overflow-hidden">
                   <img
                     src={heroConsultation}
                     alt="Attorney consulting with client about legal case, both reviewing documents at desk"
-                    className="h-80 w-full object-cover lg:h-[360px] lg:w-[min(100%,34rem)] xl:h-[390px] 2xl:h-[420px]"
+                    className="w-full h-80 lg:h-[360px] 2xl:h-96 3xl:h-[430px] object-cover"
                     width="800"
                     height="600"
                     loading="eager"
+                    fetchPriority="high"
+                    decoding="async"
                   />
                   <div
-                    className="absolute bottom-4 left-4 right-4 rounded-lg p-6 shadow-lg md:right-auto md:max-w-sm backdrop-blur-sm"
+                    className="absolute bottom-4 left-4 right-4 md:right-auto md:max-w-sm backdrop-blur-sm rounded-lg p-6 shadow-lg"
                     style={{ backgroundColor: "hsla(51, 100%, 50%, 0.85)" }}
                   >
-                    <h3 className="lr-heading-s mb-4 font-semibold text-black">What Firms Want</h3>
+                    <h3 className="lr-heading-s text-black mb-4 font-semibold">Why Firms Choose Us</h3>
                     <div className="space-y-3">
                       <div className="flex items-center gap-3 text-black/80">
-                        <div className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-black/10">
+                        <div className="flex-shrink-0 w-8 h-8 bg-black/10 rounded-full flex items-center justify-center">
                           <Shield className="h-4 w-4 text-black" />
                         </div>
                         <span className="lr-body-s">100% TCPA compliant</span>
                       </div>
 
                       <div className="flex items-center gap-3 text-black/80">
-                        <div className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-black/10">
+                        <div className="flex-shrink-0 w-8 h-8 bg-black/10 rounded-full flex items-center justify-center">
                           <Clock className="h-4 w-4 text-black" />
                         </div>
                         <span className="lr-body-s">Pre-screened by legal professionals</span>
@@ -116,14 +113,14 @@ const Index = () => {
             </div>
           </section>
 
-          <section className="hidden bg-background lg:block lg:pt-6">
+          <section className="hidden bg-background lg:block lg:pt-10 lg:pb-2">
             <div className="lr-width-container">
               <h2 className="lr-heading-xl mb-0">Find Your Practice Area</h2>
             </div>
           </section>
         </div>
 
-        <section className="py-10 lg:pt-2 lg:pb-10">
+        <section className="py-10 lg:pt-0 lg:pb-10">
           <div className="lr-width-container">
             <div className="mb-8">
               <h2 className="lr-heading-xl mb-4 lg:hidden">Find Your Practice Area</h2>
@@ -132,7 +129,7 @@ const Index = () => {
               </p>
             </div>
 
-            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-6 lg:grid-cols-4 lg:gap-6 lg:mt-10 mb-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-8">
               <Link to="/cases?category=personal-injury" className="block group">
                 <Card className="text-center cursor-pointer h-full border-2 border-black shadow-none bg-white p-6 transition-all duration-200 hover:-translate-y-1 hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
                   <CardHeader className="pb-2">
