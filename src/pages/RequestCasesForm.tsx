@@ -17,6 +17,11 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { cases, practiceAreas } from "@/data/cases";
 
+type CaseSelection = {
+  caseType: string;
+  quantity: number;
+};
+
 const RequestCasesForm = () => {
   const navigate = useNavigate();
   useEffect(() => {
@@ -47,10 +52,7 @@ const RequestCasesForm = () => {
     }] : [{
       caseType: '',
       quantity: 1
-    }] as Array<{
-      caseType: string;
-      quantity: number;
-    }>,
+    }] as CaseSelection[],
     geographicPreferences: [] as string[],
     requirements: '',
     yearsInPractice: '',
@@ -285,9 +287,12 @@ const RequestCasesForm = () => {
   };
 
   // Case order helper functions
-  const updateCaseSelection = (index: number, field: 'caseType' | 'quantity', value: any) => {
+  const updateCaseSelection = (index: number, field: keyof CaseSelection, value: string | number) => {
     const newSelections = [...caseOrderData.selectedCases];
-    newSelections[index] = { ...newSelections[index], [field]: value };
+    newSelections[index] = {
+      ...newSelections[index],
+      [field]: field === "quantity" ? Number(value) : String(value),
+    };
     setCaseOrderData({ ...caseOrderData, selectedCases: newSelections });
   };
 

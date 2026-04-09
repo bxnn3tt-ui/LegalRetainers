@@ -67,28 +67,6 @@ const Index = () => {
       <StructuredData type="siteNavigation" />
       <StructuredData type="homepage" />
       <StructuredData type="knowledgeGraph" />
-      <StructuredData type="aggregateRating" />
-      <StructuredData type="review" data={{
-        authorName: "Michael Torres",
-        authorTitle: "Managing Partner, Torres Law Group",
-        reviewBody: "LegalRetainers has transformed our case acquisition. We receive pre-signed retainers within 24 hours, allowing us to focus on litigation instead of intake.",
-        ratingValue: 5,
-        datePublished: "2025-11-15"
-      }} />
-      <StructuredData type="review" data={{
-        authorName: "Sarah Chen",
-        authorTitle: "Senior Partner, Chen & Associates",
-        reviewBody: "The quality of cases from LegalRetainers is exceptional. Every client comes with complete documentation and signed agreements. Our conversion rate has improved significantly.",
-        ratingValue: 5,
-        datePublished: "2025-12-02"
-      }} />
-      <StructuredData type="review" data={{
-        authorName: "James Williams",
-        authorTitle: "Founding Partner, Williams Legal",
-        reviewBody: "Working with LegalRetainers has streamlined our entire intake process. The pre-qualified clients are exactly what we need for our personal injury practice.",
-        ratingValue: 5,
-        datePublished: "2026-01-08"
-      }} />
       <StructuredData type="glossary" />
       <StructuredData type="llmOptimizedPage" data={{
         pageName: "LegalRetainers - Signed Cases on Demand for Law Firms",
@@ -97,18 +75,18 @@ const Index = () => {
         pageType: "HomePage",
         additionalData: {
           keywords: ["signed legal cases", "pre-qualified clients", "law firm cases", "case acquisition"],
-          mentions: ["Personal Injury", "Mass Tort", "Medical Malpractice", "Product Liability", "Employment Law"],
-          lastReviewed: "2026-01-21"
+          mentions: ["Motor Vehicle Accidents", "SSDI and SSI Disability Claims", "Slip and Fall Cases", "Dog Bite and Animal Attack Cases"],
+          lastReviewed: "2026-04-09"
         }
       }} />
       <Header />
 
       <main>
         {/* Hero Section - desktop height stays consistent so the approved wide-screen composition holds across laptop and desktop sizes */}
-        <section className="bg-primary text-primary-foreground py-8 md:py-12 lg:py-10 lg:min-h-[610px] xl:min-h-[610px] 2xl:min-h-[640px] 3xl:min-h-[680px]">
+        <section className="bg-primary text-primary-foreground py-8 md:py-12 lg:py-8 lg:min-h-[clamp(500px,54vh,610px)] 2xl:min-h-[clamp(560px,58vh,640px)] 3xl:min-h-[clamp(600px,60vh,680px)]">
           <div className="lr-width-container lg:h-full">
-            <div className="grid lg:grid-cols-2 gap-8 2xl:gap-12 3xl:gap-16 items-center">
-              <div className="space-y-4 md:space-y-8">
+            <div className="grid lg:grid-cols-2 gap-8 xl:gap-10 2xl:gap-12 3xl:gap-16 items-center">
+              <div className="space-y-4 md:space-y-8 lg:space-y-6">
                 <div>
                   <h1 className="text-5xl font-bold leading-tight sm:text-6xl lg:text-[48px] lg:leading-[50px] 2xl:text-[56px] 2xl:leading-[60px] 3xl:text-[64px] 3xl:leading-[68px] lg:font-bold mb-6 text-white">Grow Your Firm With Cases on Demand</h1>
                   <p className="text-lg sm:lr-body-l 2xl:text-[22px] 2xl:leading-[32px] 3xl:text-[24px] 3xl:leading-[36px] text-white/90 mb-8 max-w-2xl 2xl:max-w-3xl">
@@ -160,7 +138,7 @@ const Index = () => {
         </section>
 
         {/* Case Finder Section */}
-        <section className="py-12 lg:pt-12">
+        <section className="py-12 lg:pt-8">
           <div className="lr-width-container">
             <div className="mb-8 lg:mb-4">
               <h2 className="lr-heading-xl mb-4">Find Your Practice Area</h2>

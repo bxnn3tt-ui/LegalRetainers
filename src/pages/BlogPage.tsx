@@ -164,7 +164,7 @@ const BlogPage = () => {
                   aria-label="Search articles and updates"
                 />
               </div>
-              <Select value={contentType} onValueChange={(value: any) => setContentType(value)}>
+              <Select value={contentType} onValueChange={(value) => setContentType(value as 'all' | 'articles' | 'updates')}>
                 <SelectTrigger aria-label="Filter by content type" className="border-2 border-black bg-white">
                   <SelectValue placeholder="All Content" />
                 </SelectTrigger>

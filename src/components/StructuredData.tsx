@@ -18,7 +18,6 @@ import {
   generateCollectionPageSchema,
   generateProductSchema,
   generateActionSchema,
-  aggregateRatingSchema,
   generateReviewSchema,
   generateEventSchema,
   generateSpecialAnnouncementSchema,
@@ -29,8 +28,37 @@ import {
 } from '@/utils/siteSchema';
 
 interface StructuredDataProps {
-  type: 'organization' | 'legalService' | 'faqPage' | 'localBusiness' | 'breadcrumbList' | 'service' | 'article' | 'webPage' | 'professionalService' | 'product' | 'itemList' | 'website' | 'howTo' | 'siteNavigation' | 'homepage' | 'contactPage' | 'aboutPage' | 'collectionPage' | 'action' | 'aggregateRating' | 'review' | 'event' | 'specialAnnouncement' | 'knowledgeGraph' | 'llmOptimizedPage' | 'qaPage' | 'glossary' | 'blog';
-  data?: any;
+  type: 'organization' | 'legalService' | 'faqPage' | 'localBusiness' | 'breadcrumbList' | 'service' | 'article' | 'webPage' | 'professionalService' | 'product' | 'itemList' | 'website' | 'howTo' | 'siteNavigation' | 'homepage' | 'contactPage' | 'aboutPage' | 'collectionPage' | 'action' | 'review' | 'event' | 'specialAnnouncement' | 'knowledgeGraph' | 'llmOptimizedPage' | 'qaPage' | 'glossary' | 'blog';
+  data?: Record<string, unknown> & {
+    faqs?: Parameters<typeof generateFAQSchema>[0];
+    items?: Parameters<typeof generateBreadcrumbSchema>[0];
+    steps?: Parameters<typeof generateHowToSchema>[2];
+    options?: Parameters<typeof generateWebPageSchema>[3];
+    actionType?: Parameters<typeof generateActionSchema>[0];
+    targetUrl?: Parameters<typeof generateActionSchema>[3];
+    authorName?: string;
+    authorTitle?: string;
+    reviewBody?: string;
+    ratingValue?: number;
+    datePublished?: string;
+    startDate?: string;
+    endDate?: string;
+    eventType?: string;
+    relatedCaseSlug?: string;
+    text?: string;
+    datePosted?: string;
+    expires?: string;
+    category?: string;
+    relatedUrl?: string;
+    pageName?: string;
+    pageDescription?: string;
+    pageUrl?: string;
+    pageType?: string;
+    additionalData?: Record<string, unknown>;
+    questions?: Parameters<typeof generateQASchema>[0];
+    "@context"?: string;
+    "@type"?: string;
+  };
 }
 
 export const StructuredData = ({ type, data }: StructuredDataProps) => {
@@ -111,9 +139,6 @@ export const StructuredData = ({ type, data }: StructuredDataProps) => {
           return generateActionSchema(data.actionType, data.name, data.description, data.targetUrl);
         }
         return data;
-      
-      case 'aggregateRating':
-        return data || aggregateRatingSchema;
       
       case 'review':
         if (data?.authorName && data?.reviewBody && data?.ratingValue) {

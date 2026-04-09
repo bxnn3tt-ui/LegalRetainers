@@ -27,7 +27,6 @@ export default defineConfig(({ command, mode }) => {
       },
     },
     build: {
-      // Enhanced obfuscation and minification for production
       minify: 'terser',
       terserOptions: {
         compress: {
@@ -59,27 +58,12 @@ export default defineConfig(({ command, mode }) => {
       },
       rollupOptions: {
         output: {
-          // Obscure chunk and asset names
-          chunkFileNames: () => {
-            const chars = 'abcdefghijklmnopqrstuvwxyz0123456789';
-            let result = '';
-            for (let i = 0; i < 8; i++) {
-              result += chars.charAt(Math.floor(Math.random() * chars.length));
-            }
-            return `assets/${result}.js`;
-          },
-          assetFileNames: () => {
-            const chars = 'abcdefghijklmnopqrstuvwxyz0123456789';
-            let result = '';
-            for (let i = 0; i < 8; i++) {
-              result += chars.charAt(Math.floor(Math.random() * chars.length));
-            }
-            return `assets/${result}.[ext]`;
-          },
-          manualChunks: undefined
+          chunkFileNames: "assets/[name]-[hash].js",
+          entryFileNames: "assets/[name]-[hash].js",
+          assetFileNames: "assets/[name]-[hash][extname]"
         }
       },
-      cssCodeSplit: false,
+      cssCodeSplit: true,
       sourcemap: false,
       assetsInlineLimit: 0
     },

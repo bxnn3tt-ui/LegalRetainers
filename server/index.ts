@@ -3,6 +3,11 @@ import { registerRoutes } from "./routes";
 import path from "path";
 import { fileURLToPath } from "url";
 
+type ErrorWithStatus = Error & {
+  status?: number;
+  statusCode?: number;
+};
+
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
@@ -14,20 +19,20 @@ app.use(express.urlencoded({ extended: false }));
 
 app.use((req, res, next) => {
   const start = Date.now();
-  const path = req.path;
-  let capturedJsonResponse: Record<string, any> | undefined = undefined;
+  const requestPath = req.path;
+  let capturedJsonResponse: unknown;
 
-  const originalResJson = res.json;
-  res.json = function (bodyJson, ...args) {
+  const originalResJson = res.json.bind(res) as (body?: unknown) => Response;
+  res.json = ((bodyJson: unknown) => {
     capturedJsonResponse = bodyJson;
-    return originalResJson.apply(res, [bodyJson, ...args]);
-  };
+    return originalResJson(bodyJson);
+  }) as typeof res.json;
 
   res.on("finish", () => {
     const duration = Date.now() - start;
-    if (path.startsWith("/api")) {
-      let logLine = `${req.method} ${path} ${res.statusCode} in ${duration}ms`;
-      if (capturedJsonResponse) {
+    if (requestPath.startsWith("/api")) {
+      let logLine = `${req.method} ${requestPath} ${res.statusCode} in ${duration}ms`;
+      if (capturedJsonResponse !== undefined) {
         logLine += ` :: ${JSON.stringify(capturedJsonResponse)}`;
       }
 
@@ -52,9 +57,10 @@ if (process.env.NODE_ENV === "production") {
   });
 }
 
-app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
-  const status = err.status || err.statusCode || 500;
-  const message = err.message || "Internal Server Error";
+app.use((err: unknown, _req: Request, res: Response, _next: NextFunction) => {
+  const normalizedError = err instanceof Error ? (err as ErrorWithStatus) : undefined;
+  const status = normalizedError?.status || normalizedError?.statusCode || 500;
+  const message = normalizedError?.message || "Internal Server Error";
 
   if (!res.headersSent) {
     res.status(status).json({ message });

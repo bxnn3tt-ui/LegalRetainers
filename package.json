@@ -7,6 +7,9 @@
     "node": ">=22.9.0"
   },
   "scripts": {
+    "generate:sitemap": "node --import tsx scripts/generate-sitemap.ts",
+    "prebuild": "npm run generate:sitemap",
+    "prebuild:dev": "npm run generate:sitemap",
     "dev": "NODE_ENV=development node --env-file-if-exists=.env --import tsx server/index.ts & vite",
     "build": "vite build",
     "build:dev": "vite build --mode development",

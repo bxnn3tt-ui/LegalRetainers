@@ -44,7 +44,7 @@ export const organizationSchema = {
   ],
   "address": {
     "@type": "PostalAddress",
-    "streetAddress": "2345 E Thomas Rd Ste 100 #498",
+    "streetAddress": "2345 E Thomas Rd Ste 100 #589",
     "addressLocality": "Phoenix",
     "addressRegion": "AZ",
     "postalCode": "85016",
@@ -61,27 +61,21 @@ export const organizationSchema = {
     "Retainer Agreement Services"
   ],
   "knowsAbout": [
-    "Personal Injury Cases",
-    "Mass Tort Litigation",
-    "Institutional Abuse Claims",
-    "Medical Malpractice Cases",
-    "Product Liability",
-    "Employment Law Cases",
+    "Motor Vehicle Accident Cases",
+    "SSDI and SSI Disability Claims",
+    "Slip and Fall Cases",
+    "Dog Bite and Animal Attack Cases",
     "Legal Lead Generation",
     "Case Acquisition for Law Firms",
-    "Pre-Signed Retainer Agreements"
+    "Pre-Signed Retainer Agreements",
+    "Law Firm Intake Optimization"
   ],
   "slogan": "Signed Cases on Demand",
   "sameAs": [
     "https://linkedin.com/company/legalretainers",
     "https://x.com/legalretainers",
     "https://facebook.com/legalretainers"
-  ],
-  "hasCredential": {
-    "@type": "EducationalOccupationalCredential",
-    "credentialCategory": "Professional License",
-    "name": "Licensed Legal Services Provider"
-  }
+  ]
 };
 
 export const professionalServiceSchema = {
@@ -107,32 +101,32 @@ export const professionalServiceSchema = {
         "@type": "Offer",
         "itemOffered": {
           "@type": "Service",
-          "name": "Personal Injury Cases",
-          "description": "Motor vehicle accidents, slip and falls, workplace injuries"
+          "name": "Motor Vehicle Accident Cases",
+          "description": "Auto and motorcycle accident cases delivered with signed representation agreements"
         }
       },
       {
         "@type": "Offer",
         "itemOffered": {
           "@type": "Service",
-          "name": "Mass Tort Cases",
-          "description": "Product liability, defective drugs, environmental contamination"
+          "name": "SSDI and SSI Disability Claims",
+          "description": "Signed disability claim opportunities for firms handling Social Security disability matters"
         }
       },
       {
         "@type": "Offer",
         "itemOffered": {
           "@type": "Service",
-          "name": "Institutional Abuse Cases",
-          "description": "Clergy abuse, institutional negligence, survivor claims"
+          "name": "Slip and Fall Cases",
+          "description": "Premises liability matters involving fall injuries and documented liability"
         }
       },
       {
         "@type": "Offer",
         "itemOffered": {
           "@type": "Service",
-          "name": "Employment Cases",
-          "description": "Workplace disputes, benefits denial, employment violations"
+          "name": "Dog Bite and Animal Attack Cases",
+          "description": "Animal attack injury cases delivered with signed representation agreements"
         }
       }
     ]
@@ -166,16 +160,11 @@ export const localBusinessSchema = {
   "priceRange": "$$",
   "address": {
     "@type": "PostalAddress",
-    "streetAddress": "2345 E Thomas Rd Ste 100 #498",
+    "streetAddress": "2345 E Thomas Rd Ste 100 #589",
     "addressLocality": "Phoenix",
     "addressRegion": "AZ",
     "postalCode": "85016",
     "addressCountry": "US"
-  },
-  "geo": {
-    "@type": "GeoCoordinates",
-    "latitude": 25.7742,
-    "longitude": -80.1936
   },
   "openingHoursSpecification": [
     {
@@ -428,7 +417,7 @@ export const generateWebPageSchema = (
     breadcrumb?: Array<{ name: string; url: string }>;
   }
 ) => {
-  const schema: any = {
+  const schema: Record<string, unknown> = {
     "@context": "https://schema.org",
     "@type": "WebPage",
     "@id": url.startsWith('http') ? url : `${BASE_URL}${url}`,
@@ -553,7 +542,7 @@ export const generateProductSchema = (
     features?: string[];
   }
 ) => {
-  const schema: any = {
+  const schema: Record<string, unknown> = {
     "@context": "https://schema.org",
     "@type": "Product",
     "@id": `${BASE_URL}/cases/${slug}#product`,
@@ -644,11 +633,10 @@ export const homepageSchema = {
     "cssSelector": [".lr-heading-xl", ".lr-heading-l", ".lr-body-l", "[data-speakable]"]
   },
   "specialty": [
-    "Personal Injury Cases",
-    "Mass Tort Litigation",
-    "Medical Malpractice",
-    "Product Liability",
-    "Employment Law"
+    "Motor Vehicle Accident Cases",
+    "SSDI and SSI Disability Claims",
+    "Slip and Fall Cases",
+    "Dog Bite and Animal Attack Cases"
   ],
   "mainContentOfPage": {
     "@type": "WebPageElement",
@@ -659,23 +647,6 @@ export const homepageSchema = {
     "url": `${BASE_URL}/og-image.png`,
     "width": 1200,
     "height": 630
-  }
-};
-
-/**
- * AggregateRating schema for organization reputation
- */
-export const aggregateRatingSchema = {
-  "@context": "https://schema.org",
-  "@type": "Organization",
-  "@id": `${BASE_URL}/#organization`,
-  "name": "LegalRetainers",
-  "aggregateRating": {
-    "@type": "AggregateRating",
-    "ratingValue": "4.9",
-    "reviewCount": "127",
-    "bestRating": "5",
-    "worstRating": "1"
   }
 };
 
@@ -913,20 +884,19 @@ export const knowledgeGraphSchema = {
       "areaServed": "United States",
       "serviceType": "Legal Case Acquisition",
       "knowsAbout": [
-        "Personal Injury Law",
-        "Mass Tort Litigation", 
-        "Medical Malpractice",
-        "Product Liability",
-        "Employment Law",
-        "Institutional Abuse",
-        "Legal Lead Generation"
+        "Motor Vehicle Accident Cases",
+        "SSDI and SSI Disability Claims",
+        "Slip and Fall Cases",
+        "Dog Bite and Animal Attack Cases",
+        "Legal Lead Generation",
+        "Law Firm Intake Optimization"
       ],
       "slogan": "Signed Cases on Demand",
       "telephone": "+1-305-900-5954",
       "email": "help@legalretainers.com",
       "address": {
         "@type": "PostalAddress",
-        "streetAddress": "2345 E Thomas Rd Ste 100 #498",
+        "streetAddress": "2345 E Thomas Rd Ste 100 #589",
         "addressLocality": "Phoenix",
         "addressRegion": "AZ",
         "postalCode": "85016",
@@ -983,8 +953,8 @@ export const legalGlossaryTerms = [
     definition: "A fee arrangement where the attorney receives a percentage of the client's recovery rather than hourly fees, meaning no payment is due if the case is unsuccessful."
   },
   {
-    term: "Mass Tort",
-    definition: "Civil litigation involving many plaintiffs against one or a few defendants in cases alleging similar harm from defective products, pharmaceuticals, or environmental hazards."
+    term: "SSDI and SSI Claim",
+    definition: "A Social Security disability matter involving benefits eligibility, supporting medical records, work history, and administrative review."
   },
   {
     term: "TCPA Compliance",

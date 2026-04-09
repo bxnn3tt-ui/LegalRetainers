@@ -131,8 +131,8 @@ const ContactPage = () => {
                     <div>
                       <h3 className="font-bold mb-1">Office</h3>
                       <p className="lr-body">2345 E Thomas Rd Ste 100</p>
-                      <p className="lr-body">#498</p>
-                      <p className="lr-body">Phoenix, AZ 85016</p>
+                      <p className="lr-body">#589</p>
+                      <p className="lr-body">Phoenix , AZ 85016</p>
                     </div>
                   </div>
 

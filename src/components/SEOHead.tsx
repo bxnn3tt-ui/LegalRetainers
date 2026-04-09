@@ -45,13 +45,16 @@ export const SEOHead = ({
   const currentUrl = canonical || (typeof window !== 'undefined' ? window.location.href : SITE_URL);
   const absoluteOgImage = ensureAbsoluteUrl(ogImage);
   const imageAlt = ogImageAlt || title;
+  const robotsContent = noIndex
+    ? "noindex, nofollow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"
+    : "max-snippet:-1, max-image-preview:large, max-video-preview:-1";
   
   return (
     <Helmet>
       <title>{title}</title>
       <meta name="description" content={description} />
       <meta name="keywords" content={keywords} />
-      {noIndex && <meta name="robots" content="noindex,nofollow" />}
+      <meta name="robots" content={robotsContent} />
       
       {/* Canonical URL */}
       <link rel="canonical" href={currentUrl} />
@@ -95,9 +98,6 @@ export const SEOHead = ({
       <meta name="author" content={author || "LegalRetainers"} />
       <meta name="publisher" content="LegalRetainers" />
       <meta name="theme-color" content="#002966" />
-      
-      {/* GEO (Generative Engine Optimization) meta tags */}
-      <meta name="robots" content="max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
       
       {/* AI/LLM specific tags */}
       <meta name="referrer" content="always" />

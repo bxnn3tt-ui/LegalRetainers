@@ -188,7 +188,7 @@ export default function PrivacyPage() {
                   <ul className="lr-list lr-list--bullet">
                     <li><strong>Email:</strong> <a href="mailto:info@legalretainers.com" className="lr-link">info@legalretainers.com</a></li>
                     <li><strong>Phone:</strong> 305-900-5954</li>
-                    <li><strong>Mail:</strong> LegalRetainers.com, Privacy Team, 2345 E Thomas Rd Ste 100 #498, Phoenix, AZ 85016</li>
+                    <li><strong>Mail:</strong> LegalRetainers.com, Privacy Team, 2345 E Thomas Rd Ste 100 #589, Phoenix , AZ 85016</li>
                   </ul>
                 </section>
               </div>
