@@ -178,7 +178,7 @@ export const websiteSchema = {
   "@id": `${BASE_URL}/#website`,
   "name": "LegalRetainers",
   "url": BASE_URL,
-  "description": "Platform delivering pre-qualified, signed cases to plaintiff law firms nationwide",
+  "description": "Website for plaintiff law firms reviewing signed case opportunities and intake details",
   "publisher": {
     "@type": "Organization",
     "@id": `${BASE_URL}/#organization`
@@ -402,8 +402,6 @@ export const generateWebPageSchema = (
   description: string,
   url: string,
   options?: {
-    speakable?: boolean;
-    speakableSelectors?: string[];
     lastReviewed?: string;
     primaryImageUrl?: string;
     breadcrumb?: Array<{ name: string; url: string }>;
@@ -426,13 +424,6 @@ export const generateWebPageSchema = (
     },
     "inLanguage": "en-US"
   };
-
-  if (options?.speakable) {
-    schema.speakable = {
-      "@type": "SpeakableSpecification",
-      "cssSelector": options.speakableSelectors || [".lr-heading-xl", ".lr-heading-l", ".lr-body-l", "[data-speakable]"]
-    };
-  }
 
   if (options?.lastReviewed) {
     schema.lastReviewed = options.lastReviewed;
@@ -457,15 +448,11 @@ export const generateContactPageSchema = () => ({
   "@type": "ContactPage",
   "@id": `${BASE_URL}/contact`,
   "name": "Contact LegalRetainers",
-  "description": "Contact LegalRetainers to discuss signed case acquisition for your law firm",
+  "description": "Contact LegalRetainers to discuss case fit, documentation, and availability for your law firm",
   "url": `${BASE_URL}/contact`,
   "mainEntity": {
     "@type": "Organization",
     "@id": `${BASE_URL}/#organization`
-  },
-  "speakable": {
-    "@type": "SpeakableSpecification",
-    "cssSelector": [".lr-heading-xl", ".lr-heading-l", ".lr-body-l", "[data-speakable]"]
   }
 });
 
@@ -479,10 +466,6 @@ export const generateAboutPageSchema = () => ({
   "mainEntity": {
     "@type": "Organization",
     "@id": `${BASE_URL}/#organization`
-  },
-  "speakable": {
-    "@type": "SpeakableSpecification",
-    "cssSelector": [".lr-heading-xl", ".lr-heading-l", ".lr-body-l", "[data-speakable]"]
   }
 });
 
@@ -515,10 +498,6 @@ export const generateCollectionPageSchema = (
         "url": item.url.startsWith('http') ? item.url : `${BASE_URL}${item.url}`
       }
     }))
-  },
-  "speakable": {
-    "@type": "SpeakableSpecification",
-    "cssSelector": [".lr-heading-xl", ".lr-heading-l", ".lr-body-l", "[data-speakable]"]
   }
 });
 
@@ -610,7 +589,7 @@ export const homepageSchema = {
   "@type": "WebPage",
   "@id": BASE_URL,
   "name": "LegalRetainers - Signed Cases on Demand for Law Firms",
-  "description": "LegalRetainers delivers pre-qualified, signed legal cases to plaintiff law firms nationwide. Skip intake and start working with clients who have already signed representation agreements.",
+  "description": "LegalRetainers helps plaintiff law firms review signed case opportunities with supporting intake details and a faster path to evaluation.",
   "url": BASE_URL,
   "isPartOf": {
     "@type": "WebSite",
@@ -619,10 +598,6 @@ export const homepageSchema = {
   "about": {
     "@type": "Organization",
     "@id": `${BASE_URL}/#organization`
-  },
-  "speakable": {
-    "@type": "SpeakableSpecification",
-    "cssSelector": [".lr-heading-xl", ".lr-heading-l", ".lr-body-l", "[data-speakable]"]
   },
   "specialty": [
     "Motor Vehicle Accident Cases",
@@ -810,18 +785,6 @@ export const generateLLMOptimizedPageSchema = (
   "provider": {
     "@id": `${BASE_URL}/#organization`
   },
-  "speakable": {
-    "@type": "SpeakableSpecification",
-    "cssSelector": [
-      ".lr-heading-xl",
-      ".lr-heading-l", 
-      ".lr-body-l",
-      "[data-speakable]",
-      "h1",
-      "h2",
-      ".hero-text"
-    ]
-  },
   "inLanguage": "en-US",
   "isAccessibleForFree": true,
   "potentialAction": {
@@ -869,7 +832,7 @@ export const knowledgeGraphSchema = {
       "@id": `${BASE_URL}/#organization`,
       "name": "LegalRetainers",
       "alternateName": ["Legal Retainers", "LegalRetainers.com"],
-      "description": "LegalRetainers delivers pre-qualified, signed cases to plaintiff law firms nationwide. Each case includes a client who has already signed a representation agreement.",
+      "description": "LegalRetainers helps plaintiff law firms review signed case opportunities with supporting intake details and a faster path to evaluation.",
       "url": BASE_URL,
       "logo": `${BASE_URL}/og-image.png`,
       "foundingDate": "2020",
@@ -900,14 +863,14 @@ export const knowledgeGraphSchema = {
       "@id": `${BASE_URL}/#website`,
       "url": BASE_URL,
       "name": "LegalRetainers",
-      "description": "Platform for law firms to acquire pre-signed legal cases",
+      "description": "Website for plaintiff law firms reviewing signed case opportunities and intake details",
       "publisher": { "@id": `${BASE_URL}/#organization` }
     },
     {
       "@type": "Service",
       "@id": `${BASE_URL}/#caseService`,
-      "name": "Pre-Signed Case Delivery",
-      "description": "Delivers pre-qualified clients with signed retainer agreements to plaintiff law firms within 24-48 hours",
+      "name": "Signed Case Opportunity Review",
+      "description": "Helps plaintiff law firms review signed case opportunities with supporting intake details and available documentation",
       "provider": { "@id": `${BASE_URL}/#organization` },
       "serviceType": "Legal Case Acquisition",
       "areaServed": "United States",

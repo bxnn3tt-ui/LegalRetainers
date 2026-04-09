@@ -55,24 +55,31 @@ const ContactPage = () => {
       "@type": "FAQPage",
       "mainEntity": [{
         "@type": "Question",
-        "name": "How quickly can you deliver signed cases?",
+        "name": "How should we use this form?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Timing depends on the case type and the records available, but we aim to move quickly once the fit is clear."
+          "text": "Use it when you want a real answer about fit, documentation, timing, or availability. The more context you give us, the more useful our response will be."
         }
       }, {
         "@type": "Question",
-        "name": "What quality verification do you provide?",
+        "name": "How quickly do you respond?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "We focus on signed matters with intake details and supporting records that help a law firm evaluate fit faster."
+          "text": "Response times depend on message volume and the complexity of the request, but we aim to reply quickly once we have enough information to understand what your firm needs."
         }
       }, {
         "@type": "Question",
-        "name": "Do you offer bulk case purchasing options?",
+        "name": "What should we include in our message?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "If your firm has recurring demand, contact us and we can discuss volume, practice fit, and intake needs."
+          "text": "Practice areas, jurisdictions, target case types, monthly capacity, and any non-negotiables on documentation or timing will help us point you in the right direction faster."
+        }
+      }, {
+        "@type": "Question",
+        "name": "What happens after we reach out?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "We review your message, look at fit and availability, and then tell you the clearest next step. If there is a strong match, we move the conversation forward from there."
         }
       }]
     }} />

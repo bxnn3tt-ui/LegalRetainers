@@ -39,44 +39,6 @@ const AboutPage = () => {
           }
         ]
       }} />
-      <StructuredData type="faqPage" data={{
-        "@context": "https://schema.org",
-        "@type": "FAQPage",
-        "mainEntity": [
-          {
-            "@type": "Question",
-            "name": "How does LegalRetainers verify case quality?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "We focus on signed case opportunities with intake details and supporting documentation so your firm can evaluate fit faster and spend less time chasing basic intake information."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "What is your delivery timeframe?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "We move quickly once a fit is confirmed. Timing depends on the case type and records available, but our goal is to help your team review viable matters without unnecessary intake delay."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "Do you offer exclusive representation rights?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Yes. Your firm receives 100% exclusive rights to each case. No competing attorneys, no shared clients—just clean, exclusive representation delivered directly to your practice."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "What practice areas do you serve?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "We support plaintiff firms across personal injury, mass tort, institutional abuse, and related practice areas, with case availability depending on current intake and documentation."
-            }
-          }
-        ]
-      }} />
       <Helmet>
         <script type="application/ld+json">
           {JSON.stringify({
@@ -110,24 +72,6 @@ const AboutPage = () => {
           })}
         </script>
       </Helmet>
-      <StructuredData type="breadcrumbList" data={{
-        "@context": "https://schema.org",
-        "@type": "BreadcrumbList",
-        "itemListElement": [
-          {
-            "@type": "ListItem",
-            "position": 1,
-            "name": "Home",
-            "@id": "https://legalretainers.com/"
-          },
-          {
-            "@type": "ListItem",
-            "position": 2,
-            "name": "About",
-            "@id": "https://legalretainers.com/about"
-          }
-        ]
-      }} />
       <Header />
 
       <section className="bg-primary text-primary-foreground py-12 md:py-16">

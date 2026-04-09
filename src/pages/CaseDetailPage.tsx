@@ -120,25 +120,9 @@ const CaseDetailPage = () => {
       "@id": "https://legalretainers.com/#organization",
       "name": "LegalRetainers"
     },
-    "areaServed": caseItem.geography.map(state => ({
-      "@type": "State",
-      "name": state
-    })),
-    "offers": {
-      "@type": "Offer",
-      "priceCurrency": "USD",
-      "price": caseItem.purchasePrice > 0 ? caseItem.purchasePrice.toString() : undefined,
-      "priceSpecification": {
-        "@type": "PriceSpecification",
-        "priceCurrency": "USD",
-        "valueAddedTaxIncluded": false
-      },
-      "availability": caseItem.status === "available" || caseItem.status === "high-volume" ? "https://schema.org/InStock" : "https://schema.org/LimitedAvailability",
-      "itemOffered": {
-        "@type": "Service",
-        "name": caseItem.title,
-        "description": caseItem.summary
-      }
+    "areaServed": {
+      "@type": "Country",
+      "name": "United States"
     },
     "availableChannel": {
       "@type": "ServiceChannel",
@@ -170,37 +154,6 @@ const CaseDetailPage = () => {
       "name": "Legal Filing Deadline"
     }
   } : null;
-
-  // Generate Product schema for case (enables product rich results)
-  const productSchema = {
-    "@context": "https://schema.org",
-    "@type": "Product",
-    "@id": `https://legalretainers.com/cases/${caseItem.slug}#product`,
-    "name": caseItem.title,
-    "description": caseItem.summary,
-    "url": `https://legalretainers.com/cases/${caseItem.slug}`,
-    "category": getPracticeAreaName(caseItem.practiceArea),
-    "brand": {
-      "@type": "Organization",
-      "@id": "https://legalretainers.com/#organization"
-    },
-    "offers": caseItem.purchasePrice > 0 ? {
-      "@type": "Offer",
-      "priceCurrency": "USD",
-      "price": caseItem.purchasePrice.toString(),
-      "availability": caseItem.status === 'available' || caseItem.status === 'high-volume'
-        ? "https://schema.org/InStock"
-        : "https://schema.org/LimitedAvailability",
-      "seller": {
-        "@type": "Organization",
-        "@id": "https://legalretainers.com/#organization"
-      }
-    } : undefined,
-    "areaServed": caseItem.geography.map(state => ({
-      "@type": "State",
-      "name": state
-    }))
-  };
 
   // Generate FAQ schema from eligibility points
   const faqSchema = {
@@ -252,7 +205,6 @@ const CaseDetailPage = () => {
       />
       <StructuredData type="breadcrumbList" data={breadcrumbSchema} />
       <StructuredData type="service" data={serviceSchema} />
-      <StructuredData type="product" data={productSchema} />
       <StructuredData type="faqPage" data={faqSchema} />
       {eventSchema && <StructuredData type="event" data={eventSchema} />}
       <Header />

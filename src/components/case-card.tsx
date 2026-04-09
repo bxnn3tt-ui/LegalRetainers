@@ -3,7 +3,6 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import type { CaseType } from "@/data/cases";
-import { Helmet } from "react-helmet-async";
 interface CaseCardProps {
   case: CaseType;
 }
@@ -28,41 +27,7 @@ const statusLabels = {
 export function CaseCard({
   case: caseItem
 }: CaseCardProps) {
-  // Generate Product schema for each case card
-  const productSchema = {
-    "@context": "https://schema.org",
-    "@type": "Product",
-    "name": caseItem.title,
-    "description": caseItem.summary,
-    "url": `https://legalretainers.com/cases/${caseItem.slug}`,
-    "offers": {
-      "@type": "Offer",
-      "priceCurrency": "USD",
-      "price": caseItem.purchasePrice > 0 ? caseItem.purchasePrice.toString() : undefined,
-      "priceSpecification": {
-        "@type": "PriceSpecification",
-        "priceCurrency": "USD",
-        "valueAddedTaxIncluded": false
-      },
-      "availability": caseItem.status === "available" || caseItem.status === "high-volume" 
-        ? "https://schema.org/InStock" 
-        : "https://schema.org/LimitedAvailability",
-      "itemCondition": "https://schema.org/NewCondition",
-      "seller": {
-        "@type": "Organization",
-        "name": "LegalRetainers"
-      }
-    },
-    "category": caseItem.practiceArea
-  };
-
   return (
-    <>
-      <Helmet>
-        <script type="application/ld+json">
-          {JSON.stringify(productSchema)}
-        </script>
-      </Helmet>
       <Link to={`/cases/${caseItem.slug}`} className="block h-full group">
         <Card className="h-full cursor-pointer shadow-none transition-all duration-200 hover:-translate-y-1 hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] active:translate-y-0 active:shadow-none">
         <CardHeader className="pb-4">
@@ -84,6 +49,5 @@ export function CaseCard({
         </CardContent>
       </Card>
     </Link>
-    </>
   );
 }

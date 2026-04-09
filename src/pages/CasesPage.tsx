@@ -39,15 +39,15 @@ const CasesPage = () => {
     <div className="min-h-screen bg-background">
       <SEOHead 
         title="Browse Legal Cases | Personal Injury, Mass Torts & More | LegalRetainers"
-        description="Browse available pre-signed legal cases across 18 practice areas. Personal injury, mass torts, institutional abuse, and consumer protection cases with 24-48 hour delivery."
+        description="Browse pre-signed cases by practice area. Review signed opportunities across personal injury, mass torts, institutional abuse, and more."
         canonical="https://legalretainers.com/cases"
         keywords="legal cases, personal injury cases, mass tort cases, signed retainer cases, law firm case acquisition, pre-qualified clients"
       />
       <StructuredData type="legalService" />
       <StructuredData type="breadcrumbList" data={breadcrumbSchema} />
       <StructuredData type="llmOptimizedPage" data={{
-        pageName: "Pre-Signed Legal Cases Marketplace",
-        pageDescription: "Browse and acquire pre-signed legal cases across personal injury, mass torts, and institutional abuse. 24-48 hour delivery.",
+        pageName: "Pre-Signed Cases Marketplace",
+        pageDescription: "Browse pre-signed cases across personal injury, mass torts, and institutional abuse so your firm can review fit faster.",
         pageUrl: "https://legalretainers.com/cases",
         pageType: "CollectionPage",
         additionalData: {
@@ -57,7 +57,7 @@ const CasesPage = () => {
       }} />
       <StructuredData type="collectionPage" data={{
         name: "Legal Case Marketplace",
-        description: "Browse signed legal cases across all practice areas. Each case includes a client who has already signed representation with your firm receiving exclusive rights.",
+        description: "Browse signed case opportunities across practice areas and review the matters that fit your firm.",
         url: "https://legalretainers.com/cases",
         items: cases.map(caseItem => ({
           name: caseItem.title,
@@ -69,26 +69,19 @@ const CasesPage = () => {
         "@context": "https://schema.org",
         "@type": "ItemList",
         "name": "Available Legal Cases",
-        "description": "Browse signed legal cases across all practice areas",
+        "description": "Browse signed case opportunities across practice areas",
         "numberOfItems": cases.length,
         "itemListElement": cases.map((caseItem, index) => ({
           "@type": "ListItem",
           "position": index + 1,
           "item": {
-            "@type": "Product",
+            "@type": "Service",
             "@id": `https://legalretainers.com/cases/${caseItem.slug}`,
             "name": caseItem.title,
             "description": caseItem.summary,
-            "brand": {
+            "provider": {
               "@type": "Organization",
               "@id": "https://legalretainers.com/#organization"
-            },
-            "offers": {
-              "@type": "AggregateOffer",
-              "priceCurrency": "USD",
-              "availability": caseItem.status === "available" || caseItem.status === "high-volume" 
-                ? "https://schema.org/InStock" 
-                : "https://schema.org/LimitedAvailability"
             }
           }
         }))
@@ -98,10 +91,9 @@ const CasesPage = () => {
       <section className="bg-primary text-primary-foreground py-12 md:py-16">
         <div className="lr-width-container">
           <Breadcrumbs items={breadcrumbItems} variant="light" />
-          <h1 className="lr-heading-xl mb-4 text-white">Pre-Signed Legal Cases</h1>
+          <h1 className="lr-heading-xl mb-4 text-white">Pre-Signed Cases</h1>
           <p className="lr-body-l text-white/90 max-w-3xl">
-            Acquire clients who have already signed representation agreements with your firm. 
-            Each case includes exclusive rights, complete documentation, and verified eligibility.
+            Start with the case type your firm wants most. Review signed opportunities by practice area, then decide which matters are worth your team's time.
           </p>
         </div>
       </section>
