@@ -73,9 +73,9 @@ const allCases: CaseType[] = [
     practiceArea: "injury-accidents",
     subcategory: "",
     status: "available",
-    summary: "High-volume auto and motorcycle crashes with clear liability and strong insurance coverage. Steady 24-48 hour case delivery.",
+    summary: "Clear-liability auto and motorcycle cases with meaningful injuries and collectible insurance.",
     description:
-      "Auto and motorcycle accidents with documented liability: rear-end collisions, DUI crashes, intersection violations with police reports. Focus on policy limits ≥$100K and clear defendant fault. Recent $420K DUI rear-end verdict (CA, 2024). Consistent volume, immediate fulfillment.",
+      "These are motor-vehicle cases a firm can review quickly: rear-end collisions, DUI crashes, left-turn crashes, and other police-documented liability scenarios. The strongest fits combine clear fault, real treatment, and coverage of at least $100K.",
     eligibilityPoints: [
       "Clear liability: rear-end, left-turn violations, DUI, or cited at-fault driver",
       "Injuries requiring ER visit, hospitalization, surgery, or documented treatment",
@@ -97,8 +97,6 @@ const allCases: CaseType[] = [
     purchasePrice: 0,
     geography: ["All 50 states"],
     priority: "medium",
-    recentUpdate:
-      "Distracted driving incidents increasing significantly nationwide; $420K DUI rear-end collision verdict (CA, 2024); enhanced DUI penalties strengthening liability in repeat offender cases",
   },
   {
     slug: "ssdi-ssi-claims",
@@ -106,16 +104,16 @@ const allCases: CaseType[] = [
     practiceArea: "work-benefits",
     subcategory: "",
     status: "available",
-    summary: "Social Security disability denials with strong medical documentation. High approval rates on appeal with ALJ hearings.",
+    summary: "Denied disability claims with strong medical records and a clear path to appeal.",
     description:
-      "SSDI and SSI disability claims with extensive medical documentation and clear functional limitations. Focus on claimants aged 50+ with severe impairments, documented treatment history, and work credit eligibility. Strong cases include denied claims ready for ALJ appeal, musculoskeletal disorders, mental health conditions, and terminal illnesses. High approval rates when properly documented.",
+      "These claims work best when the file already tells a simple story: the claimant cannot keep working, the treatment history is well documented, and the next appeal step is close. The strongest fits often involve claimants age 50 and older, severe impairments, and records that show real functional limits.",
     eligibilityPoints: [
       "Severe medical condition preventing work for ≥12 months or terminal illness",
       "Medical documentation: treating physician records, specialists, hospitalizations",
       "Functional capacity limitations documented in medical records",
       "Work credits earned: SSDI requires 20 credits in last 10 years (varies by age)",
       "Prior denial or pending application requiring appeal within 60 days",
-      "Age 18-65 for SSDI; SSI has no age restrictions but income/asset limits",
+      "SSDI generally applies to adults under full retirement age who meet insured-status rules; SSI has no age restriction but does have income and asset limits",
     ],
     documents: [
       "Complete medical records from physicians",
@@ -140,9 +138,9 @@ const allCases: CaseType[] = [
     practiceArea: "injury-accidents",
     subcategory: "",
     status: "limited",
-    summary: "Elder abuse and neglect cases with documented injuries and facility violations.",
+    summary: "Nursing-home neglect cases with serious injuries, clear records, and signs the facility failed the resident.",
     description:
-      "Elder abuse and neglect cases in nursing homes and assisted living facilities. Target severe pressure ulcers, preventable falls, medication errors, and documented facility violations.",
+      "These matters focus on preventable harm inside nursing homes and assisted living facilities. Strong cases usually involve pressure ulcers, falls, dehydration, medication errors, or other serious decline backed by records, photos, and facility deficiencies.",
     eligibilityPoints: [
       "Stage 3-4 pressure ulcers developed in facility",
       "Preventable injury: falls with fracture, severe dehydration, medication errors",
@@ -174,9 +172,9 @@ const allCases: CaseType[] = [
     practiceArea: "work-benefits",
     subcategory: "",
     status: "available",
-    summary: "High-value construction site accidents with third-party defendants beyond workers' comp. Recent $1.5M+ crane accident settlements.",
+    summary: "Work-injury cases with third-party liability beyond workers' comp.",
     description:
-      "Workplace injuries involving non-employer third parties: defective equipment, subcontractor negligence, OSHA violations, and motor vehicle crashes during work. Target catastrophic injuries with third-party liability and adequate defendant coverage. Strong cases include crane collapses, scaffolding failures, and forklift accidents with clear equipment defects or safety violations.",
+      "These are workplace-injury matters where someone other than the employer may be responsible. The best fits involve defective equipment, subcontractor negligence, OSHA-related failures, or vehicle crashes on the job, with serious injuries and a defendant that can actually pay.",
     eligibilityPoints: [
       "Catastrophic injury or medical bills >$50K",
       "Workplace injury involving non-employer third party",
@@ -207,16 +205,16 @@ const allCases: CaseType[] = [
     practiceArea: "injury-accidents",
     subcategory: "",
     status: "limited",
-    summary: "Premises liability falls requiring surgery: fractures, rotator cuff tears, spinal injuries. Recent $400K+ surgical verdicts.",
+    summary: "Slip-and-fall cases with surgery, clear hazards, and damages large enough to matter.",
     description:
-      "Slip and fall cases with documented hazards and surgical injuries. Target fractures requiring ORIF, rotator cuff tears, spinal injuries with documented dangerous conditions. Focus on commercial properties with liability coverage ≥$1M and strong photographic evidence. Recent $400K+ verdicts for surgical slip and falls with clear notice. High-value cases only.",
+      "These are not minor stumble claims. The strongest cases pair a documented hazard with surgery-level injuries such as fractures, rotator cuff tears, or spinal damage, ideally on commercial property with strong photos, notice evidence, and meaningful coverage.",
     eligibilityPoints: [
       "Surgical intervention performed: ORIF (fracture repair), arthroscopy (rotator cuff, meniscus, labral tear), or spinal injection/surgery",
       "Objective injury via imaging: X-ray showing fracture, MRI showing tear, CT showing compression fracture",
       "Hazard documented: foreign substance (liquid, ice, debris), defective floor (cracked, uneven), or inadequate lighting",
       "Notice provable: defendant created condition, or constructive notice (condition existed long enough per reasonable inspection standard)",
       'No "open and obvious" defense: hazard not readily apparent, or distraction exception applies',
-      "Incident within 1-3 years (state-dependent: NY 3 years, CA/FL/TX 2 years, LA/KY/TN 1 year)",
+      "Incident within the applicable statute of limitations (for example: NY 3 years, CA/FL/TX 2 years, LA 2 years, KY/TN 1 year)",
     ],
     documents: [
       "Photos of hazard immediately post-fall",
@@ -232,8 +230,6 @@ const allCases: CaseType[] = [
     purchasePrice: 0,
     geography: ["All 50 states - Premises liability laws exist in all jurisdictions; favorable precedent in CA, NY, IL, TX, FL, NJ"],
     priority: "medium",
-    recentUpdate:
-      "2024 premises liability jury award increases in NY and CA; defense bar increasingly challenging causation in minor falls requiring heightened case selection",
   },
   {
     slug: "dog-bites-animal-attacks",
@@ -241,9 +237,9 @@ const allCases: CaseType[] = [
     practiceArea: "injury-accidents",
     subcategory: "",
     status: "available",
-    summary: "Serious dog attacks requiring surgery or causing facial scarring in children. Recent $250K+ settlements for pediatric facial injuries.",
+    summary: "Dog-bite cases with severe injuries, visible scarring, and reachable insurance.",
     description:
-      "Dog bite and animal attack cases with severe injuries and homeowner insurance coverage ≥$100K. Target children with facial scarring, deep lacerations requiring plastic surgery, and attacks with documented owner knowledge. Strict liability states (CA, IL, FL) preferred. Recent $285K settlement for child facial scarring in Illinois. Focus on cases with clear insurance coverage and no provocation defense.",
+      "The best dog-bite files involve deep wounds, facial scarring, surgery, or child victims, plus a homeowner or renter policy that can fund the claim. Cases become especially attractive when the owner is identified, the attack is documented, and there is no strong provocation defense.",
     eligibilityPoints: [
       "Severe injuries: facial scarring requiring plastic surgery, deep punctures/lacerations requiring ER/sutures, fractures (if knocked down), nerve damage, or infection (MRSA, sepsis)",
       "Owner identified with homeowner/renter insurance (verify coverage; many policies exclude specific breeds)",
@@ -265,8 +261,6 @@ const allCases: CaseType[] = [
     purchasePrice: 0,
     geography: ["All 50 states - Strict liability states (CA, IL, FL, NJ, WA) preferred"],
     priority: "medium",
-    recentUpdate:
-      "2025 homeowner insurance breed exclusions expanding; $285K settlement for child facial scarring (IL, 2024); pediatric facial injury cases commanding higher settlements",
   },
   {
     slug: "social-media-addiction",
@@ -274,9 +268,9 @@ const allCases: CaseType[] = [
     practiceArea: "mass-torts",
     subcategory: "",
     status: "limited",
-    summary: "Youth mental health harm from addictive social media platform design and algorithm manipulation.",
+    summary: "Youth mental-health cases tied to prolonged social-media use and platform design.",
     description:
-      "Cases against Instagram, Facebook, TikTok, and Snapchat alleging addictive design causing youth mental health harm. Over 400 school districts have filed suits targeting cases involving serious mental health conditions.",
+      "These cases focus on minors and young adults who allegedly suffered serious mental-health harm after heavy use of Instagram, Facebook, TikTok, Snapchat, or similar platforms. The strongest files connect sustained use with diagnoses, crisis events, and records that help show causation.",
     eligibilityPoints: [
       "Minor (<18) or young adult (18-25) with heavy social media use (≥3 hrs/day for ≥1 year)",
       "Platform use: Instagram, TikTok, Snapchat, Facebook, YouTube",
@@ -307,9 +301,9 @@ const allCases: CaseType[] = [
     subcategory: "",
     status: "high-volume",
     summary:
-      "Online grooming and sexual exploitation of minors on Roblox gaming platform. Lawsuits allege inadequate safety features, failure to moderate predatory behavior, and negligent design enabling abuse of children.",
+      "Roblox exploitation cases involving child grooming, platform contact, and serious downstream harm.",
     description:
-      "Cases alleging Roblox's inadequate safety features enabled child grooming and sexual exploitation. Platform's chat and weak parental controls allowed predators to target minors, leading to real-world abuse, sextortion, and severe trauma.",
+      "These matters center on claims that Roblox contact opened the door to grooming, sextortion, or real-world abuse. The strongest files show platform contact, migration to other apps, and records that tie the abuse period to lasting trauma.",
     eligibilityPoints: [
       "Minor (<18) groomed or exploited through Roblox platform contact",
       "Grooming pattern: Roblox chat contact migrating to Discord, Snapchat, or other platforms",
@@ -342,9 +336,9 @@ const allCases: CaseType[] = [
     subcategory: "",
     status: "available",
     summary:
-      "Sexual abuse and harassment at K-12 schools and universities with Title IX violations and institutional failure to protect students.",
+      "School and university abuse cases where the institution knew enough to act and failed to protect students.",
     description:
-      "Sexual abuse cases against public/private schools and universities involving staff, teachers, coaches, or peer-on-peer assault. Title IX requires schools to provide safe learning environments free from sex-based discrimination. Institutional liability based on deliberate indifference to known harassment or assault.",
+      "These cases target schools and universities that ignored reports, protected the wrong person, or left students exposed to known risk. Strong files usually involve staff abuse, coach misconduct, or peer assault followed by a weak or delayed response from the institution.",
     eligibilityPoints: [
       "Sexual abuse/assault by teacher, coach, administrator, staff, or student on student",
       "Abuse severe, pervasive, or objectively offensive denying equal educational access",
@@ -377,9 +371,9 @@ const allCases: CaseType[] = [
     subcategory: "",
     status: "limited",
     summary:
-      "Child sexual/physical abuse in youth organizations, athletics programs, foster placements, and residential group homes due to systemic failures.",
+      "Child-abuse cases against youth programs, athletics organizations, foster placements, and group homes.",
     description:
-      "Consolidated intake for child abuse in (1) youth organizations/camps/scouts, (2) school/club/elite athletics and SafeSport-covered programs, and (3) foster care or licensed group homes. Liability centers on negligent screening/placement, ignoring complaints, and failure to protect. High-value matters include long-term abuse, multiple victims, or documented agency notice.",
+      "This intake category is built for abuse tied to youth programs, sports organizations, foster placements, and licensed group homes. The strongest matters show more than individual wrongdoing: ignored complaints, weak screening, unsafe placement decisions, or a pattern the organization failed to stop.",
     eligibilityPoints: [
       "Minor victim during participation in youth org, athletics program, foster placement, or licensed group home",
       "Abuse by leader, coach, staff, foster parent, or volunteer; or peer-on-peer enabled by negligence",
@@ -408,9 +402,9 @@ const allCases: CaseType[] = [
     subcategory: "",
     status: "available",
     summary:
-      "Sexual abuse by doctors, therapists, psychologists, and healthcare providers exploiting patient trust and authority.",
+      "Abuse by medical and mental-health providers who exploited trust, access, and authority.",
     description:
-      "Sexual abuse by medical professionals including physicians, psychiatrists, psychologists, therapists, dentists, and other healthcare providers. Professional codes universally prohibit sexual contact with patients. Cases involve abuse during examinations, therapy sessions, or exploitation of vulnerable patients. Medical boards often fail to adequately discipline offenders.",
+      "These cases involve doctors, therapists, dentists, psychologists, and other providers who crossed clear professional boundaries. Strong files often include treatment records, appointment history, billing records, and evidence that the provider used the clinical relationship to exploit a vulnerable patient.",
     eligibilityPoints: [
       "Sexual contact/assault by licensed healthcare provider during professional relationship",
       "Abuse during: medical exam, therapy session, treatment, or exploitation of patient vulnerability",
@@ -443,9 +437,9 @@ const allCases: CaseType[] = [
     subcategory: "",
     status: "available",
     summary:
-      "Sexual assaults at hotels, resorts, and hospitality venues due to negligent security and employee misconduct.",
+      "Hotel and resort assault cases tied to poor security, unsafe access, or employee misconduct.",
     description:
-      "Sexual assault cases against hotels, resorts, and hospitality businesses. Recent major verdicts: $177M Hyatt (security guard assault), $44M Hilton (wrong room placement leading to assault), $29.4M resort minor assault. Liability based on negligent security, negligent hiring of employees, or inadequate response to guest safety complaints.",
+      "These matters focus on hospitality businesses that failed to protect guests. The best files involve employee assault, master-key misuse, wrong-room placement, or third-party attacks where the hotel ignored obvious security problems or prior warning signs.",
     eligibilityPoints: [
       "Sexual assault on hotel/resort property by employee or third party",
       "Severe injuries: rape, attempted rape, or assault causing PTSD requiring treatment",
@@ -479,9 +473,9 @@ const allCases: CaseType[] = [
     subcategory: "",
     status: "limited",
     summary:
-      "Sexual abuse in religious settings by clergy and non-clergy personnel with institutional knowledge, cover-ups, or negligent oversight.",
+      "Religious-institution abuse cases involving clergy or staff and organizational failure to stop it.",
     description:
-      "Civil cases against churches and religious organizations (Catholic, Protestant, LDS, missions, religious schools, counseling programs) for abuse by clergy and non-clergy staff. Liability is driven by institutional knowledge, failure to supervise, negligent hiring, and concealment. Many states have lookback windows for childhood claims.",
+      "These cases go beyond the individual abuser and ask what the institution knew, ignored, transferred, or concealed. Strong files involve churches, missions, religious schools, or counseling programs where leadership failed to supervise, screen, or respond to prior complaints.",
     eligibilityPoints: [
       "Abuse in a religious context by clergy (priest, minister, pastor, deacon) or non-clergy (teacher, counselor, missionary, camp staff)",
       "Abuse occurred during religious activities, on property, or via authority/pastoral role",
@@ -510,9 +504,9 @@ const allCases: CaseType[] = [
     subcategory: "",
     status: "limited",
     summary:
-      "Sexual assaults by Uber, Lyft, and taxi drivers with corporate liability for inadequate driver screening and safety protocols.",
+      "Rideshare and transportation assault cases with app records and corporate-safety issues.",
     description:
-      "Sexual assault cases against rideshare companies (Uber, Lyft) and transportation providers. Uber's 2024 safety report disclosed 2,717 sexual assault reports (2021-2022), including 355 rapes. MDL and individual lawsuits allege negligent hiring, inadequate background checks, and failure to respond to driver complaints. Cases include rape, attempted rape, groping, and kidnapping.",
+      "These cases involve assaults by Uber, Lyft, taxi, or other transportation drivers, with claims focused on weak screening, complaint handling, and rider-safety systems. The strongest files include trip records, location data, medical support, and facts showing the company had preventable gaps in its safety process.",
     eligibilityPoints: [
       "Sexual assault during Uber, Lyft, or taxi ride by driver",
       "Assault types: rape, attempted rape, unwanted touching, indecent exposure, kidnapping/false imprisonment",
@@ -544,9 +538,9 @@ const allCases: CaseType[] = [
     subcategory: "",
     status: "available",
     summary:
-      "Sexual assault of inmates by correctional staff in violation of PREA (Prison Rape Elimination Act) protections.",
+      "Correctional-facility abuse cases involving staff misconduct, retaliation, and broken PREA safeguards.",
     description:
-      "Sexual abuse cases against federal Bureau of Prisons, state prison systems, and county jails. Recent $116M federal settlement (FCI Dublin) for 103 women survivors. PREA (2003) mandates zero-tolerance for sexual abuse. Cases involve staff-on-inmate abuse, retaliation against reporting, and systemic failures to protect vulnerable populations.",
+      "These matters focus on prisons and jails that failed to protect people in custody from sexual abuse by staff or medical personnel. Strong cases often include PREA reports, grievances, medical records, or investigative findings showing abuse, retaliation, or a wider institutional failure.",
     eligibilityPoints: [
       "Sexual abuse/assault while incarcerated by correctional officer, staff, or medical personnel",
       "Severe abuse: rape, coerced sexual acts under threat, or pattern of harassment",
@@ -579,9 +573,9 @@ const allCases: CaseType[] = [
     subcategory: "",
     status: "available",
     summary:
-      "Civil lawsuits against hotels, websites, and businesses that facilitated or profited from sex trafficking of minors and adults.",
+      "Trafficking cases against businesses that facilitated, ignored, or profited from exploitation.",
     description:
-      "Sex trafficking civil litigation targeting businesses that knowingly benefited from trafficking. Cases against hotels that allowed trafficking operations, online platforms facilitating exploitation, and transportation companies. TVPA (Trafficking Victims Protection Act) and state laws provide civil remedies. Survivors can sue traffickers, facilitators, and beneficiaries.",
+      "These civil cases target hotels, websites, transportation companies, and other businesses that allegedly helped trafficking continue or looked away while it happened. The strongest files show repeated red flags, business benefit, and records that connect the defendant to the exploitation.",
     eligibilityPoints: [
       "Victim of sex trafficking as minor (<18) or adult (through force, fraud, or coercion)",
       "Severe exploitation: forced prostitution, coerced commercial sex acts, debt bondage",
@@ -614,9 +608,9 @@ const allCases: CaseType[] = [
     subcategory: "",
     status: "available",
     summary:
-      "Workplace sexual assault, harassment, and hostile work environment claims under Title VII and state employment laws, including #MeToo movement cases.",
+      "Workplace and venue assault cases with employer notice, weak response, or retaliation.",
     description:
-      "Adult sexual assault and harassment cases in workplace settings, entertainment venues, and professional contexts. Employer liability under Title VII for hostile work environment, quid pro quo harassment, and inadequate response to complaints. Post-#MeToo movement has strengthened legal protections and reduced arbitration barriers in several states.",
+      "These matters cover sexual assault, harassment, and hostile-work-environment claims in employment and professional settings. The strongest files show repeated conduct, a complaint that went nowhere, retaliation, or an employer that knew enough to act and still failed to protect the victim.",
     eligibilityPoints: [
       "Sexual harassment or assault in employment context by supervisor, coworker, or client",
       "Hostile work environment: severe or pervasive conduct affecting work conditions",

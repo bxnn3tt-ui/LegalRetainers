@@ -22,12 +22,12 @@ const ContactPage = () => {
     window.scrollTo(0, 0);
   }, []);
   return <div className="min-h-screen bg-background">
-      <SEOHead title="Contact LegalRetainers | Inquire About Signed Legal Cases" description="Contact our team to discuss case acquisition for your law firm. Learn about our pre-signed case delivery process, pricing, and available case types." canonical="https://legalretainers.com/contact" keywords="contact legal case provider, case acquisition inquiry, law firm partnership, signed cases, pre-qualified clients" ogImage="https://legalretainers.com/og-image.png" />
+      <SEOHead title="Contact LegalRetainers | Talk Through Case Fit and Availability" description="Contact LegalRetainers to discuss case types, intake fit, documentation, and availability for your law firm." canonical="https://legalretainers.com/contact" keywords="contact legal case provider, case acquisition inquiry, law firm partnership, signed cases, legal intake support" ogImage="https://legalretainers.com/og-image.png" />
       <StructuredData type="localBusiness" />
       <StructuredData type="contactPage" />
       <StructuredData type="llmOptimizedPage" data={{
         pageName: "Contact LegalRetainers - Request Signed Cases",
-        pageDescription: "Contact us to order pre-signed legal cases. 24-48 hour delivery with complete documentation for law firms.",
+        pageDescription: "Contact us to discuss case fit, documentation, and availability for your firm.",
         pageUrl: "https://legalretainers.com/contact",
         pageType: "ContactPage",
         additionalData: {
@@ -58,21 +58,21 @@ const ContactPage = () => {
         "name": "How quickly can you deliver signed cases?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Most signed cases are delivered within 24-48 hours of order approval with complete case documentation."
+          "text": "Timing depends on the case type and the records available, but we aim to move quickly once the fit is clear."
         }
       }, {
         "@type": "Question",
         "name": "What quality verification do you provide?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "All cases include client eligibility verification and complete case documentation reviewed for accuracy before delivery."
+          "text": "We focus on signed matters with intake details and supporting records that help a law firm evaluate fit faster."
         }
       }, {
         "@type": "Question",
         "name": "Do you offer bulk case purchasing options?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Yes, we offer volume discounts and bulk case packages for established law firms. Contact us to discuss your specific needs."
+          "text": "If your firm has recurring demand, contact us and we can discuss volume, practice fit, and intake needs."
         }
       }]
     }} />
@@ -83,9 +83,9 @@ const ContactPage = () => {
           <Breadcrumbs items={[{ label: "Contact", href: "/contact" }]} />
           
           <div className="mb-8">
-            <h1 className="lr-heading-xl mb-4">Contact Us</h1>
+            <h1 className="lr-heading-xl mb-4">Let’s Talk Through Fit First</h1>
             <p className="lr-body-l text-muted-foreground max-w-2xl">
-              Ready to grow your caseload with pre-signed clients? Our case acquisition team is available to discuss your practice areas, volume requirements, and delivery preferences.
+              The fastest way to waste time is to talk about the wrong cases. Tell us what your firm actually wants, what your team can handle, and what a worthwhile handoff looks like.
             </p>
           </div>
 
@@ -93,8 +93,8 @@ const ContactPage = () => {
             {/* Contact Information */}
             <Card className="border-2 border-black bg-white h-fit shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
               <CardHeader className="border-b-2 border-black bg-primary text-white">
-                <CardTitle className="lr-heading-l text-white">Get in Touch</CardTitle>
-                <p className="text-white/80">We're here to help grow your caseload</p>
+                <CardTitle className="lr-heading-l text-white">Start the Conversation</CardTitle>
+                <p className="text-white/80">Clear answers, straight process, no guesswork</p>
               </CardHeader>
               <CardContent className="p-0">
                 <div className="divide-y-2 divide-border">
@@ -107,7 +107,7 @@ const ContactPage = () => {
                       <a href="tel:305-900-5954" className="lr-heading-s text-primary hover:underline lr-focus">
                         305-900-5954
                       </a>
-                      <p className="lr-body-s text-muted-foreground mt-1">Available 24/7 for consultations</p>
+                      <p className="lr-body-s text-muted-foreground mt-1">Best for urgent questions or immediate case-fit conversations</p>
                     </div>
                   </div>
 
@@ -120,7 +120,7 @@ const ContactPage = () => {
                       <a href="mailto:help@legalretainers.com" className="lr-link lr-body-l">
                         help@legalretainers.com
                       </a>
-                      <p className="lr-body-s text-muted-foreground mt-1">Response within 2-4 hours</p>
+                      <p className="lr-body-s text-muted-foreground mt-1">Best for detailed practice-area, volume, or intake questions</p>
                     </div>
                   </div>
 
@@ -141,9 +141,9 @@ const ContactPage = () => {
                       <Clock className="h-6 w-6 text-primary" />
                     </div>
                     <div>
-                      <h3 className="font-bold mb-1">Case Delivery</h3>
-                      <p className="lr-body">Cases delivered within <strong>24-48 hours</strong></p>
-                      <p className="lr-body-s text-muted-foreground mt-1">Complete documentation included</p>
+                      <h3 className="font-bold mb-1">What to Expect</h3>
+                      <p className="lr-body">We start with fit, documentation, and availability.</p>
+                      <p className="lr-body-s text-muted-foreground mt-1">If there is a match, we move fast on the next step.</p>
                     </div>
                   </div>
                 </div>
@@ -153,8 +153,8 @@ const ContactPage = () => {
             {/* Contact Form */}
             <Card className="border-2 border-black bg-white">
               <CardHeader className="border-b-2 border-black">
-                <CardTitle className="lr-heading-l">Send Us a Message</CardTitle>
-                <p className="text-black/70 font-medium">We'll get back to you within 2-4 hours</p>
+                <CardTitle className="lr-heading-l">Tell Us What You Need</CardTitle>
+                <p className="text-black/70 font-medium">The more specific you are, the faster we can tell you whether there’s a fit.</p>
               </CardHeader>
               <CardContent className="pt-6">
                   <form className="space-y-6" onSubmit={async e => {
@@ -243,14 +243,14 @@ const ContactPage = () => {
                       </Label>
                       <Select name="inquiryType" value={inquiryType} onValueChange={setInquiryType} required>
                         <SelectTrigger className="lr-focus border-2 border-black">
-                          <SelectValue placeholder="Select inquiry type" />
+                          <SelectValue placeholder="Choose the type of conversation you want to have" />
                         </SelectTrigger>
                         <SelectContent>
-                          <SelectItem value="new-order">New Case Inquiry</SelectItem>
-                          <SelectItem value="pricing">Pricing & Volume Inquiry</SelectItem>
-                          <SelectItem value="custom-request">Custom Practice Area Request</SelectItem>
-                          <SelectItem value="partnership">Firm Partnership Proposal</SelectItem>
-                          <SelectItem value="other">General Inquiry</SelectItem>
+                        <SelectItem value="new-order">Case Availability</SelectItem>
+                        <SelectItem value="pricing">Volume and Pricing</SelectItem>
+                        <SelectItem value="custom-request">Practice Area Fit</SelectItem>
+                        <SelectItem value="partnership">Firm Relationship</SelectItem>
+                        <SelectItem value="other">General Inquiry</SelectItem>
                         </SelectContent>
                       </Select>
                     </div>
@@ -259,7 +259,7 @@ const ContactPage = () => {
                       <Label htmlFor="message" className="lr-body font-bold">
                         Message *
                       </Label>
-                      <Textarea id="message" name="message" rows={6} placeholder="Please describe your question or situation..." required className="lr-focus border-2 border-black" />
+                      <Textarea id="message" name="message" rows={6} placeholder="Tell us your practice areas, jurisdictions, ideal case profile, monthly capacity, or the specific question you want answered..." required className="lr-focus border-2 border-black" />
                     </div>
 
                     <div className="bg-muted/50 p-4 rounded-none hidden">
@@ -272,7 +272,7 @@ const ContactPage = () => {
                     </div>
 
                     <Button type="submit" variant="brutalist" size="lg" className="w-full lr-focus">
-                      Send Message
+                      See If There’s a Fit
                     </Button>
 
                     <p className="text-xs text-center text-muted-foreground pt-2">
@@ -296,41 +296,37 @@ const ContactPage = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
             <div className="bg-white border-2 border-black p-6 shadow-[2px_2px_0px_0px_rgba(0,0,0,0.3)]">
               <h3 className="lr-heading-s mb-3">
-                What payment terms do you offer for signed case purchases?
+                How should we use this form?
               </h3>
               <p className="lr-body-s text-black/70 font-medium">
-                We accept purchase orders from established law firms with flexible 
-                payment terms. Contact us to discuss your firm's requirements and exclusive case packages.
+                Use it when you want a real answer about fit, documentation, timing, or availability. The more context you give us, the more useful our response will be.
               </p>
             </div>
 
             <div className="bg-white border-2 border-black p-6 shadow-[2px_2px_0px_0px_rgba(0,0,0,0.3)]">
               <h3 className="lr-heading-s mb-3">
-                How quickly can you deliver purchased cases?
+                How quickly do you respond?
               </h3>
               <p className="lr-body-s text-black/70 font-medium">
-                Most signed cases are delivered within 24-48 hours after purchase 
-                order approval with complete case documentation.
+                Response times depend on message volume and the complexity of the request, but we aim to reply quickly once we have enough information to understand what your firm needs.
               </p>
             </div>
 
             <div className="bg-white border-2 border-black p-6 shadow-[2px_2px_0px_0px_rgba(0,0,0,0.3)]">
               <h3 className="lr-heading-s mb-3">
-                What quality verification do you provide?
+                What should we include in our message?
               </h3>
               <p className="lr-body-s text-black/70 font-medium">
-                All cases include client eligibility verification 
-                and complete case documentation reviewed for accuracy before delivery.
+                Practice areas, jurisdictions, target case types, monthly capacity, and any non-negotiables on documentation or timing will help us point you in the right direction faster.
               </p>
             </div>
 
             <div className="bg-white border-2 border-black p-6 shadow-[2px_2px_0px_0px_rgba(0,0,0,0.3)]">
               <h3 className="lr-heading-s mb-3">
-                Do you offer bulk case purchasing options?
+                What happens after we reach out?
               </h3>
               <p className="lr-body-s text-black/70 font-medium">
-                Yes, we offer volume discounts and bulk case packages for 
-                established law firms. Contact us to discuss your specific needs.
+                We review your message, look at fit and availability, and then tell you the clearest next step. If there is a strong match, we move the conversation forward from there.
               </p>
             </div>
           </div>

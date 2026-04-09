@@ -184,20 +184,18 @@ const CaseDetailPage = () => {
       "@type": "Organization",
       "@id": "https://legalretainers.com/#organization"
     },
-    "offers": {
-      "@type": "AggregateOffer",
+    "offers": caseItem.purchasePrice > 0 ? {
+      "@type": "Offer",
       "priceCurrency": "USD",
-      "lowPrice": "500",
-      "highPrice": "5000",
-      "priceValidUntil": "2026-12-31",
-      "availability": caseItem.status === 'available' || caseItem.status === 'high-volume' 
-        ? "https://schema.org/InStock" 
+      "price": caseItem.purchasePrice.toString(),
+      "availability": caseItem.status === 'available' || caseItem.status === 'high-volume'
+        ? "https://schema.org/InStock"
         : "https://schema.org/LimitedAvailability",
       "seller": {
         "@type": "Organization",
         "@id": "https://legalretainers.com/#organization"
       }
-    },
+    } : undefined,
     "areaServed": caseItem.geography.map(state => ({
       "@type": "State",
       "name": state
@@ -306,11 +304,11 @@ const CaseDetailPage = () => {
               <Accordion type="single" collapsible className="space-y-4">
                 <AccordionItem value="eligibility" className="border-2 border-black rounded-none bg-white">
                   <AccordionTrigger className="lr-heading-s px-4 py-3 text-foreground font-bold hover:no-underline focus:bg-transparent focus:ring-0 focus:ring-offset-0">
-                    Case Overview
+                    Why This Case Type Moves
                   </AccordionTrigger>
                   <AccordionContent className="px-4 pb-4">
                     <p className="lr-body mb-4">{caseItem.description}</p>
-                    <h4 className="lr-heading-s mb-3">Potential clients typically have:</h4>
+                    <h4 className="lr-heading-s mb-3">Strong files usually include:</h4>
                     <ul className="list-disc list-inside space-y-2 lr-body">
                       {caseItem.eligibilityPoints.map((point, index) => (
                         <li key={index}>{point}</li>
@@ -321,12 +319,12 @@ const CaseDetailPage = () => {
 
                 <AccordionItem value="documents" className="border-2 border-black rounded-none bg-white">
                   <AccordionTrigger className="lr-heading-s px-4 py-3 text-foreground font-bold hover:no-underline focus:bg-transparent focus:ring-0 focus:ring-offset-0">
-                    Client Documentation
+                    What Strong Intake Files Include
                   </AccordionTrigger>
                   <AccordionContent className="px-4 pb-4">
                     <p className="lr-body mb-4">
-                      Clients for these cases typically possess the following documentation. 
-                      Having these documents strengthens case viability and speeds up intake:
+                      The better the documentation, the faster your team can assess liability, damages, and timing.
+                      These are the records that most often help move intake forward:
                     </p>
                     <ul className="grid grid-cols-1 md:grid-cols-2 gap-2">
                       {caseItem.documents.map((doc, index) => (
@@ -341,7 +339,7 @@ const CaseDetailPage = () => {
 
                 <AccordionItem value="deadlines" className="border-2 border-black rounded-none bg-white">
                   <AccordionTrigger className="lr-heading-s px-4 py-3 text-foreground font-bold hover:no-underline focus:bg-transparent focus:ring-0 focus:ring-offset-0">
-                    Case Timing & Geography
+                    Timing, Coverage, and Fit
                   </AccordionTrigger>
                   <AccordionContent className="px-4 pb-4">
                     <Alert className="mb-4">
@@ -371,7 +369,7 @@ const CaseDetailPage = () => {
 
                 <AccordionItem value="next-steps" className="border-2 border-black rounded-none bg-white">
                   <AccordionTrigger className="lr-heading-s px-4 py-3 text-foreground font-bold hover:no-underline focus:bg-transparent focus:ring-0 focus:ring-offset-0">
-                    Client Delivery Process
+                    How Intake Works
                   </AccordionTrigger>
                   <AccordionContent className="px-4 pb-4">
                     <div className="space-y-4">
@@ -382,7 +380,7 @@ const CaseDetailPage = () => {
                         <div>
                           <h5 className="lr-body font-medium">Request Cases</h5>
                           <p className="lr-body-s text-muted-foreground">
-                            Select case types for your practice areas.
+                            Tell us which case types fit your practice and current capacity.
                           </p>
                         </div>
                       </div>
@@ -393,7 +391,7 @@ const CaseDetailPage = () => {
                         <div>
                           <h5 className="lr-body font-medium">Verification</h5>
                           <p className="lr-body-s text-muted-foreground">
-                            We verify signed representation agreements and case eligibility.
+                            We review the signed paperwork, core facts, and intake fit before release.
                           </p>
                         </div>
                       </div>
@@ -404,7 +402,7 @@ const CaseDetailPage = () => {
                         <div>
                           <h5 className="lr-body font-medium">Delivery</h5>
                           <p className="lr-body-s text-muted-foreground">
-                            Complete case files with executed agreements delivered within 24-48 hours.
+                            Qualified files are delivered with the core records your team needs for the next step.
                           </p>
                         </div>
                       </div>
