@@ -60,7 +60,7 @@ export function Footer() {
           <div className="border-2 border-black p-4 bg-white">
             <h3 className="lr-heading-s">Legal Disclaimer</h3>
             <p className="lr-body-s text-muted-foreground">
-              This is attorney advertising. We connect law firms with pre-signed legal cases. Cases are verified but outcomes and case value may vary.{" "}
+              This is attorney advertising. We connect law firms with pre-signed cases. Cases are verified but outcomes and case value may vary.{" "}
             </p>
           </div>
         </div>

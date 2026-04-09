@@ -80,7 +80,7 @@ const UpdateDetailPage = () => {
       "name": "LegalRetainers",
       "logo": {
         "@type": "ImageObject",
-        "url": "https://legalretainers.com/logo.png"
+        "url": "https://legalretainers.com/og-image.png"
       }
     },
     "articleSection": categoryName

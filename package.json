@@ -7,11 +7,13 @@
     "node": ">=22.9.0"
   },
   "scripts": {
-    "generate:sitemap": "node --import tsx scripts/generate-sitemap.ts",
+    "generate:sitemap": "TSX_TSCONFIG_PATH=tsconfig.app.json node --import tsx scripts/generate-sitemap.ts",
+    "prerender": "TSX_TSCONFIG_PATH=tsconfig.app.json node --import tsx scripts/prerender.ts",
     "prebuild": "npm run generate:sitemap",
     "prebuild:dev": "npm run generate:sitemap",
     "dev": "NODE_ENV=development node --env-file-if-exists=.env --import tsx server/index.ts & vite",
     "build": "vite build",
+    "postbuild": "npm run prerender",
     "build:dev": "vite build --mode development",
     "lint": "eslint .",
     "preview": "vite preview",

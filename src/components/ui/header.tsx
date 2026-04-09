@@ -23,7 +23,7 @@ export function Header() {
   };
   return <header className="bg-card border-b-4 border-primary">
       <div className="lr-width-container">
-        <div className="flex items-center justify-between py-4">
+        <div className="flex items-center justify-between py-4 lg:h-[82px] lg:py-0">
           <div className="flex items-center gap-4">
             <Link to="/" className="inline-flex shrink-0 items-center whitespace-nowrap px-3 py-2 md:px-2 md:py-1 transition-colors lr-focus touch-manipulation border-2 border-black bg-[hsl(var(--warning))] text-[hsl(var(--warning-foreground))]" style={{
             fontFamily: "'Space Grotesk', sans-serif",

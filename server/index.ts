@@ -1,7 +1,9 @@
 import express, { type Request, Response, NextFunction } from "express";
 import { registerRoutes } from "./routes";
+import fs from "node:fs";
 import path from "path";
 import { fileURLToPath } from "url";
+import { publicRouteRedirects } from "../src/utils/redirects";
 
 type ErrorWithStatus = Error & {
   status?: number;
@@ -13,6 +15,29 @@ const __dirname = path.dirname(__filename);
 
 const app = express();
 const HOST = process.env.HOST || (process.env.NODE_ENV === "production" ? "0.0.0.0" : "127.0.0.1");
+
+function normalizeRoutePath(requestPath: string): string {
+  if (!requestPath || requestPath === "/") {
+    return "/";
+  }
+
+  return requestPath.replace(/\/+$/, "") || "/";
+}
+
+function getPrerenderedHtmlPath(distPath: string, requestPath: string): string {
+  const normalizedPath = normalizeRoutePath(requestPath);
+
+  if (normalizedPath === "/") {
+    return path.join(distPath, "index.html");
+  }
+
+  if (normalizedPath === "/404") {
+    return path.join(distPath, "404.html");
+  }
+
+  const routeSegments = normalizedPath.split("/").filter(Boolean);
+  return path.join(distPath, ...routeSegments, "index.html");
+}
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -51,9 +76,31 @@ registerRoutes(app);
 
 if (process.env.NODE_ENV === "production") {
   const distPath = path.resolve(__dirname, "../dist");
-  app.use(express.static(distPath));
-  app.get(/^(?!\/api).*/, (_req, res) => {
-    res.sendFile(path.join(distPath, "index.html"));
+  app.use(express.static(distPath, { index: false, redirect: false }));
+
+  app.get(/^(?!\/api).*/, (req, res) => {
+    const normalizedPath = normalizeRoutePath(req.path);
+
+    if (normalizedPath !== req.path && normalizedPath !== "/") {
+      return res.redirect(301, normalizedPath);
+    }
+
+    const redirectTarget = publicRouteRedirects[normalizedPath];
+    if (redirectTarget) {
+      return res.redirect(301, redirectTarget);
+    }
+
+    const htmlPath = getPrerenderedHtmlPath(distPath, normalizedPath);
+    if (fs.existsSync(htmlPath)) {
+      return res.sendFile(htmlPath);
+    }
+
+    const notFoundPath = path.join(distPath, "404.html");
+    if (fs.existsSync(notFoundPath)) {
+      return res.status(404).sendFile(notFoundPath);
+    }
+
+    return res.status(404).sendFile(path.join(distPath, "index.html"));
   });
 }
 

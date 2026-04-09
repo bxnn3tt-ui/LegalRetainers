@@ -4,8 +4,8 @@ import { Footer } from "@/components/ui/footer";
 import { SEOHead } from "@/components/SEOHead";
 import { StructuredData } from "@/components/StructuredData";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Helmet } from "react-helmet-async";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
+import { Helmet } from "@/lib/helmet";
 const AboutPage = () => {
   return <div className="min-h-screen bg-background">
       <SEOHead title="About LegalRetainers | Signed Case Intake for Law Firms" description="Learn how LegalRetainers helps plaintiff law firms review signed case opportunities with documentation, intake context, and a faster path to evaluation." canonical="https://legalretainers.com/about" keywords="legal case provider, signed case intake, law firm case acquisition, pre-qualified clients, legal intake support" />

@@ -57,6 +57,56 @@ export default defineConfig(({ command, mode }) => {
       },
       rollupOptions: {
         output: {
+          manualChunks(id) {
+            if (!id.includes("node_modules")) {
+              return undefined;
+            }
+
+            if (
+              id.includes("/react/") ||
+              id.includes("/react-dom/") ||
+              id.includes("/react-router/") ||
+              id.includes("/react-router-dom/") ||
+              id.includes("/@remix-run/router/") ||
+              id.includes("/scheduler/")
+            ) {
+              return "react-vendor";
+            }
+
+            if (
+              id.includes("/@radix-ui/") ||
+              id.includes("/lucide-react/") ||
+              id.includes("/class-variance-authority/") ||
+              id.includes("/clsx/") ||
+              id.includes("/tailwind-merge/") ||
+              id.includes("/tailwindcss-animate/")
+            ) {
+              return "ui-vendor";
+            }
+
+            if (
+              id.includes("/react-hook-form/") ||
+              id.includes("/@hookform/") ||
+              id.includes("/zod/") ||
+              id.includes("/@hookform/resolvers/")
+            ) {
+              return "forms-vendor";
+            }
+
+            if (
+              id.includes("/recharts/") ||
+              id.includes("/embla-carousel-react/") ||
+              id.includes("/date-fns/")
+            ) {
+              return "content-vendor";
+            }
+
+            if (id.includes("/@tanstack/react-query/")) {
+              return "query-vendor";
+            }
+
+            return undefined;
+          },
           chunkFileNames: "assets/[name]-[hash].js",
           entryFileNames: "assets/[name]-[hash].js",
           assetFileNames: "assets/[name]-[hash][extname]"

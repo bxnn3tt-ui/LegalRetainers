@@ -81,6 +81,7 @@ export const blogSchema: SchemaGenerator = {
         "jobTitle": post.author.title,
         "description": post.author.bio,
         "image": `${baseUrl}${post.author.image}`,
+        "url": `${baseUrl}${post.author.url}`,
         ...(post.author.linkedin && {
           "sameAs": [post.author.linkedin]
         })
@@ -91,9 +92,9 @@ export const blogSchema: SchemaGenerator = {
         "name": "LegalRetainers",
         "logo": {
           "@type": "ImageObject",
-          "url": `${baseUrl}/logo.png`,
-          "width": 600,
-          "height": 60
+          "url": `${baseUrl}/og-image.png`,
+          "width": 1200,
+          "height": 630
         },
         "contactPoint": {
           "@type": "ContactPoint",

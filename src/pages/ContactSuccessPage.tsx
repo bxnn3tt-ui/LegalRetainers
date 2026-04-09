@@ -20,6 +20,7 @@ const ContactSuccessPage = () => {
       <SEOHead 
         title="Message Sent | LegalRetainers"
         description="Your message has been submitted successfully."
+        canonical="https://legalretainers.com/contact-success"
         noIndex={true}
       />
       <StructuredData type="webPage" data={{
