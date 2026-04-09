@@ -254,7 +254,7 @@ export function CaseFinder() {
         {filteredCases.length === 0 && (
           <div className="text-center py-8">
             <p className="lr-body text-muted-foreground">
-              No case packages match your criteria. Try adjusting your filters or contact us for custom case programs.
+              Try adjusting your filters or contact us for custom case programs.
             </p>
             <Button variant="lr" className="mt-4" onClick={() => navigate("/contact")}>
               Request Custom Case Packages
