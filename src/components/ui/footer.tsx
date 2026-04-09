@@ -68,7 +68,7 @@ export function Footer() {
         <div className="border-t border-border pt-4 sm:pt-6 mt-6 sm:mt-8">
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 sm:gap-4">
             <p className="lr-body-s text-muted-foreground">
-              © {currentYear} LegalRetainers - A registered marketing provider.
+              © {currentYear} LegalRetainers. A registered marketing provider.
             </p>
             <div className="flex gap-4">
               <Link to="/cookies" className="lr-link lr-body-s lr-focus inline-block leading-tight">
