@@ -136,7 +136,7 @@ const BlogPostPage = () => {
 
                 {/* Featured Image */}
                 <div className="pt-6">
-                  <div className="relative h-[300px] w-[90%] overflow-hidden border-2 border-black md:h-[400px] mx-auto">
+                  <div className="relative h-[300px] w-full overflow-hidden border-2 border-black md:h-[400px] md:w-[90%] mx-auto">
                     <img
                       src={post.featuredImage.url}
                       alt={post.featuredImage.alt}
