@@ -256,7 +256,7 @@ const CaseDetailPage = () => {
               <Accordion type="single" collapsible className="space-y-4">
                 <AccordionItem value="eligibility" className="border-2 border-black rounded-none bg-white">
                   <AccordionTrigger className="lr-heading-s px-4 py-3 text-foreground font-bold hover:no-underline focus:bg-transparent focus:ring-0 focus:ring-offset-0">
-                    Why This Case Type Moves
+                    Case Description
                   </AccordionTrigger>
                   <AccordionContent className="px-4 pb-4">
                     <p className="lr-body mb-4">{caseItem.description}</p>
