@@ -90,7 +90,7 @@ const ContactPage = () => {
           <Breadcrumbs items={[{ label: "Contact", href: "/contact" }]} />
           
           <div className="mb-8">
-            <h1 className="lr-heading-xl mb-4">Let’s Talk Through Fit First</h1>
+            <h1 className="lr-heading-xl mb-4">Let’s Talk Through Fit</h1>
             <p className="lr-body-l text-muted-foreground max-w-2xl">
               The fastest way to waste time is to talk about the wrong cases. Tell us what your firm actually wants, what your team can handle, and what a worthwhile handoff looks like.
             </p>
