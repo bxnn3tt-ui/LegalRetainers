@@ -3,7 +3,7 @@ import { registerRoutes } from "./routes";
 import fs from "node:fs";
 import path from "path";
 import { fileURLToPath } from "url";
-import { publicRouteRedirects } from "../src/utils/redirects";
+import { publicRouteRedirects } from "../shared/redirects";
 
 type ErrorWithStatus = Error & {
   status?: number;
