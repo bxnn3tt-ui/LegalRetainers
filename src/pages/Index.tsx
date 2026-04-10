@@ -54,8 +54,8 @@ const Index = () => {
                     <h1 className="mb-6 text-[clamp(3rem,4.4vw,4.6rem)] font-bold leading-[0.98] text-white">
                       Grow Your Firm With Cases on Demand
                     </h1>
-                    <p className="mb-6 max-w-2xl text-[1.25rem] leading-7 text-white/90 sm:text-[1.375rem] sm:leading-8 lg:max-w-[31rem] xl:max-w-[32rem]">
-                      Find your case type and we'll connect your firm with pre-qualified clients. Each case is vetted for eligibility and delivered directly to your intake team - often within 24-48 hours.
+                    <p className="mb-6 max-w-2xl text-[1.25rem] leading-7 text-white/90 sm:text-[1.375rem] sm:leading-8 xl:max-w-[34rem]">
+                      Find your case type and we'll connect your firm with pre-qualified, e-signed clients. Each case is vetted for eligibility and delivered directly to your intake team - often within 24-48 hours.
                     </p>
                   </div>
 
