@@ -237,8 +237,8 @@ const CaseDetailPage = () => {
                       <dd className="lr-body text-black/70">{getPracticeAreaName(caseItem.practiceArea)}</dd>
                     </div>
                     <div>
-                      <dt className="lr-body font-bold text-foreground">Status</dt>
-                      <dd className="lr-body text-black/70">{statusLabels[caseItem.status]}</dd>
+                      <dt className="lr-body font-bold text-foreground">Priority Level</dt>
+                      <dd className="lr-body text-black/70 capitalize">{caseItem.priority}</dd>
                     </div>
                     <div>
                       <dt className="lr-body font-bold text-foreground">Case Value Range</dt>
@@ -260,7 +260,7 @@ const CaseDetailPage = () => {
                   </AccordionTrigger>
                   <AccordionContent className="px-4 pb-4">
                     <p className="lr-body mb-4">{caseItem.description}</p>
-                    <h4 className="lr-heading-s mb-3">Strong files usually include:</h4>
+                    <h4 className="lr-heading-s mb-3">Typical qualification factors:</h4>
                     <ul className="list-disc list-inside space-y-2 lr-body">
                       {caseItem.eligibilityPoints.map((point, index) => (
                         <li key={index}>{point}</li>
@@ -271,12 +271,11 @@ const CaseDetailPage = () => {
 
                 <AccordionItem value="documents" className="border-2 border-black rounded-none bg-white">
                   <AccordionTrigger className="lr-heading-s px-4 py-3 text-foreground font-bold hover:no-underline focus:bg-transparent focus:ring-0 focus:ring-offset-0">
-                    What Strong Intake Files Include
+                    Supporting Documents
                   </AccordionTrigger>
                   <AccordionContent className="px-4 pb-4">
                     <p className="lr-body mb-4">
-                      The better the documentation, the faster your team can assess liability, damages, and timing.
-                      These are the records that most often help move intake forward:
+                      These documents can help your team assess liability, damages, and timing more efficiently:
                     </p>
                     <ul className="grid grid-cols-1 md:grid-cols-2 gap-2">
                       {caseItem.documents.map((doc, index) => (
@@ -291,7 +290,7 @@ const CaseDetailPage = () => {
 
                 <AccordionItem value="deadlines" className="border-2 border-black rounded-none bg-white">
                   <AccordionTrigger className="lr-heading-s px-4 py-3 text-foreground font-bold hover:no-underline focus:bg-transparent focus:ring-0 focus:ring-offset-0">
-                    Timing, Coverage, and Fit
+                    Timing Considerations
                   </AccordionTrigger>
                   <AccordionContent className="px-4 pb-4">
                     <Alert className="mb-4">
@@ -304,14 +303,16 @@ const CaseDetailPage = () => {
                       <div className="flex items-start gap-3">
                         <Calendar className="h-5 w-5 text-muted-foreground mt-0.5" />
                         <div>
-                          <h5 className="lr-body font-medium">Geographic Coverage</h5>
-                          <p className="lr-body-s text-muted-foreground">{caseItem.geography.join(", ")}</p>
+                          <h5 className="lr-body font-medium">Timing Note</h5>
+                          <p className="lr-body-s text-muted-foreground">
+                            Review filing deadlines, notice requirements, and state-specific timing rules before moving forward.
+                          </p>
                         </div>
                       </div>
                       <div className="flex items-start gap-3">
                         <Clock className="h-5 w-5 text-muted-foreground mt-0.5" />
                         <div>
-                          <h5 className="lr-body font-medium">Priority Level</h5>
+                          <h5 className="lr-body font-medium">Review Priority</h5>
                           <p className="lr-body-s text-muted-foreground capitalize">{caseItem.priority}</p>
                         </div>
                       </div>
@@ -332,7 +333,7 @@ const CaseDetailPage = () => {
                         <div>
                           <h5 className="lr-body font-medium">Request Cases</h5>
                           <p className="lr-body-s text-muted-foreground">
-                            Tell us which case types fit your practice and current capacity.
+                            Tell us the case types you want and how many your firm can handle.
                           </p>
                         </div>
                       </div>
@@ -343,7 +344,7 @@ const CaseDetailPage = () => {
                         <div>
                           <h5 className="lr-body font-medium">Verification</h5>
                           <p className="lr-body-s text-muted-foreground">
-                            We review the signed paperwork, core facts, and intake fit before release.
+                            We review supporting documentation before anything is sent.
                           </p>
                         </div>
                       </div>
@@ -354,7 +355,7 @@ const CaseDetailPage = () => {
                         <div>
                           <h5 className="lr-body font-medium">Delivery</h5>
                           <p className="lr-body-s text-muted-foreground">
-                            Qualified files are delivered with the core records your team needs for the next step.
+                            Qualified files are delivered with the essential records your team needs to evaluate and take next steps.
                           </p>
                         </div>
                       </div>
@@ -383,16 +384,9 @@ const CaseDetailPage = () => {
                     <CardTitle className="lr-heading-s">Request Signed Cases</CardTitle>
                   </CardHeader>
                   <CardContent className="space-y-4 pt-6">
-                     <div className="space-y-2">
-                       <div className="flex justify-between lr-body-s">
-                         <span className="font-bold">Value Range:</span>
-                         <span className="font-medium">{caseItem.caseValue}</span>
-                       </div>
-                       <div className="flex justify-between lr-body-s">
-                         <span className="font-bold">Priority:</span>
-                         <span className="font-medium capitalize">{caseItem.priority}</span>
-                       </div>
-                     </div>
+                    <p className="lr-body-s text-black/70 font-medium">
+                      Request this case type if it aligns with your practice area, intake standards, and current capacity.
+                    </p>
                     <Button variant="brutalist" size="lg" className="w-full" asChild>
                       <Link to={`/request-clients?case=${caseItem.slug}`}>
                         Request Clients
@@ -418,7 +412,7 @@ const CaseDetailPage = () => {
                        help@legalretainers.com
                      </div>
                      <p className="lr-body-s text-black/70 font-medium">
-                       All consultations are confidential. Dedicated account managers available 24/7.
+                      Dedicated account managers available 24/7.
                      </p>
                   </CardContent>
                 </Card>

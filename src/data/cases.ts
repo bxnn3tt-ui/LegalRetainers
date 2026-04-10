@@ -73,9 +73,9 @@ const allCases: CaseType[] = [
     practiceArea: "injury-accidents",
     subcategory: "",
     status: "available",
-    summary: "Clear-liability auto and motorcycle cases with meaningful injuries and collectible insurance.",
+    summary: "Auto and motorcycle injury cases with clear liability and available insurance coverage.",
     description:
-      "These are motor-vehicle cases a firm can review quickly: rear-end collisions, DUI crashes, left-turn crashes, and other police-documented liability scenarios. The strongest fits combine clear fault, real treatment, and coverage of at least $100K.",
+      "This category includes motor-vehicle claims involving rear-end collisions, DUI crashes, left-turn violations, and other police-documented liability scenarios. These matters are generally strongest when fault is clear, treatment is documented, and available coverage is at least $100K.",
     eligibilityPoints: [
       "Clear liability: rear-end, left-turn violations, DUI, or cited at-fault driver",
       "Injuries requiring ER visit, hospitalization, surgery, or documented treatment",
@@ -104,9 +104,9 @@ const allCases: CaseType[] = [
     practiceArea: "work-benefits",
     subcategory: "",
     status: "available",
-    summary: "Denied disability claims with strong medical records and a clear path to appeal.",
+    summary: "Disability claims with medical support and a near-term appeal deadline.",
     description:
-      "These claims work best when the file already tells a simple story: the claimant cannot keep working, the treatment history is well documented, and the next appeal step is close. The strongest fits often involve claimants age 50 and older, severe impairments, and records that show real functional limits.",
+      "This category focuses on SSDI and SSI matters where the claimant cannot continue working, the treatment history is well documented, and the next appeal step is approaching. These matters are generally stronger when the claimant has severe impairments, clear functional limitations, and a well-supported disability theory.",
     eligibilityPoints: [
       "Severe medical condition preventing work for ≥12 months or terminal illness",
       "Medical documentation: treating physician records, specialists, hospitalizations",
@@ -140,7 +140,7 @@ const allCases: CaseType[] = [
     status: "limited",
     summary: "Nursing-home neglect cases with serious injuries, clear records, and signs the facility failed the resident.",
     description:
-      "These matters focus on preventable harm inside nursing homes and assisted living facilities. Strong cases usually involve pressure ulcers, falls, dehydration, medication errors, or other serious decline backed by records, photos, and facility deficiencies.",
+      "These matters focus on preventable harm inside nursing homes and assisted living facilities. Strong cases usually involve pressure ulcers, falls, dehydration, medication errors, or other serious decline tied to breakdowns in care, supervision, or staffing.",
     eligibilityPoints: [
       "Stage 3-4 pressure ulcers developed in facility",
       "Preventable injury: falls with fracture, severe dehydration, medication errors",
@@ -205,9 +205,9 @@ const allCases: CaseType[] = [
     practiceArea: "injury-accidents",
     subcategory: "",
     status: "limited",
-    summary: "Slip-and-fall cases with surgery, clear hazards, and damages large enough to matter.",
+    summary: "Slip-and-fall cases involving surgery, documented hazards, and substantial damages.",
     description:
-      "These are not minor stumble claims. The strongest cases pair a documented hazard with surgery-level injuries such as fractures, rotator cuff tears, or spinal damage, ideally on commercial property with strong photos, notice evidence, and meaningful coverage.",
+      "This category focuses on premises liability claims involving surgery-level injuries such as fractures, rotator cuff tears, or spinal damage. These matters are generally stronger when the hazard is documented, notice can be established, and the claim involves commercial property with adequate coverage.",
     eligibilityPoints: [
       "Surgical intervention performed: ORIF (fracture repair), arthroscopy (rotator cuff, meniscus, labral tear), or spinal injection/surgery",
       "Objective injury via imaging: X-ray showing fracture, MRI showing tear, CT showing compression fracture",
@@ -237,9 +237,9 @@ const allCases: CaseType[] = [
     practiceArea: "injury-accidents",
     subcategory: "",
     status: "available",
-    summary: "Dog-bite cases with severe injuries, visible scarring, and reachable insurance.",
+    summary: "Dog-bite and animal-attack cases involving significant injuries and available insurance.",
     description:
-      "The best dog-bite files involve deep wounds, facial scarring, surgery, or child victims, plus a homeowner or renter policy that can fund the claim. Cases become especially attractive when the owner is identified, the attack is documented, and there is no strong provocation defense.",
+      "This category includes dog-bite and animal-attack claims involving deep wounds, facial scarring, surgery, child victims, or other significant injuries. These matters are generally stronger when the owner is identified, the attack is documented, and homeowner or renter coverage is available.",
     eligibilityPoints: [
       "Severe injuries: facial scarring requiring plastic surgery, deep punctures/lacerations requiring ER/sutures, fractures (if knocked down), nerve damage, or infection (MRSA, sepsis)",
       "Owner identified with homeowner/renter insurance (verify coverage; many policies exclude specific breeds)",
@@ -270,7 +270,7 @@ const allCases: CaseType[] = [
     status: "limited",
     summary: "Youth mental-health cases tied to prolonged social-media use and platform design.",
     description:
-      "These cases focus on minors and young adults who allegedly suffered serious mental-health harm after heavy use of Instagram, Facebook, TikTok, Snapchat, or similar platforms. The strongest files connect sustained use with diagnoses, crisis events, and records that help show causation.",
+      "These cases focus on minors and young adults who allegedly suffered serious mental-health harm after heavy use of Instagram, Facebook, TikTok, Snapchat, or similar platforms. The strongest matters connect sustained use with diagnoses, crisis events, and a clear causal story linking the platforms to the harm.",
     eligibilityPoints: [
       "Minor (<18) or young adult (18-25) with heavy social media use (≥3 hrs/day for ≥1 year)",
       "Platform use: Instagram, TikTok, Snapchat, Facebook, YouTube",
@@ -303,7 +303,7 @@ const allCases: CaseType[] = [
     summary:
       "Roblox exploitation cases involving child grooming, platform contact, and serious downstream harm.",
     description:
-      "These matters center on claims that Roblox contact opened the door to grooming, sextortion, or real-world abuse. The strongest files show platform contact, migration to other apps, and records that tie the abuse period to lasting trauma.",
+      "These matters center on claims that Roblox contact opened the door to grooming, sextortion, or real-world abuse. The strongest matters show platform contact, migration to other apps, and a clear link between the abuse period and lasting trauma.",
     eligibilityPoints: [
       "Minor (<18) groomed or exploited through Roblox platform contact",
       "Grooming pattern: Roblox chat contact migrating to Discord, Snapchat, or other platforms",
@@ -338,7 +338,7 @@ const allCases: CaseType[] = [
     summary:
       "School and university abuse cases where the institution knew enough to act and failed to protect students.",
     description:
-      "These cases target schools and universities that ignored reports, protected the wrong person, or left students exposed to known risk. Strong files usually involve staff abuse, coach misconduct, or peer assault followed by a weak or delayed response from the institution.",
+      "These cases target schools and universities that ignored reports, protected the wrong person, or left students exposed to known risk. Strong matters usually involve staff abuse, coach misconduct, or peer assault followed by a weak or delayed institutional response.",
     eligibilityPoints: [
       "Sexual abuse/assault by teacher, coach, administrator, staff, or student on student",
       "Abuse severe, pervasive, or objectively offensive denying equal educational access",
@@ -404,7 +404,7 @@ const allCases: CaseType[] = [
     summary:
       "Abuse by medical and mental-health providers who exploited trust, access, and authority.",
     description:
-      "These cases involve doctors, therapists, dentists, psychologists, and other providers who crossed clear professional boundaries. Strong files often include treatment records, appointment history, billing records, and evidence that the provider used the clinical relationship to exploit a vulnerable patient.",
+      "These cases involve doctors, therapists, dentists, psychologists, and other providers who crossed clear professional boundaries. Strong matters often involve a provider using the clinical relationship, access, or authority to exploit a vulnerable patient over time.",
     eligibilityPoints: [
       "Sexual contact/assault by licensed healthcare provider during professional relationship",
       "Abuse during: medical exam, therapy session, treatment, or exploitation of patient vulnerability",
@@ -475,7 +475,7 @@ const allCases: CaseType[] = [
     summary:
       "Religious-institution abuse cases involving clergy or staff and organizational failure to stop it.",
     description:
-      "These cases go beyond the individual abuser and ask what the institution knew, ignored, transferred, or concealed. Strong files involve churches, missions, religious schools, or counseling programs where leadership failed to supervise, screen, or respond to prior complaints.",
+      "These cases go beyond the individual abuser and ask what the institution knew, ignored, transferred, or concealed. Strong matters involve churches, missions, religious schools, or counseling programs where leadership failed to supervise, screen, or respond to prior complaints.",
     eligibilityPoints: [
       "Abuse in a religious context by clergy (priest, minister, pastor, deacon) or non-clergy (teacher, counselor, missionary, camp staff)",
       "Abuse occurred during religious activities, on property, or via authority/pastoral role",
@@ -506,7 +506,7 @@ const allCases: CaseType[] = [
     summary:
       "Rideshare and transportation assault cases with app records and corporate-safety issues.",
     description:
-      "These cases involve assaults by Uber, Lyft, taxi, or other transportation drivers, with claims focused on weak screening, complaint handling, and rider-safety systems. The strongest files include trip records, location data, medical support, and facts showing the company had preventable gaps in its safety process.",
+      "These cases involve assaults by Uber, Lyft, taxi, or other transportation drivers, with claims focused on weak screening, complaint handling, and rider-safety systems. The strongest matters show preventable gaps in the company’s safety process and a clear connection between the ride and the resulting harm.",
     eligibilityPoints: [
       "Sexual assault during Uber, Lyft, or taxi ride by driver",
       "Assault types: rape, attempted rape, unwanted touching, indecent exposure, kidnapping/false imprisonment",
@@ -540,7 +540,7 @@ const allCases: CaseType[] = [
     summary:
       "Correctional-facility abuse cases involving staff misconduct, retaliation, and broken PREA safeguards.",
     description:
-      "These matters focus on prisons and jails that failed to protect people in custody from sexual abuse by staff or medical personnel. Strong cases often include PREA reports, grievances, medical records, or investigative findings showing abuse, retaliation, or a wider institutional failure.",
+      "These matters focus on prisons and jails that failed to protect people in custody from sexual abuse by staff or medical personnel. Strong cases often show abuse, retaliation, or a wider institutional failure to prevent and investigate misconduct.",
     eligibilityPoints: [
       "Sexual abuse/assault while incarcerated by correctional officer, staff, or medical personnel",
       "Severe abuse: rape, coerced sexual acts under threat, or pattern of harassment",
@@ -575,7 +575,7 @@ const allCases: CaseType[] = [
     summary:
       "Trafficking cases against businesses that facilitated, ignored, or profited from exploitation.",
     description:
-      "These civil cases target hotels, websites, transportation companies, and other businesses that allegedly helped trafficking continue or looked away while it happened. The strongest files show repeated red flags, business benefit, and records that connect the defendant to the exploitation.",
+      "These civil cases target hotels, websites, transportation companies, and other businesses that allegedly helped trafficking continue or looked away while it happened. The strongest matters show repeated red flags, business benefit, and a plausible basis for saying the defendant helped enable the exploitation.",
     eligibilityPoints: [
       "Victim of sex trafficking as minor (<18) or adult (through force, fraud, or coercion)",
       "Severe exploitation: forced prostitution, coerced commercial sex acts, debt bondage",
@@ -610,7 +610,7 @@ const allCases: CaseType[] = [
     summary:
       "Workplace and venue assault cases with employer notice, weak response, or retaliation.",
     description:
-      "These matters cover sexual assault, harassment, and hostile-work-environment claims in employment and professional settings. The strongest files show repeated conduct, a complaint that went nowhere, retaliation, or an employer that knew enough to act and still failed to protect the victim.",
+      "These matters cover sexual assault, harassment, and hostile-work-environment claims in employment and professional settings. The strongest matters show repeated conduct, a complaint that went nowhere, retaliation, or an employer that knew enough to act and still failed to protect the victim.",
     eligibilityPoints: [
       "Sexual harassment or assault in employment context by supervisor, coworker, or client",
       "Hostile work environment: severe or pervasive conduct affecting work conditions",
