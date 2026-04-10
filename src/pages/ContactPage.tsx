@@ -101,7 +101,7 @@ const ContactPage = () => {
             <Card className="border-2 border-black bg-white h-fit shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
               <CardHeader className="border-b-2 border-black bg-primary text-white">
                 <CardTitle className="lr-heading-l text-white">Start the Conversation</CardTitle>
-                <p className="text-white/80">Clear answers, straight process, no guesswork</p>
+                <p className="text-white/80">Clear answers, no guesswork</p>
               </CardHeader>
               <CardContent className="p-0">
                 <div className="divide-y-2 divide-border">

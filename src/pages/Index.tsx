@@ -61,7 +61,7 @@ const Index = () => {
 
                   <div className="space-y-4">
                     <h3 className="mb-4 text-2xl font-bold text-white sm:text-3xl lg:text-[24px] lg:leading-[30px] xl:text-[28px] xl:leading-[34px]">
-                      Start With Practice Fit
+                      Find Your Practice Area
                     </h3>
                     <MassTortDropdown />
                   </div>
