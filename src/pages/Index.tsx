@@ -55,7 +55,7 @@ const Index = () => {
                       Grow Your Firm With Cases on Demand
                     </h1>
                     <p className="mb-6 max-w-2xl text-lg text-white/90 sm:lr-body-l xl:max-w-[34rem]">
-                      Choose the case types your firm wants to review. We deliver signed opportunities with clearer intake and simpler handoff.
+                      Find your case type and we'll connect your firm with pre-qualified, e-signed clients. Each case is fully vetted for eligibility and delivered directly to your intake team - often within 24-48 hours.
                     </p>
                   </div>
 
