@@ -279,7 +279,7 @@ const ContactPage = () => {
                     </div>
 
                     <Button type="submit" variant="brutalist" size="lg" className="w-full lr-focus">
-                      See If There’s a Fit
+                      Send message
                     </Button>
 
                     <p className="text-xs text-center text-muted-foreground pt-2">
