@@ -45,22 +45,22 @@ const Index = () => {
       <Header />
 
       <main>
-        <div className="lg:grid lg:min-h-[calc(100dvh-82px)] lg:grid-rows-[minmax(0,1fr)_auto]">
-          <section className="bg-primary text-primary-foreground py-8 md:py-12 lg:py-12">
+        <div className="lg:grid lg:min-h-[calc(100svh-82px)] lg:grid-rows-[minmax(0,1fr)_auto]">
+          <section className="bg-primary text-primary-foreground py-8 md:py-12 lg:py-8 xl:py-10">
             <div className="lr-width-container lg:flex lg:h-full lg:items-center">
-              <div className="grid w-full items-center gap-8 lg:grid-cols-2 xl:gap-12 2xl:gap-16">
-                <div className="max-w-[38rem] space-y-4 md:space-y-8 lg:space-y-6">
+              <div className="grid w-full items-center gap-8 lg:grid-cols-2 lg:gap-6 xl:gap-10 2xl:gap-16">
+                <div className="max-w-[38rem] space-y-4 md:space-y-8 lg:space-y-5">
                   <div>
-                    <h1 className="mb-6 text-[clamp(3rem,4.4vw,4.6rem)] font-bold leading-[0.98] text-white">
+                    <h1 className="mb-5 text-[clamp(3rem,4.4vw,4.6rem)] font-bold leading-[0.98] text-white lg:mb-4">
                       Grow Your Firm With Cases on Demand
                     </h1>
-                    <p className="mb-6 max-w-2xl text-lg text-white/90 sm:text-[1.375rem] sm:leading-8 xl:max-w-[34rem]">
+                    <p className="mb-6 max-w-2xl text-lg text-white/90 sm:text-[1.375rem] sm:leading-8 lg:mb-4 xl:max-w-[34rem]">
                       Find your case type and we'll connect your firm with pre-qualified, e-signed clients. Each case is vetted for eligibility and delivered directly to your intake team - often within 24-48 hours.
                     </p>
                   </div>
 
-                  <div className="space-y-4">
-                    <h3 className="mb-4 text-2xl font-bold text-white sm:text-3xl lg:text-[24px] lg:leading-[30px] xl:text-[28px] xl:leading-[34px]">
+                  <div className="space-y-4 lg:space-y-3">
+                    <h3 className="mb-4 text-2xl font-bold text-white sm:text-3xl lg:mb-3 lg:text-[24px] lg:leading-[30px] xl:text-[28px] xl:leading-[34px]">
                       Find Your Practice Area
                     </h3>
                     <MassTortDropdown />
@@ -80,7 +80,7 @@ const Index = () => {
                   <img
                     src={heroConsultation}
                     alt="Attorney consulting with client about legal case, both reviewing documents at desk"
-                    className="w-full h-80 lg:h-[360px] 2xl:h-96 3xl:h-[430px] object-cover"
+                    className="w-full h-80 object-cover lg:h-[300px] xl:h-[340px] 2xl:h-[380px] 3xl:h-[430px]"
                     width="800"
                     height="600"
                     loading="eager"
@@ -113,7 +113,7 @@ const Index = () => {
             </div>
           </section>
 
-          <section className="hidden bg-background lg:block lg:pt-10 lg:pb-2">
+          <section className="hidden bg-background lg:block lg:pt-6 lg:pb-2 xl:pt-8">
             <div className="lr-width-container">
               <h2 className="lr-heading-xl mb-0">Find Your Practice Area</h2>
             </div>
