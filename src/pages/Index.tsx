@@ -45,11 +45,11 @@ const Index = () => {
       <Header />
 
       <main>
-        <div className="lg:grid lg:min-h-[calc(100svh-82px)] lg:grid-rows-[minmax(0,1fr)_auto]">
-          <section className="bg-primary text-primary-foreground py-8 md:py-12 lg:py-8 xl:py-10">
+        <div className="lg:grid lg:min-h-[calc(100svh-82px)] lg:max-h-[calc(100svh-82px)] lg:grid-rows-[minmax(0,1fr)_auto]">
+          <section className="bg-primary text-primary-foreground py-8 md:py-12 lg:py-8 xl:py-9 2xl:py-8">
             <div className="lr-width-container lg:flex lg:h-full lg:items-center">
-              <div className="grid w-full items-center gap-8 lg:grid-cols-2 lg:gap-6 xl:gap-10 2xl:gap-16">
-                <div className="max-w-[38rem] space-y-4 md:space-y-8 lg:space-y-5">
+              <div className="grid w-full items-center gap-8 lg:grid-cols-2 lg:gap-6 xl:gap-8 2xl:gap-10">
+                <div className="max-w-[38rem] space-y-4 md:space-y-8 lg:space-y-5 2xl:space-y-4">
                   <div>
                     <h1 className="mb-5 text-[clamp(3rem,4.4vw,4.6rem)] font-bold leading-[0.98] text-white lg:mb-4">
                       Grow Your Firm With Cases on Demand
@@ -80,7 +80,7 @@ const Index = () => {
                   <img
                     src={heroConsultation}
                     alt="Attorney consulting with client about legal case, both reviewing documents at desk"
-                    className="w-full h-80 object-cover lg:h-[300px] xl:h-[340px] 2xl:h-[380px] 3xl:h-[430px]"
+                    className="w-full h-80 object-cover lg:h-[300px] xl:h-[340px] 2xl:h-[370px] 3xl:h-[400px]"
                     width="800"
                     height="600"
                     loading="eager"
@@ -113,7 +113,7 @@ const Index = () => {
             </div>
           </section>
 
-          <section className="hidden bg-background lg:block lg:pt-6 lg:pb-2 xl:pt-8">
+          <section className="hidden bg-background lg:block lg:pt-5 lg:pb-2 xl:pt-6 2xl:pt-5">
             <div className="lr-width-container">
               <h2 className="lr-heading-xl mb-0">Find Your Practice Area</h2>
             </div>
