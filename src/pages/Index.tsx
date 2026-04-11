@@ -22,7 +22,7 @@ const Index = () => {
   };
 
   return <div className="min-h-screen bg-background">
-      <SEOHead title="Pre-Signed Legal Cases for Law Firms | LegalRetainers" description="Acquire pre-qualified, signed legal cases delivered within 24-48 hours. Complete documentation and exclusive representation rights included. Personal injury, mass torts, and more." keywords="signed legal cases, pre-qualified clients, case acquisition, personal injury cases, mass tort leads, exclusive law firm cases, 24-48 hour delivery" canonical="https://legalretainers.com" />
+      <SEOHead title="Signed Legal Cases for Law Firms | LegalRetainers" description="Acquire pre-qualified, signed legal cases delivered within 24-48 hours. Complete documentation and exclusive representation rights included. Personal injury, mass torts, and more." keywords="signed legal cases, pre-qualified clients, case acquisition, personal injury cases, mass tort leads, exclusive law firm cases, 24-48 hour delivery" canonical="https://legalretainers.com" />
       <StructuredData type="organization" />
       <StructuredData type="professionalService" />
       <StructuredData type="localBusiness" />
