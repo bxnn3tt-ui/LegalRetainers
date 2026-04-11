@@ -160,7 +160,7 @@ const ContactPage = () => {
             {/* Contact Form */}
             <Card className="border-2 border-black bg-white">
               <CardHeader className="border-b-2 border-black">
-                <CardTitle className="lr-heading-l">Tell Us What You Need</CardTitle>
+                <CardTitle className="lr-heading-l">How Can We Help?</CardTitle>
                 <p className="text-black/70 font-medium">The more specific you are, the faster we can tell you whether there’s a fit.</p>
               </CardHeader>
               <CardContent className="pt-6">
