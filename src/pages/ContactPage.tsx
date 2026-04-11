@@ -92,7 +92,7 @@ const ContactPage = () => {
           <div className="mb-8">
             <h1 className="lr-heading-xl mb-4">Let’s Talk Through Fit</h1>
             <p className="lr-body-l text-muted-foreground max-w-2xl">
-              The right cases start with clear alignment. Tell us what your firm is looking for, what your team can take on, and what a qualified handoff looks like.
+              The fastest way to waste time is to talk about the wrong cases. Tell us what your firm actually wants, what your team can handle, and what a worthwhile handoff looks like.
             </p>
           </div>
 
