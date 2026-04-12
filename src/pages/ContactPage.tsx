@@ -253,11 +253,11 @@ const ContactPage = () => {
                           <SelectValue placeholder="Choose the type of conversation you want to have" />
                         </SelectTrigger>
                         <SelectContent>
-                        <SelectItem value="new-order">Case Availability</SelectItem>
-                        <SelectItem value="pricing">Volume and Pricing</SelectItem>
-                        <SelectItem value="custom-request">Practice Area Fit</SelectItem>
-                        <SelectItem value="partnership">Firm Relationship</SelectItem>
-                        <SelectItem value="other">General Inquiry</SelectItem>
+                        <SelectItem value="case-fit">Case Fit / Availability</SelectItem>
+                        <SelectItem value="volume-pricing">Volume and Pricing</SelectItem>
+                        <SelectItem value="practice-area-fit">Practice Area Fit</SelectItem>
+                        <SelectItem value="partnership-question">Partnership Question</SelectItem>
+                        <SelectItem value="general">General Question</SelectItem>
                         </SelectContent>
                       </Select>
                     </div>
