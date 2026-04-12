@@ -74,6 +74,9 @@ The frontend runs on `127.0.0.1:5000` and the backend runs on `127.0.0.1:3001`.
   Optional. Set to `false` to render the full app and routes.
   If not set to `false`, the app renders a "Coming soon" page.
 
+- `DISABLE_FORM_RATE_LIMITS`
+  Optional. Set to `true` to bypass form submission rate limits while testing.
+
 ### Twenty CRM
 
 - `TWENTY_API_KEY`

@@ -18,7 +18,7 @@ function getClientIP(req: Request): string {
 }
 
 async function checkRateLimit(clientIP: string, functionName: string, limit: number = RATE_LIMIT): Promise<boolean> {
-  if (process.env.NODE_ENV === "development") {
+  if (process.env.NODE_ENV === "development" || process.env.DISABLE_FORM_RATE_LIMITS === "true") {
     return false;
   }
 
