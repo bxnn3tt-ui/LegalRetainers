@@ -1,5 +1,9 @@
 import type { Request } from "express";
-import { forwardSubmissionToN8n, type N8nSubmissionPayload } from "./n8n";
+import {
+  forwardSubmissionToN8nTarget,
+  type N8nSubmissionPayload,
+  type N8nWebhookTarget,
+} from "./n8n";
 import { createTwentyOpportunity, type TwentySubmission } from "./twenty";
 
 type DeliveryTarget = "twenty" | "n8n";
@@ -8,6 +12,7 @@ export type FormSubmission = {
   clientIp: string;
   twenty: TwentySubmission;
   n8n: Omit<N8nSubmissionPayload, "metadata">;
+  n8nTarget?: N8nWebhookTarget;
 };
 
 function readDeliveryTargets(): DeliveryTarget[] {
@@ -32,13 +37,26 @@ function isTwentyConfigured() {
   return Boolean(process.env.TWENTY_API_KEY);
 }
 
-function isN8nConfigured() {
-  return Boolean(process.env.N8N_FORM_WEBHOOK_URL);
+function getConfiguredN8nWebhookUrl(target: N8nWebhookTarget = "default") {
+  if (target === "contact") {
+    return process.env.N8N_CONTACT_WEBHOOK_URL || process.env.N8N_FORM_WEBHOOK_URL;
+  }
+
+  if (target === "request-cases") {
+    return process.env.N8N_REQUEST_CASES_WEBHOOK_URL || process.env.N8N_FORM_WEBHOOK_URL;
+  }
+
+  return process.env.N8N_FORM_WEBHOOK_URL;
+}
+
+function isN8nConfigured(target: N8nWebhookTarget = "default") {
+  return Boolean(getConfiguredN8nWebhookUrl(target));
 }
 
 export async function deliverFormSubmission(req: Request, submission: FormSubmission) {
   const targets = readDeliveryTargets();
   let deliveredCount = 0;
+  const n8nTarget = submission.n8nTarget || "default";
 
   for (const target of targets) {
     if (target === "twenty") {
@@ -56,16 +74,16 @@ export async function deliverFormSubmission(req: Request, submission: FormSubmis
       continue;
     }
 
-    if (!isN8nConfigured()) {
+    if (!isN8nConfigured(n8nTarget)) {
       if (isDevelopment()) {
-        console.warn("Skipping n8n delivery in development because N8N_FORM_WEBHOOK_URL is not configured.");
+        console.warn(`Skipping n8n delivery in development because the webhook URL for target "${n8nTarget}" is not configured.`);
         continue;
       }
 
-      throw new Error("N8N_FORM_WEBHOOK_URL not configured");
+      throw new Error(`n8n webhook URL not configured for target "${n8nTarget}"`);
     }
 
-    await forwardSubmissionToN8n({
+    await forwardSubmissionToN8nTarget(n8nTarget, {
       ...submission.n8n,
       metadata: {
         clientIp: submission.clientIp,

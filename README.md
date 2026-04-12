@@ -124,8 +124,13 @@ The frontend runs on `127.0.0.1:5000` and the backend runs on `127.0.0.1:3001`.
   Defaults to `twenty`.
 
 - `N8N_FORM_WEBHOOK_URL`
-  Required when `FORM_SUBMISSION_TARGETS` includes `n8n`.
-  Use your production n8n webhook URL, such as `https://n8n.legalretainers.com/webhook/legalretainers/contact`.
+  Optional default webhook used when a form-specific override is not set.
+
+- `N8N_CONTACT_WEBHOOK_URL`
+  Optional contact-form-specific webhook URL, such as `https://n8n.legalretainers.com/webhook/legalretainers/contact`.
+
+- `N8N_REQUEST_CASES_WEBHOOK_URL`
+  Optional request-form-specific webhook URL shared by both claim orders and partnership inquiries, such as `https://n8n.legalretainers.com/webhook/legalretainers/request-cases`.
 
 - `N8N_FORM_WEBHOOK_SECRET`
   Optional shared secret sent to n8n in a custom header.
@@ -187,8 +192,8 @@ When forwarding to n8n, the backend sends a normalized JSON payload shaped like:
 
 Recommended pattern:
 
-1. Create one `Webhook` node in n8n for the shared form endpoint.
-2. Add a `Switch` node on `{{$json.type}}` if you want per-form routing.
+1. Create one `Webhook` node for contact forms and one shared `Webhook` node for request flows if you want separate workflows.
+2. In the request workflow, add a `Switch` node on `{{$json.type}}` to split `claim-order` and `law-firm-demo`.
 3. Add a Twenty step:
    - either use the Twenty community node package in n8n
    - or use an `HTTP Request` node against your Twenty `/rest/...` API

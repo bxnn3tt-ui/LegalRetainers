@@ -125,6 +125,7 @@ export function registerRoutes(app: Express): void {
     try {
       await deliverFormSubmission(req, {
         clientIp: clientIP,
+        n8nTarget: "contact",
         twenty: {
           source: "contact-form",
           title: `Contact inquiry - ${fullName}`,
@@ -192,6 +193,7 @@ export function registerRoutes(app: Express): void {
     try {
       await deliverFormSubmission(req, {
         clientIp: clientIP,
+        n8nTarget: "request-cases",
         twenty: {
           source: "law-firm-demo",
           title: `Law firm inquiry - ${data.firmName}`,
@@ -275,6 +277,7 @@ export function registerRoutes(app: Express): void {
     try {
       await deliverFormSubmission(req, {
         clientIp: clientIP,
+        n8nTarget: "request-cases",
         twenty: {
           source: "claim-order",
           title: `Claim order - ${formData.firmName} (${orderId})`,

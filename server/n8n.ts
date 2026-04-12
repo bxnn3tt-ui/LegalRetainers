@@ -28,6 +28,8 @@ type N8nConfig = {
   allowInsecureTls: boolean;
 };
 
+export type N8nWebhookTarget = "default" | "contact" | "request-cases";
+
 type N8nTestWebhookResult = {
   ok: boolean;
   status: number;
@@ -35,11 +37,23 @@ type N8nTestWebhookResult = {
   location?: string | null;
 };
 
-function readN8nConfig(): N8nConfig {
-  const webhookUrl = process.env.N8N_FORM_WEBHOOK_URL;
+function readWebhookUrl(target: N8nWebhookTarget) {
+  if (target === "contact") {
+    return process.env.N8N_CONTACT_WEBHOOK_URL || process.env.N8N_FORM_WEBHOOK_URL;
+  }
+
+  if (target === "request-cases") {
+    return process.env.N8N_REQUEST_CASES_WEBHOOK_URL || process.env.N8N_FORM_WEBHOOK_URL;
+  }
+
+  return process.env.N8N_FORM_WEBHOOK_URL;
+}
+
+function readN8nConfig(target: N8nWebhookTarget = "default"): N8nConfig {
+  const webhookUrl = readWebhookUrl(target);
 
   if (!webhookUrl) {
-    throw new Error("N8N_FORM_WEBHOOK_URL not configured");
+    throw new Error(`n8n webhook URL not configured for target "${target}"`);
   }
 
   const timeoutMs = Number.parseInt(process.env.N8N_FORM_WEBHOOK_TIMEOUT_MS || "10000", 10);
@@ -125,7 +139,11 @@ async function sendRequest(url: string, init: RequestInit, allowInsecureLocalTls
 }
 
 export async function forwardSubmissionToN8n(payload: N8nSubmissionPayload) {
-  const config = readN8nConfig();
+  return forwardSubmissionToN8nTarget("default", payload);
+}
+
+export async function forwardSubmissionToN8nTarget(target: N8nWebhookTarget, payload: N8nSubmissionPayload) {
+  const config = readN8nConfig(target);
   const headers: Record<string, string> = {
     "Content-Type": "application/json",
   };
