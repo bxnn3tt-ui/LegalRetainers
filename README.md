@@ -204,6 +204,32 @@ Recommended pattern:
 
 During rollout, set `FORM_SUBMISSION_TARGETS=twenty,n8n` so your existing direct Twenty sync keeps working while you validate the n8n workflow.
 
+## Final Env Values
+
+Use `n8n` as the delivery target now that the CRM sync is running through workflows:
+
+```env
+FORM_SUBMISSION_TARGETS=n8n
+N8N_CONTACT_WEBHOOK_URL=https://n8n.legalretainers.com/webhook/legalretainers/contact
+N8N_REQUEST_CASES_WEBHOOK_URL=https://n8n.legalretainers.com/webhook/legalretainers/request-cases
+```
+
+If the app is deployed somewhere outside the Tailscale/VPS network, such as Railway, and your `n8n.legalretainers.com` host still resolves to the private Tailscale IP, use the public webhook-only port instead:
+
+```env
+FORM_SUBMISSION_TARGETS=n8n
+N8N_CONTACT_WEBHOOK_URL=http://65.108.243.124:8088/webhook/legalretainers/contact
+N8N_REQUEST_CASES_WEBHOOK_URL=http://65.108.243.124:8088/webhook/legalretainers/request-cases
+```
+
+For repeated setup/testing on hosted environments, you can also temporarily set:
+
+```env
+DISABLE_FORM_RATE_LIMITS=true
+```
+
+Remove that once the flows are stable.
+
 ## Build
 
 ```bash
