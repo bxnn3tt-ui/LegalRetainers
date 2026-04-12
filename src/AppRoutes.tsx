@@ -14,7 +14,6 @@ import CookiesPage from "./pages/CookiesPage";
 import EditorialPage from "./pages/EditorialPage";
 import ContactSuccessPage from "./pages/ContactSuccessPage";
 import OrderSuccessPage from "./pages/OrderSuccessPage";
-import NewsletterSuccessPage from "./pages/NewsletterSuccessPage";
 import BlogPage from "./pages/BlogPage";
 import BlogPostPage from "./pages/BlogPostPage";
 import AuthorPage from "./pages/AuthorPage";
@@ -39,7 +38,6 @@ export function AppRoutes() {
       <Route path="/editorial" element={<EditorialPage />} />
       <Route path="/contact-success" element={<ContactSuccessPage />} />
       <Route path="/order-success" element={<OrderSuccessPage />} />
-      <Route path="/newsletter-success" element={<NewsletterSuccessPage />} />
       <Route path="/insights" element={<BlogPage />} />
       <Route path="/insights/author/:authorId" element={<AuthorPage />} />
       <Route path="/insights/:slug" element={<BlogPostPage />} />

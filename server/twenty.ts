@@ -1,7 +1,7 @@
 import http from "node:http";
 import https from "node:https";
 
-type TwentySubmission = {
+export type TwentySubmission = {
   source: string;
   title: string;
   description: string;

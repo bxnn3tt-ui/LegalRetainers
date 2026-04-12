@@ -1,8 +1,9 @@
 import type { Express, Request, Response } from "express";
 import { db } from "./db";
-import { rateLimits, newsletterSchema, contactSchema, lawFirmLeadSchema, claimOrderSchema } from "../shared/schema";
+import { rateLimits, contactSchema, lawFirmLeadSchema, claimOrderSchema } from "../shared/schema";
 import { eq, and, gte } from "drizzle-orm";
-import { createTwentyOpportunity } from "./twenty";
+import { deliverFormSubmission } from "./form-delivery";
+import { triggerN8nTestWebhook } from "./n8n";
 
 const RATE_LIMIT = 5;
 const RATE_LIMIT_ORDER = 3;
@@ -17,6 +18,10 @@ function getClientIP(req: Request): string {
 }
 
 async function checkRateLimit(clientIP: string, functionName: string, limit: number = RATE_LIMIT): Promise<boolean> {
+  if (process.env.NODE_ENV === "development") {
+    return false;
+  }
+
   const now = Date.now();
   const windowStart = new Date(now - RATE_WINDOW);
   const key = `${clientIP}:${functionName}`;
@@ -89,41 +94,6 @@ function formatDetailLines(details: Array<[string, string | undefined]>): string
 }
 
 export function registerRoutes(app: Express): void {
-  app.post("/api/send-newsletter", async (req: Request, res: Response) => {
-    const clientIP = getClientIP(req);
-    const isLimited = await checkRateLimit(clientIP, 'send-newsletter');
-    if (isLimited) {
-      return res.status(429).json({ error: "Rate limit exceeded. Please try again later." });
-    }
-
-    const parsed = newsletterSchema.safeParse(req.body);
-    if (!parsed.success) {
-      return res.status(400).json({ error: "Invalid input data" });
-    }
-
-    const { name, email } = parsed.data;
-
-    try {
-      await createTwentyOpportunity({
-        source: "newsletter",
-        title: `Newsletter signup - ${name}`,
-        description: formatDetailLines([
-          ["Submission type", "Newsletter signup"],
-          ["Name", name],
-          ["Email", email],
-          ["Submitted", new Date().toISOString()],
-        ]),
-        contactName: name,
-        email,
-      });
-
-      res.json({ success: true, message: "Newsletter subscription successful" });
-    } catch (error) {
-      console.error("Twenty sync error:", error);
-      res.status(500).json({ error: "Failed to process newsletter subscription" });
-    }
-  });
-
   app.post("/api/send-contact", async (req: Request, res: Response) => {
     const clientIP = getClientIP(req);
     const isLimited = await checkRateLimit(clientIP, 'send-contact');
@@ -138,32 +108,67 @@ export function registerRoutes(app: Express): void {
 
     const { firstName, lastName, email, phone, inquiryType, message } = parsed.data;
 
+    const fullName = `${firstName} ${lastName}`;
+    const submittedAt = new Date().toISOString();
+
     try {
-      await createTwentyOpportunity({
-        source: "contact-form",
-        title: `Contact inquiry - ${firstName} ${lastName}`,
-        description: formatDetailLines([
-          ["Submission type", "Contact inquiry"],
-          ["Name", `${firstName} ${lastName}`],
-          ["Email", email],
-          ["Phone", phone],
-          ["Inquiry type", inquiryType],
-          ["Message", message],
-          ["Submitted", new Date().toISOString()],
-        ]),
-        contactName: `${firstName} ${lastName}`,
-        email,
-        phone,
+      await deliverFormSubmission(req, {
+        clientIp: clientIP,
+        twenty: {
+          source: "contact-form",
+          title: `Contact inquiry - ${fullName}`,
+          description: formatDetailLines([
+            ["Submission type", "Contact inquiry"],
+            ["Name", fullName],
+            ["Email", email],
+            ["Phone", phone],
+            ["Inquiry type", inquiryType],
+            ["Message", message],
+            ["Submitted", submittedAt],
+          ]),
+          contactName: fullName,
+          email,
+          phone,
+        },
+        n8n: {
+          type: "contact-form",
+          title: `Contact inquiry - ${fullName}`,
+          description: formatDetailLines([
+            ["Submission type", "Contact inquiry"],
+            ["Name", fullName],
+            ["Email", email],
+            ["Phone", phone],
+            ["Inquiry type", inquiryType],
+            ["Message", message],
+            ["Submitted", submittedAt],
+          ]),
+          submittedAt,
+          contactName: fullName,
+          email,
+          phone,
+          details: {
+            submissionType: "Contact inquiry",
+            firstName,
+            lastName,
+            inquiryType,
+            message,
+          },
+        },
+      });
+
+      triggerN8nTestWebhook().catch((error) => {
+        console.error("n8n test webhook error:", error);
       });
 
       res.json({ success: true, message: "Contact form submitted successfully" });
     } catch (error) {
-      console.error("Twenty sync error:", error);
+      console.error("Form delivery error:", error);
       res.status(500).json({ error: "Failed to process contact form" });
     }
   });
 
   app.post("/api/send-law-firm-lead", async (req: Request, res: Response) => {
+    const clientIP = getClientIP(req);
     const parsed = lawFirmLeadSchema.safeParse(req.body);
     if (!parsed.success) {
       return res.status(400).json({ error: "Invalid input data" });
@@ -171,30 +176,62 @@ export function registerRoutes(app: Express): void {
 
     const data = parsed.data;
 
+    const submittedAt = new Date().toISOString();
+
     try {
-      await createTwentyOpportunity({
-        source: "law-firm-demo",
-        title: `Law firm inquiry - ${data.firmName}`,
-        description: formatDetailLines([
-          ["Submission type", "Law firm inquiry"],
-          ["Firm name", data.firmName],
-          ["Contact name", data.contactName],
-          ["Email", data.email],
-          ["Phone", data.phone],
-          ["Practice areas", data.practiceAreas.join(", ")],
-          ["Monthly case volume", data.caseVolume],
-          ["Main challenge", data.challenge],
-          ["Submitted", new Date().toISOString()],
-        ]),
-        contactName: data.contactName,
-        companyName: data.firmName,
-        email: data.email,
-        phone: data.phone,
+      await deliverFormSubmission(req, {
+        clientIp: clientIP,
+        twenty: {
+          source: "law-firm-demo",
+          title: `Law firm inquiry - ${data.firmName}`,
+          description: formatDetailLines([
+            ["Submission type", "Law firm inquiry"],
+            ["Firm name", data.firmName],
+            ["Contact name", data.contactName],
+            ["Email", data.email],
+            ["Phone", data.phone],
+            ["Practice areas", data.practiceAreas.join(", ")],
+            ["Monthly case volume", data.caseVolume],
+            ["Main challenge", data.challenge],
+            ["Submitted", submittedAt],
+          ]),
+          contactName: data.contactName,
+          companyName: data.firmName,
+          email: data.email,
+          phone: data.phone,
+        },
+        n8n: {
+          type: "law-firm-demo",
+          title: `Law firm inquiry - ${data.firmName}`,
+          description: formatDetailLines([
+            ["Submission type", "Law firm inquiry"],
+            ["Firm name", data.firmName],
+            ["Contact name", data.contactName],
+            ["Email", data.email],
+            ["Phone", data.phone],
+            ["Practice areas", data.practiceAreas.join(", ")],
+            ["Monthly case volume", data.caseVolume],
+            ["Main challenge", data.challenge],
+            ["Submitted", submittedAt],
+          ]),
+          submittedAt,
+          contactName: data.contactName,
+          companyName: data.firmName,
+          email: data.email,
+          phone: data.phone,
+          details: {
+            submissionType: "Law firm inquiry",
+            firmName: data.firmName,
+            practiceAreas: data.practiceAreas,
+            caseVolume: data.caseVolume,
+            challenge: data.challenge,
+          },
+        },
       });
 
       res.json({ success: true, message: "Demo request received" });
     } catch (error) {
-      console.error("Twenty sync error:", error);
+      console.error("Form delivery error:", error);
       res.status(500).json({ error: "Failed to process demo request" });
     }
   });
@@ -219,40 +256,81 @@ export function registerRoutes(app: Express): void {
 
     const orderId = `CPO-${Date.now().toString().slice(-6)}`;
 
+    const submittedAt = new Date().toISOString();
+    const selectedCasesSummary = formData.selectedCases
+      .map((selection) => `${selection.caseType} x${selection.quantity}`)
+      .join(", ");
+
     try {
-      await createTwentyOpportunity({
-        source: "claim-order",
-        title: `Claim order - ${formData.firmName} (${orderId})`,
-        description: formatDetailLines([
-          ["Submission type", "Claim order"],
-          ["Order ID", orderId],
-          ["Law firm", formData.firmName],
-          ["Attorney", formData.attorneyName],
-          ["Email", formData.email],
-          ["Phone", formData.phone],
-          ["Practice areas", formData.practiceAreas.join(", ")],
-          [
-            "Selected cases",
-            formData.selectedCases
-              .map((selection) => `${selection.caseType} x${selection.quantity}`)
-              .join(", "),
-          ],
-          ["Geographic preferences", formData.geographicPreferences.join(", ")],
-          ["Special requirements", formData.requirements],
-          ["Years in practice", formData.yearsInPractice],
-          ["Referral source", formData.referralSource],
-          ["Service agreement accepted", formData.serviceAgreement ? "Yes" : "No"],
-          ["Submitted", new Date().toISOString()],
-        ]),
-        contactName: formData.attorneyName,
-        companyName: formData.firmName,
-        email: formData.email,
-        phone: formData.phone,
+      await deliverFormSubmission(req, {
+        clientIp: clientIP,
+        twenty: {
+          source: "claim-order",
+          title: `Claim order - ${formData.firmName} (${orderId})`,
+          description: formatDetailLines([
+            ["Submission type", "Claim order"],
+            ["Order ID", orderId],
+            ["Law firm", formData.firmName],
+            ["Attorney", formData.attorneyName],
+            ["Email", formData.email],
+            ["Phone", formData.phone],
+            ["Practice areas", formData.practiceAreas.join(", ")],
+            ["Selected cases", selectedCasesSummary],
+            ["Geographic preferences", formData.geographicPreferences.join(", ")],
+            ["Special requirements", formData.requirements],
+            ["Years in practice", formData.yearsInPractice],
+            ["Referral source", formData.referralSource],
+            ["Service agreement accepted", formData.serviceAgreement ? "Yes" : "No"],
+            ["Submitted", submittedAt],
+          ]),
+          contactName: formData.attorneyName,
+          companyName: formData.firmName,
+          email: formData.email,
+          phone: formData.phone,
+        },
+        n8n: {
+          type: "claim-order",
+          title: `Claim order - ${formData.firmName} (${orderId})`,
+          description: formatDetailLines([
+            ["Submission type", "Claim order"],
+            ["Order ID", orderId],
+            ["Law firm", formData.firmName],
+            ["Attorney", formData.attorneyName],
+            ["Email", formData.email],
+            ["Phone", formData.phone],
+            ["Practice areas", formData.practiceAreas.join(", ")],
+            ["Selected cases", selectedCasesSummary],
+            ["Geographic preferences", formData.geographicPreferences.join(", ")],
+            ["Special requirements", formData.requirements],
+            ["Years in practice", formData.yearsInPractice],
+            ["Referral source", formData.referralSource],
+            ["Service agreement accepted", formData.serviceAgreement ? "Yes" : "No"],
+            ["Submitted", submittedAt],
+          ]),
+          submittedAt,
+          contactName: formData.attorneyName,
+          companyName: formData.firmName,
+          email: formData.email,
+          phone: formData.phone,
+          details: {
+            submissionType: "Claim order",
+            orderId,
+            firmName: formData.firmName,
+            attorneyName: formData.attorneyName,
+            practiceAreas: formData.practiceAreas,
+            selectedCases: formData.selectedCases,
+            geographicPreferences: formData.geographicPreferences,
+            requirements: formData.requirements,
+            yearsInPractice: formData.yearsInPractice,
+            referralSource: formData.referralSource,
+            serviceAgreement: formData.serviceAgreement,
+          },
+        },
       });
 
       res.json({ success: true, message: "Case purchase order submitted successfully", orderId });
     } catch (error) {
-      console.error("Twenty sync error:", error);
+      console.error("Form delivery error:", error);
       res.status(500).json({ error: "Failed to process case purchase order" });
     }
   });

@@ -26,11 +26,6 @@ export const rateLimits = pgTable("rate_limits", {
 
 export const insertRateLimitSchema = createInsertSchema(rateLimits);
 
-export const newsletterSchema = z.object({
-  name: z.string().min(1).max(100),
-  email: optionalEmailSchema,
-});
-
 export const contactSchema = z.object({
   firstName: z.string().min(1).max(50),
   lastName: z.string().min(1).max(50),
@@ -67,7 +62,6 @@ export const claimOrderSchema = z.object({
   serviceAgreement: z.boolean(),
 });
 
-export type Newsletter = z.infer<typeof newsletterSchema>;
 export type Contact = z.infer<typeof contactSchema>;
 export type LawFirmLead = z.infer<typeof lawFirmLeadSchema>;
 export type ClaimOrder = z.infer<typeof claimOrderSchema>;

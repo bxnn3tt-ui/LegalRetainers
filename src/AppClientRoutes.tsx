@@ -14,7 +14,6 @@ import {
   DesignSystemRoute,
   EditorialRoute,
   IndexRoute,
-  NewsletterSuccessRoute,
   NotFoundRoute,
   OrderSuccessRoute,
   PrivacyRoute,
@@ -42,7 +41,6 @@ export function AppClientRoutes() {
         <Route path="/editorial" element={<EditorialRoute />} />
         <Route path="/contact-success" element={<ContactSuccessRoute />} />
         <Route path="/order-success" element={<OrderSuccessRoute />} />
-        <Route path="/newsletter-success" element={<NewsletterSuccessRoute />} />
         <Route path="/insights" element={<BlogRoute />} />
         <Route path="/insights/author/:authorId" element={<AuthorRoute />} />
         <Route path="/insights/:slug" element={<BlogPostRoute />} />

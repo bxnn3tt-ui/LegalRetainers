@@ -15,7 +15,6 @@ export const CookiesRoute = createLoadableRoute(() => import("./pages/CookiesPag
 export const EditorialRoute = createLoadableRoute(() => import("./pages/EditorialPage"));
 export const ContactSuccessRoute = createLoadableRoute(() => import("./pages/ContactSuccessPage"));
 export const OrderSuccessRoute = createLoadableRoute(() => import("./pages/OrderSuccessPage"));
-export const NewsletterSuccessRoute = createLoadableRoute(() => import("./pages/NewsletterSuccessPage"));
 export const BlogRoute = createLoadableRoute(() => import("./pages/BlogPage"));
 export const BlogPostRoute = createLoadableRoute(() => import("./pages/BlogPostPage"));
 export const AuthorRoute = createLoadableRoute(() => import("./pages/AuthorPage"));
@@ -37,7 +36,6 @@ const routePreloaders = [
   { path: "/editorial", preload: EditorialRoute.preload },
   { path: "/contact-success", preload: ContactSuccessRoute.preload },
   { path: "/order-success", preload: OrderSuccessRoute.preload },
-  { path: "/newsletter-success", preload: NewsletterSuccessRoute.preload },
   { path: "/insights", preload: BlogRoute.preload },
   { path: "/insights/author/:authorId", preload: AuthorRoute.preload },
   { path: "/insights/:slug", preload: BlogPostRoute.preload },
