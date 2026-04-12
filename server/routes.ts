@@ -22,11 +22,9 @@ async function checkRateLimit(clientIP: string, functionName: string, limit: num
     return false;
   }
 
-  const now = Date.now();
-  const windowStart = new Date(now - RATE_WINDOW);
-  const key = `${clientIP}:${functionName}`;
-
-  if (!db) {
+  const useMemoryFallback = () => {
+    const now = Date.now();
+    const key = `${clientIP}:${functionName}`;
     const existing = memoryRateLimits.get(key);
 
     if (!existing || existing.windowStart < now - RATE_WINDOW) {
@@ -49,41 +47,54 @@ async function checkRateLimit(clientIP: string, functionName: string, limit: num
     });
 
     return false;
+  };
+
+  const now = Date.now();
+  const windowStart = new Date(now - RATE_WINDOW);
+  const key = `${clientIP}:${functionName}`;
+
+  if (!db) {
+    return useMemoryFallback();
   }
 
-  const existing = await db
-    .select()
-    .from(rateLimits)
-    .where(
-      and(
-        eq(rateLimits.ipAddress, clientIP),
-        eq(rateLimits.functionName, functionName),
-        gte(rateLimits.windowStart, windowStart)
+  try {
+    const existing = await db
+      .select()
+      .from(rateLimits)
+      .where(
+        and(
+          eq(rateLimits.ipAddress, clientIP),
+          eq(rateLimits.functionName, functionName),
+          gte(rateLimits.windowStart, windowStart)
+        )
       )
-    )
-    .limit(1);
+      .limit(1);
 
-  if (existing.length === 0) {
-    await db.insert(rateLimits).values({
-      ipAddress: clientIP,
-      functionName: functionName,
-      requestCount: 1,
-      windowStart: new Date(now),
-    });
+    if (existing.length === 0) {
+      await db.insert(rateLimits).values({
+        ipAddress: clientIP,
+        functionName: functionName,
+        requestCount: 1,
+        windowStart: new Date(now),
+      });
+      return false;
+    }
+
+    const record = existing[0];
+    if (record.requestCount >= limit) {
+      return true;
+    }
+
+    await db
+      .update(rateLimits)
+      .set({ requestCount: record.requestCount + 1, lastRequest: new Date() })
+      .where(eq(rateLimits.id, record.id));
+
     return false;
+  } catch (error) {
+    console.error("Rate limit storage unavailable, using in-memory fallback:", error);
+    return useMemoryFallback();
   }
-
-  const record = existing[0];
-  if (record.requestCount >= limit) {
-    return true;
-  }
-
-  await db
-    .update(rateLimits)
-    .set({ requestCount: record.requestCount + 1, lastRequest: new Date() })
-    .where(eq(rateLimits.id, record.id));
-
-  return false;
 }
 
 function formatDetailLines(details: Array<[string, string | undefined]>): string {
