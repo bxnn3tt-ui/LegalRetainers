@@ -38,10 +38,9 @@ const OrderSuccessPage = () => {
             <h1 className="lr-panel__title lr-heading-l mb-4 text-white">
               We got your order
             </h1>
-            <div className="lr-panel__body lr-body-l text-white/90">
-              Reference<br />
-              <strong className="lr-heading-m text-white">{orderData?.orderReference || 'Case Order'}</strong>
-            </div>
+            <p className="lr-panel__body lr-body-l text-white/90">
+              Your case request has been submitted successfully.
+            </p>
           </div>
 
           <div className="max-w-2xl mx-auto">

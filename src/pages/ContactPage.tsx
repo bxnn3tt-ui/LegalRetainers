@@ -195,14 +195,9 @@ const ContactPage = () => {
                       },
                       body: JSON.stringify(contactData)
                     });
-                    const responseData = await response.text();
                     if (response.ok) {
-                      const referenceNumber = Math.random().toString(36).substring(2, 7).toUpperCase();
                       navigate('/contact-success', {
-                        state: {
-                          ...contactData,
-                          referenceNumber
-                        }
+                        state: contactData
                       });
                     } else {
                       setFormError('There was an error sending your message. Please check your information and try again.');

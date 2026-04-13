@@ -38,10 +38,9 @@ const ContactSuccessPage = () => {
             <h1 className="lr-panel__title lr-heading-l mb-4 text-white">
               Thanks for reaching out
             </h1>
-            <div className="lr-panel__body lr-body-l text-white/90">
-              Reference<br />
-              <strong className="lr-heading-m text-white">{submissionData?.referenceNumber || 'Contact Form'}</strong>
-            </div>
+            <p className="lr-panel__body lr-body-l text-white/90">
+              Your message has been submitted successfully.
+            </p>
           </div>
 
           <div className="max-w-2xl mx-auto">

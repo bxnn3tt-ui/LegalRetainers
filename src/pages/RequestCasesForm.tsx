@@ -219,10 +219,7 @@ const RequestCasesForm = () => {
           return;
         }
 
-        const responseData = await response.json();
-        const orderReference = responseData?.orderId || `#${Math.floor(1000 + Math.random() * 9000)}`;
         const orderData = {
-          orderReference,
           firmName: caseOrderData.firmName,
           attorneyName: caseOrderData.attorneyName,
           email: caseOrderData.email || undefined,
@@ -269,9 +266,7 @@ const RequestCasesForm = () => {
         return;
       }
 
-      const orderReference = `#${Math.floor(1000 + Math.random() * 9000)}`;
       const orderData = {
-        orderReference,
         firmName: partnershipData.firmName,
         attorneyName: partnershipData.contactName,
         email: partnershipData.email || undefined,
