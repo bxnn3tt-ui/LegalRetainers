@@ -256,7 +256,11 @@ export function CaseFinder() {
             <p className="lr-body text-muted-foreground">
               Try adjusting your filters or contact us for custom case programs.
             </p>
-            <Button variant="lr" className="mt-4" onClick={() => navigate("/contact")}>
+            <Button
+              variant="lr"
+              className="mt-4"
+              onClick={() => navigate("/contact?inquiryType=Custom%20Case%20Request")}
+            >
               Request Custom Case Packages
             </Button>
           </div>

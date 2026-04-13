@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { Phone, Mail, MapPin, Clock } from "lucide-react";
 import { Header } from "@/components/ui/header";
 import { Footer } from "@/components/ui/footer";
@@ -16,11 +16,18 @@ import { Alert, AlertDescription } from "@/components/ui/alert";
 import { AlertTriangle } from "lucide-react";
 const ContactPage = () => {
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
   const [formError, setFormError] = useState("");
   const [inquiryType, setInquiryType] = useState("");
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+  useEffect(() => {
+    const presetInquiryType = searchParams.get("inquiryType");
+    if (presetInquiryType) {
+      setInquiryType(presetInquiryType);
+    }
+  }, [searchParams]);
   return <div className="min-h-screen bg-background">
       <SEOHead title="Contact LegalRetainers | Talk Through Case Fit and Availability" description="Contact LegalRetainers to discuss case types, intake fit, documentation, and availability for your law firm." canonical="https://legalretainers.com/contact" keywords="contact legal case provider, case acquisition inquiry, law firm partnership, signed cases, legal intake support" ogImage="https://legalretainers.com/og-image.png" />
       <StructuredData type="localBusiness" />
